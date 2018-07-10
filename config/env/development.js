@@ -64,7 +64,7 @@ module.exports = {
     default: {
       adapter: 'sails-mongo',
       // MLab
-      url: 'mongodb://zenochansama:zen0Chan1028@ds131971.mlab.com:31971/zenochan'
+      url: 'mongodb://zenochansama:zen0Chan1028@ds131971.mlab.com:31971/zenochan',
 
 
       // url: 'mongodb://127.0.0.1:27017/dev_zeno_bot', // LOCAL
@@ -92,7 +92,7 @@ module.exports = {
        * https://sailsjs.com/config/datastores                                     *
        *                                                                           *
        ****************************************************************************/
-      ssl: false,
+      ssl: true,
 
     },
 
