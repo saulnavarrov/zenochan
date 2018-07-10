@@ -1,24 +1,26 @@
 {
-  "name": "code",
+  "name": "zenochatbot",
   "private": true,
-  "version": "0.0.0",
-  "description": "a Sails application",
-  "keywords": [],
+  "version": "0.0.1",
+  "description": "bot chat sama",
+  "keywords": ["zeno", "chat", "bot"],
   "dependencies": {
-    "sails": "^1.0.2",
+    "@sailshq/connect-redis": "^3.2.1",
+    "@sailshq/lodash": "^3.10.3",
+    "@sailshq/socket.io-redis": "^5.2.0",
+    "async": "2.0.1",
     "grunt": "1.0.1",
+    "sails": "^1.0.2",
     "sails-hook-grunt": "^3.0.2",
     "sails-hook-orm": "^2.0.0-16",
     "sails-hook-sockets": "^1.4.0",
-    "@sailshq/connect-redis": "^3.2.1",
-    "@sailshq/socket.io-redis": "^5.2.0",
-    "@sailshq/lodash": "^3.10.3",
-    "async": "2.0.1"
+    "sails-mongo": "^1.0.1"
   },
   "devDependencies": {
     "@sailshq/eslint": "^4.19.3"
   },
   "scripts": {
+    "developments": "NODE_ENV=development node app.js",
     "start": "NODE_ENV=production node app.js",
     "test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
@@ -27,10 +29,10 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/root/code.git"
+    "url": "https://github.com/saulnavarrov/zenochan.git"
   },
-  "author": "root",
-  "license": "",
+  "author": "SaulNavarrov <Sinavarrov@gmail.com>",
+  "license": "MIT",
   "engines": {
     "node": ">=8.11"
   }
