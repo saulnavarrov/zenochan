@@ -15,7 +15,7 @@ module.exports = {
   * this, just try deploying without setting it and see if it works.)       *
   *                                                                         *
   ***************************************************************************/
-  port: 33510,
+  port: 80,
 
   models: {
 
