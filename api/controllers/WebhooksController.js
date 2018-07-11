@@ -85,6 +85,42 @@ var getConfirmtWebHooks = (opt, cb) => {
 }
 
 
+
+/****************************************************************************
+ * 
+ * saveMIn
+ * @function
+ * @description :: Guardara todos los mensajes que entrano salend del sistema
+ * 
+ ****************************************************************************/
+var saveMIn = async function (opt) {
+  var userId = opt.entry[0].messaging[0].sender.id || 0;
+  var destine = opt.entry[0].id || 0;
+  var message = opt.entry[0].messaging[0].message || {}; // Mensaje en concreto
+
+  // Estructura del mensaje
+  var saveData = {
+    destine: userId, // Id quien envia
+    body: opt,
+    message: message,
+    read: 0,
+    check: 1,
+    sendread: 'toReceibe',
+    responseId: destine, // Id quien Recive
+  }
+
+  // -> Fn -> Contador de palabras
+  CuentaPalabras({
+    m: message
+  });
+
+  // Guarda el mensaje
+  // var saveMB = await M.create(saveData).fetch();
+  console.log(JSON.stringify(saveData));
+
+}
+
+
 /************************************************************************
  * modulos
  */
@@ -150,14 +186,14 @@ module.exports = {
         //   console.log(even);
         // });
 
-        console.log('======================>');
-        console.log(body);
+        // console.log('======================>');
+        // console.log(body);
         // console.log(entry);
         // console.log(message);
         // console.log(messaging);
         // console.log(attachments);
         // console.log(JSON.stringify(body));
-        console.log('======================>');
+        // console.log('======================>');
 
         // Retorno de ok para el sistema de facebook
         return res.ok('EVENT_RECEIVED');
