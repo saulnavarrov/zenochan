@@ -43,7 +43,10 @@ module.exports.routes = {
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
-
+  'get /api/webhooks': {
+    controller: 'WebhooksController',
+    action: 'getWebHooks'
+  }
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
@@ -60,7 +63,7 @@ module.exports.routes = {
   // }
 
 
-  
+
   //  ╔╦╗╦╔═╗╔═╗
   //  ║║║║╚═╗║
   //  ╩ ╩╩╚═╝╚═╝
