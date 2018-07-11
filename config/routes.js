@@ -49,8 +49,18 @@ module.exports.routes = {
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
   //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗
   //  ╚╩╝╚═╝╚═╝╩ ╩╚═╝╚═╝╩ ╩╚═╝
+  // 'GET /api/wordlist': {
+  //   controller: 'WordsListsController',
+  //   action: 'get',
+  //   csrf: true
+    // locals: {
+    //   layout: 'layouts/dashboard',
+    //   title: 'Dashboard Index'
+    // }
+  // }
 
 
+  
   //  ╔╦╗╦╔═╗╔═╗
   //  ║║║║╚═╗║
   //  ╩ ╩╩╚═╝╚═╝
