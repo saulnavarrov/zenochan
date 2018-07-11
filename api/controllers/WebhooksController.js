@@ -179,7 +179,7 @@ module.exports = {
       if (object === 'page') {
 
         // -> Fn -> Guardar mensaje en la base de datos
-        saveMIn(body);
+        // saveMIn(body);
 
 
         // entry.messaging.forEach( even => {
@@ -187,7 +187,7 @@ module.exports = {
         // });
 
         // console.log('======================>');
-        // console.log(body);
+        console.log(body);
         // console.log(entry);
         // console.log(message);
         // console.log(messaging);
