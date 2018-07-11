@@ -46,7 +46,14 @@ module.exports.routes = {
   'get /api/webhooks': {
     controller: 'WebhooksController',
     action: 'getWebHooks'
+  },
+
+  'post /api/webhooks': {
+    controller: 'WebhooksController',
+    action: 'postWebHooksIn'
   }
+
+
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
