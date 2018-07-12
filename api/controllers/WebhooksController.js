@@ -205,7 +205,7 @@ module.exports = {
           console.log(s)
 
           // Respuesta si es txt
-          if(txt){
+          if(s.txt){
             client.sendMessage(String(s.idClient), {
               text: `Response: ${s.text}`,
             });
