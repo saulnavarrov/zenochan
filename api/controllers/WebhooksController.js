@@ -184,6 +184,7 @@ module.exports = {
       var st = body.entry[0].standby[0];
       var ms = body.entry[0].standby[0].message;
       var sq = body.entry[0].standby[0].message.seq;
+      var tx = typeof (body.entry[0].standby[0].message.text) === 'string' ? true : false; 
       console.error(sq)
       
       // var att = typeof(st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
@@ -193,8 +194,8 @@ module.exports = {
         s.ob = body.object;
         s.idClient = st.sender.id;
         s.idPage = en.id;
-        // s.seq = ms.seq;
-        // s.txt = typeof (ms.text) === 'undefined'? false : true;
+        s.seq = sq;
+        s.txt = tx
         s.text = !s.txt ? null : ms.text;
         // s.type = txt ? 'text' : att.type;
         // s.stiker = txt ? null : typeof (att.payload.sticker_id) === 'undefined' ? null : att.payload.sticker_id;
@@ -204,7 +205,7 @@ module.exports = {
         // Verificación de una pagina
         if (object === 'page') {
           console.log('ingreso de datos y respuestas');
-          console.log(body)
+          console.log(s)
 
           // Respuesta si es txt
           if(s.txt){
