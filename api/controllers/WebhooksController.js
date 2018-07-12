@@ -183,7 +183,7 @@ module.exports = {
       var en = body.entry[0];
       var st = body.entry[0].standby[0];
       var ms = body.entry[0].standby[0].message;
-      console.error(ms)
+      console.error(ms.seq)
       
       // var att = typeof(st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
       
