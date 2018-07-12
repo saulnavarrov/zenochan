@@ -173,14 +173,10 @@ module.exports = {
       // variable Principal del sistema
       var body = req.body || 0;
       var object = body.object || 0;
-      // var entry = body.entry[0] || 0;
-      // var messaging = entry['messaging'] || 0;
-      // var message = messaging[0] || 0;
-      // var attachments = 0 || 0;
 
-      console.log('ingreso de datos y respuestas');
-      console.log(JSON.stringify(body))
-      console.log('===========================>')
+      // console.log('ingreso de datos y respuestas');
+      // console.log(JSON.stringify(body))
+      // console.log('===========================>')
 
       //  Codigos
       var s = {};
@@ -205,8 +201,10 @@ module.exports = {
         
         // Verificación de una pagina
         if (object === 'page') {
-          console.log('ingreso de datos y respuestas');
-          console.log(body)
+          // console.log('ingreso de datos y respuestas');
+          console.log('// =========================================================> Start');
+          console.log(s);
+          console.log('// =========================================================> End');
 
           // Respuesta si es txt
           if(s.txt){
