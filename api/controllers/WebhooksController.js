@@ -179,17 +179,19 @@ module.exports = {
       // var attachments = 0 || 0;
 
       console.log('ingreso de datos y respuestas');
-      console.log(body)
+      console.log(JSON.stringify(body))
       console.log('===========================>')
 
       //  Codigos
       var s = {};
-      var en = body.entry[0];
-      var st = body.entry[0].standby[0];
-      var ms = body.entry[0].standby[0].message;
-      var sq = body.entry[0].standby[0].message.seq;
-      var tx = typeof (body.entry[0].standby[0].message.text) === 'string' ? true : false; 
-      console.error(sq)
+      if(object === 'page'){
+        var en = body.entry[0];
+        var st = body.entry[0].standby[0];
+        var ms = body.entry[0].standby[0].message;
+        var sq = body.entry[0].standby[0].message.seq;
+        var tx = typeof (body.entry[0].standby[0].message.text) === 'string' ? true : false; 
+        console.error(sq)
+      }
       
       // var att = typeof(st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
       
