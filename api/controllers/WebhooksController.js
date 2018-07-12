@@ -178,6 +178,10 @@ module.exports = {
       // var message = messaging[0] || 0;
       // var attachments = 0 || 0;
 
+      console.log('ingreso de datos y respuestas');
+      console.log(body)
+      console.log('===========================>')
+
       //  Codigos
       var s = {};
       var en = body.entry[0];
