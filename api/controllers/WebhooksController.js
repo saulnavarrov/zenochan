@@ -201,7 +201,7 @@ module.exports = {
         // Verificación de una pagina
         if (object === 'page') {
           console.log('ingreso de datos y respuestas');
-          console.log(s)
+          console.log(body)
 
           // Respuesta si es txt
           if(s.txt){
