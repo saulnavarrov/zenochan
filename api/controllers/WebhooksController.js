@@ -4,13 +4,15 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-
+const { MessengerClient } = require('messaging-api-messenger');
 // variables
 // Token que genera facebook app para la pagina
-const token_apiSaul = 'EAAFPdRVJsDoBAJ7BZBGgk7OuWGLFbJ4zyW4Rad59LLW3yZCaCks9VAPy4idwALE4JZAojeWdoeXReIqL0RNBvAK5xXQj9G1dCVAkVZA16iISI4ulxc7kBTJRE4o6NVtfl9nEgPT7Up4sICpioBn0BZC0tCZApK1ery1mOp0USDPZCo0CZCFTgQk5';
+const token_apiSaul = 'EAAFPdRVJsDoBAClzsa0N0RqrFCYqpcLdDKFNPn2XtTAoDYLwhZCocKO0ZBchlNpZC3CNr1DZA8cWYWhA4RjsYIpJPWHmhNjFxAq166I6ZCP1XRFob6HcJ6C95JWBjX51F69tRUOZBvtcX07Wa8bshrLSryaP0jT6x3JxHdV5yvU9p56UMOrAvW';
 // Token de la app para que facebook la reconosca
 const apptoken = 'Sails=3AUVG-R9ZyY85-uFdoYEU0m6xNKz2wV1lV.N0kXRlGwXdFMVuBH0U9bFEvRBya%2BMJWdnkFzNU%2B%2FFIU=Saul';
 
+//
+const client = MessengerClient.connect(token_apiSaul);
 
 /************************************************************************************************
  * getConfirmtWebHooks
@@ -197,6 +199,13 @@ module.exports = {
         // Verificación de una pagina
         if (object === 'page') {
           console.log(JSON.stringify( body ));
+
+          // Respuesta si es txt
+          if(txt){
+            client.sendMessage(String(s.idClient), {
+              text: `Response: ${s.text}`,
+            });
+          }
         }
         // Retorno de ok para el sistema de facebook
         return res.ok('EVENT_RECEIVED');
