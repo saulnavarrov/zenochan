@@ -183,7 +183,7 @@ module.exports = {
       var en = body.entry[0];
       var st = body.entry[0].standby[0];
       var ms = body.entry[0].standby[0].message;
-      var sq = body.entry[0].standby[0].message.seq;
+      var sq = body.entry[0].standby[0].message.seq || 0;
       var tx = typeof (body.entry[0].standby[0].message.text) === 'string' ? true : false; 
       console.error(sq)
       
