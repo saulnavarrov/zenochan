@@ -184,7 +184,8 @@ module.exports = {
       var st = body.entry[0].standby[0];
       var att = typeof(st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
       var txt = typeof(st.message.text) !== 'undefined' ? true : false;
-  
+
+      console.error(typeof(st.message.attachments));
 
       if (en) {
         s.ob = body.object;
