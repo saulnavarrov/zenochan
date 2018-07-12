@@ -184,29 +184,25 @@ module.exports = {
 
       //  Codigos
       var s = {};
-      if(object === 'page'){
-        var en = body.entry[0];
-        var st = body.entry[0].standby[0];
-        var ms = body.entry[0].standby[0].message;
-        var sq = body.entry[0].standby[0].message.seq;
-        var tx = typeof (body.entry[0].standby[0].message.text) === 'string' ? true : false; 
-        console.error(sq)
-      }
-      
-      // var att = typeof(st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
-      
-      if (en) {
+      var ob = body.object; // Object
+      var en = body.entry[0]; // entry
+      var st = body.entry[0].standby[0]; //stamby
+      var ms = typeof (st.message) === 'undefined' ? false : st.message; // Mensajes
+      var sq = typeof (ms) === 'undefined' ? false : ms.seq; // secuencia de mensajes
+      var tx = typeof (ms) === 'undefined' ? false : typeof (ms.text) === 'string' ? true : false; // si es texto o no
+      var at = typeof (ms) === 'undefined' ? false : typeof (ms.attachments) === 'undefined' ? true : ms.attachments[0]; // Documentos Adjuntos
 
-        s.ob = body.object;
+      if (en) {
+        s.ob = ob;
         s.idClient = st.sender.id;
         s.idPage = en.id;
-        s.seq = sq;
-        s.txt = tx
-        s.text = !s.txt ? null : ms.text;
-        // s.type = txt ? 'text' : att.type;
-        // s.stiker = txt ? null : typeof (att.payload.sticker_id) === 'undefined' ? null : att.payload.sticker_id;
-        // s.image = s.type !== "image" ? '' : att.payload.url;
-        // s.attachments = txt ? {} : att;
+        s.seq = typeof (st.message) === 'undefined' ? 0 : sq;
+        s.txt = tx;
+        s.text = !tx ? null : st.message.text;
+        s.type = !ms ? null : tx ? 'text' : at.type;
+        s.stiker = !ms ? null : tx ? null : typeof (at.payload.sticker_id) === 'undefined' ? null : at.payload.sticker_id;
+        s.attachments = !ms ? null : tx ? {} : at;
+      }
         
         // Verificación de una pagina
         if (object === 'page') {
