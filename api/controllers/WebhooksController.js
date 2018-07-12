@@ -192,7 +192,7 @@ module.exports = {
         s.ob = body.object;
         s.idClient = st.sender.id;
         s.idPage = en.id;
-        s.seq = ms.seq;
+        // s.seq = ms.seq;
         s.txt = typeof (ms.text) === 'undefined'? false : true;
         s.text = !s.txt ? null : ms.text;
         // s.type = txt ? 'text' : att.type;
