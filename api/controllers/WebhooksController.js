@@ -188,7 +188,7 @@ module.exports = {
       if (en) {
         console.error(typeof (st.message.text));
         
-        var txt = typeof(st.message.text)==='string' ? true : false;
+        var txt = st.message.text.length > 0 ? true : false;
 
         s.ob = body.object;
         s.idClient = st.sender.id;
