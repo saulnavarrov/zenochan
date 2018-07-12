@@ -211,18 +211,9 @@ module.exports = {
             client.sendMessage(String(s.idClient), {
               text: `Response: ${s.text}`,
             });
+            
           }
 
-          // buton
-          client.sendMessage(String(s.idClient), {
-            template_type: 'button',
-            text: `Response btn: ${s.text}`,
-            buttons: [{
-              type: 'postback',
-              title: 'Start Chatting',
-              payload: 'USER_DEFINED_PAYLOAD',
-            }, ],
-          });
         }
         // Retorno de ok para el sistema de facebook
         return res.ok('EVENT_RECEIVED');
