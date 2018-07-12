@@ -182,26 +182,28 @@ module.exports = {
       var s = {};
       var en = body.entry[0];
       var st = body.entry[0].standby[0];
-      var txt = st.message.text !== undefined ? true : false;
+      console.error(st);
+
+
+      // var txt = st.message.text !== undefined ? true : false;
       // var att = typeof(st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
 
-      // console.error(typeof (st.message.attachments) === "undefined" ? 'undefined' : 'con datos');
 
       if (en) {
         s.ob = body.object;
         s.idClient = st.sender.id;
         s.idPage = en.id;
-        s.seq = st.message.seq;
+        // s.seq = st.message.seq;
         s.txt = txt;
         s.text = !txt ? null : st.message.text;
-        s.type = txt ? 'text' : att.type;
-        s.stiker = txt ? null : typeof (att.payload.sticker_id) === 'undefined' ? null : att.payload.sticker_id;
+        // s.type = txt ? 'text' : att.type;
+        // s.stiker = txt ? null : typeof (att.payload.sticker_id) === 'undefined' ? null : att.payload.sticker_id;
         // s.image = s.type !== "image" ? '' : att.payload.url;
-        s.attachments = txt ? {} : att;
+        // s.attachments = txt ? {} : att;
         
         // Verificación de una pagina
         if (object === 'page') {
-          console.log(JSON.stringify( body ));
+          console.log('ingreso de datos y respuestas');
 
           // Respuesta si es txt
           if(txt){
