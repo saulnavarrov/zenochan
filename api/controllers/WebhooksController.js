@@ -182,8 +182,10 @@ module.exports = {
       var s = {};
       var en = typeof (body.entry) === 'undefined' ? false : body.entry[0];
       var st = typeof (body.entry) === 'undefined' ? false : body.entry[0].standby[0];
-      var att = typeof (body.entry) === 'undefined' ? false : typeof (st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
-      var txt = typeof (body.entry) === 'undefined' ? false : typeof (st.message.text) !== 'undefined' ? true : false;
+      var att = typeof (body.entry) === 'undefined' ? false : typeof(st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
+      var txt = typeof (body.entry) === 'undefined' ? false : typeof(st.message.text) !== 'undefined' ? true : false;
+  
+      sails.log.error(typeof (st.message.attachments));
 
       if (en) {
         s.ob = body.object;
