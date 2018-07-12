@@ -192,9 +192,9 @@ module.exports = {
         s.ob = body.object;
         s.idClient = st.sender.id;
         s.idPage = en.id;
-        s.seq = st.message.seq;
-        s.txt = typeof (st.message.text) === 'undefined'? false : true;
-        s.text = !s.txt ? null : st.message.text;
+        s.seq = ms.seq;
+        s.txt = typeof (ms.text) === 'undefined'? false : true;
+        s.text = !s.txt ? null : ms.text;
         // s.type = txt ? 'text' : att.type;
         // s.stiker = txt ? null : typeof (att.payload.sticker_id) === 'undefined' ? null : att.payload.sticker_id;
         // s.image = s.type !== "image" ? '' : att.payload.url;
