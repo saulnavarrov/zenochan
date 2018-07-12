@@ -168,7 +168,7 @@ module.exports = {
    ****************************************************************************/
   'postWebHooksIn': (req, res) => {
       // variable Principal del sistema
-      // var body = req.body || 0;
+      var body = req.body || 0;
       // var object = body.object || 0;
       // var entry = body.entry[0] || 0;
       // var messaging = entry['messaging'] || 0;
