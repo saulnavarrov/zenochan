@@ -168,15 +168,41 @@ module.exports = {
    ****************************************************************************/
   'postWebHooksIn': (req, res) => {
       // variable Principal del sistema
-      var body = req.body || 0;
-      var object = body.object || 0;
-      var entry = body.entry[0] || 0;
-      var messaging = entry['messaging'] || 0;
-      var message = messaging[0] || 0;
-      var attachments = 0 || 0;
+      // var body = req.body || 0;
+      // var object = body.object || 0;
+      // var entry = body.entry[0] || 0;
+      // var messaging = entry['messaging'] || 0;
+      // var message = messaging[0] || 0;
+      // var attachments = 0 || 0;
 
-      // Verificación de una pagina
-      if (object === 'page') {
+      //  Codigos
+      var s = {};
+      var en = typeof (body.entry) === 'undefined' ? false : body.entry[0];
+      var st = typeof (body.entry) === 'undefined' ? false : body.entry[0].standby[0];
+      var att = typeof (body.entry) === 'undefined' ? false : typeof (st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
+      var txt = typeof (body.entry) === 'undefined' ? false : typeof (st.message.text) !== 'undefined' ? true : false;
+
+      if (en) {
+        s.ob = body.object;
+        s.idClient = st.sender.id;
+        s.idPage = en.id;
+        s.seq = st.message.seq;
+        s.txt = txt;
+        s.text = !txt ? null : st.message.text;
+        s.type = txt ? 'text' : att.type;
+        s.stiker = txt ? null : typeof (att.payload.sticker_id) === 'undefined' ? null : att.payload.sticker_id;
+        // s.image = s.type !== "image" ? '' : att.payload.url;
+        s.attachments = txt ? {} : att;
+        
+        // Verificación de una pagina
+        if (object === 'page') {
+          console.log(JSON.stringify( body ));
+        }
+        // Retorno de ok para el sistema de facebook
+        return res.ok('EVENT_RECEIVED');
+      }
+      
+
 
         // -> Fn -> Guardar mensaje en la base de datos
         // saveMIn(body);
@@ -187,7 +213,6 @@ module.exports = {
         // });
 
         // console.log('======================>');
-        console.log(JSON.stringify( body ));
         // console.log(entry);
         // console.log(message);
         // console.log(messaging);
@@ -195,11 +220,9 @@ module.exports = {
         // console.log(JSON.stringify(body));
         // console.log('======================>');
 
-        // Retorno de ok para el sistema de facebook
-        return res.ok('EVENT_RECEIVED');
-      } else {
+      else {
         // Returns a '404 Not Found' if event is not from a page subscription
-        res.status(404);
+        return res.status(404);
       }
     },
 };
