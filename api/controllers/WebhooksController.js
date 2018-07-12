@@ -186,7 +186,6 @@ module.exports = {
       // var att = typeof(st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
       
       if (en) {
-        console.error(typeof (st.message.text));
 
         s.ob = body.object;
         s.idClient = st.sender.id;
