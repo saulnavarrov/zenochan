@@ -202,7 +202,6 @@ module.exports = {
         s.type = !ms ? null : tx ? 'text' : at.type;
         s.stiker = !ms ? null : tx ? null : typeof (at.payload.sticker_id) === 'undefined' ? null : at.payload.sticker_id;
         s.attachments = !ms ? null : tx ? {} : at;
-      }
         
         // Verificación de una pagina
         if (object === 'page') {
