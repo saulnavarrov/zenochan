@@ -187,15 +187,13 @@ module.exports = {
       
       if (en) {
         console.error(typeof (st.message.text));
-        
-        var txt = st.message.text.length > 0 ? true : false;
 
         s.ob = body.object;
         s.idClient = st.sender.id;
         s.idPage = en.id;
-        // s.seq = st.message.seq;
-        s.txt = txt;
-        s.text = !txt ? null : st.message.text;
+        s.seq = st.message.seq;
+        s.txt = typeof (st.message.text) === 'undefined'? false : true;
+        s.text = !s.txt ? null : st.message.text;
         // s.type = txt ? 'text' : att.type;
         // s.stiker = txt ? null : typeof (att.payload.sticker_id) === 'undefined' ? null : att.payload.sticker_id;
         // s.image = s.type !== "image" ? '' : att.payload.url;
