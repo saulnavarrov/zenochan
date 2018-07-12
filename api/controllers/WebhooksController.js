@@ -182,14 +182,14 @@ module.exports = {
       var s = {};
       var en = body.entry[0];
       var st = body.entry[0].standby[0];
-      console.error(typeof (st.message.text));
       
-      var txt = typeof(st.message.text)==='string' ? true : false;
-
       // var att = typeof(st.message.attachments) === 'undefined' ? true : st.message.attachments[0];
-
-
+      
       if (en) {
+        console.error(typeof (st.message.text));
+        
+        var txt = typeof(st.message.text)==='string' ? true : false;
+
         s.ob = body.object;
         s.idClient = st.sender.id;
         s.idPage = en.id;
