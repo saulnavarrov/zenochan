@@ -183,7 +183,7 @@ module.exports = {
       var en = body.entry[0];
       var st = body.entry[0].standby[0];
       var ms = body.entry[0].standby[0].message;
-      var sq = body.entry[0].standby[0].message.seq || 0;
+      var sq = body.entry[0].standby[0].message.seq;
       var tx = typeof (body.entry[0].standby[0].message.text) === 'string' ? true : false; 
       console.error(sq)
       
@@ -205,7 +205,7 @@ module.exports = {
         // Verificación de una pagina
         if (object === 'page') {
           console.log('ingreso de datos y respuestas');
-          console.log(s)
+          console.log(body)
 
           // Respuesta si es txt
           if(s.txt){
