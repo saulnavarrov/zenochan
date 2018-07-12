@@ -4,6 +4,7 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
+// conector
 const { MessengerClient } = require('messaging-api-messenger');
 // variables
 // Token que genera facebook app para la pagina
