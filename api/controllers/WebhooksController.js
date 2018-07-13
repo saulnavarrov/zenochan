@@ -122,8 +122,8 @@ var saveMessageIn = async function (opt, body) {
   // });
 
   // Guarda el mensaje
-  // var saveMB = await M.create(saveData).fetch();
-  console.log(JSON.stringify(saveData));
+  var messengerMessages = await MessengerMessages.create(saveData).fetch();
+  console.log(JSON.stringify(messengerMessages));
 
 }
 
