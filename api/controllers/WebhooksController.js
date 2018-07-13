@@ -194,7 +194,7 @@ module.exports = {
         s.idPage = en.id;
         s.seq = typeof (st.message) === 'undefined' ? 0 : sq;
         s.txt = tx;
-        s.text = !tx ? null : st.message.text;
+        s.text = !tx ? '' : st.message.text;
         s.type = !ms ? null : tx ? 'text' : at.type;
         s.stiker = !ms ? null : tx ? 0 : typeof (at.payload.sticker_id) === 'undefined' ? 0 : at.payload.sticker_id;
         s.attachments = !ms ? null : tx ? {} : at;
