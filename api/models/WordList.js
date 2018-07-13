@@ -127,6 +127,11 @@ module.exports = {
     acciones: {
       type: 'string',
     },// '',
+
+    active: {
+      type: 'boolean',
+      defaultsTo: true
+    },
     
     // Grupo de acciones realizadas para un resultado comun,
     tarea: {
