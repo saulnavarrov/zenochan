@@ -196,7 +196,7 @@ module.exports = {
         s.txt = tx;
         s.text = !tx ? null : st.message.text;
         s.type = !ms ? null : tx ? 'text' : at.type;
-        s.stiker = !ms ? null : tx ? null : typeof (at.payload.sticker_id) === 'undefined' ? null : at.payload.sticker_id;
+        s.stiker = !ms ? null : tx ? 0 : typeof (at.payload.sticker_id) === 'undefined' ? 0 : at.payload.sticker_id;
         s.attachments = !ms ? null : tx ? {} : at;
         
         // Verificación de una pagina
