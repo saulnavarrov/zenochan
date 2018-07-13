@@ -102,26 +102,18 @@ var saveMessageIn = async function (opt, body) {
 
   // Estructura del mensaje
   var saveData = {
-    // destine: userId, // Id quien envia
-    // body: opt,
-    // message: message,
-    // read: 0,
-    // check: 1,
-    // responseId: destine, // Id quien Recive
-    
     object: opt.ob,
     sequence: opt.seq,
     typeMess: opt.type,
     text: opt.txt,
     textString: opt.text,
-    textArray: opt.text.split(' '),
+    textArray: !opt.txt ? [] : opt.text.split(' '),
     stikerId: opt.stiker,
     attachments: opt.attachments,
     idClient: opt.idClient,
     idPage: opt.idPage,
     sendread: 'toReceibe',
     messageComplete: body,
-
   }
 
   // -> Fn -> Contador de palabras
