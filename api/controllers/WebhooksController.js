@@ -96,26 +96,38 @@ var getConfirmtWebHooks = (opt, cb) => {
  * @description :: Guardara todos los mensajes que entrano salend del sistema
  * 
  ****************************************************************************/
-var saveMIn = async function (opt) {
-  var userId = opt.entry[0].messaging[0].sender.id || 0;
-  var destine = opt.entry[0].id || 0;
-  var message = opt.entry[0].messaging[0].message || {}; // Mensaje en concreto
+var saveMessageIn = async function (opt, body) {
+
+  console.log(opt);
 
   // Estructura del mensaje
   var saveData = {
-    destine: userId, // Id quien envia
-    body: opt,
-    message: message,
-    read: 0,
-    check: 1,
+    // destine: userId, // Id quien envia
+    // body: opt,
+    // message: message,
+    // read: 0,
+    // check: 1,
+    // responseId: destine, // Id quien Recive
+    
+    // - // object
+    // sequence
+    // typeMess
+    // text
+    // textString
+    // textArray
+    // stikerId
+    // attachments
+    messageComplete: body,
+    // idClient
+    // idPage
     sendread: 'toReceibe',
-    responseId: destine, // Id quien Recive
+
   }
 
   // -> Fn -> Contador de palabras
-  CuentaPalabras({
-    m: message
-  });
+  // CuentaPalabras({
+  //   m: message
+  // });
 
   // Guarda el mensaje
   // var saveMB = await M.create(saveData).fetch();
@@ -174,10 +186,6 @@ module.exports = {
       var body = req.body || 0;
       var object = body.object || 0;
 
-      // console.log('ingreso de datos y respuestas');
-      // console.log(JSON.stringify(body))
-      // console.log('===========================>')
-
       //  Codigos
       var s = {};
       var ob = body.object; // Object
@@ -201,44 +209,29 @@ module.exports = {
         
         // Verificación de una pagina
         if (object === 'page') {
+
+          saveMessageIn(s, body);
+
           // console.log('ingreso de datos y respuestas');
-          console.log('// =========================================================> Start');
-          console.log(s);
-          console.log('// =========================================================> End');
+          // console.log('// =========================================================> Start');
+          // console.log(s);
+          // console.log('// =========================================================> End');
 
           // Respuesta si es txt
-          if(s.txt){
-            client.sendMessage(String(s.idClient), {
-              text: `Response: ${s.text}`,
-            });
+          // if(s.txt){
+          //   client.sendMessage(String(s.idClient), {
+          //     text: `Response: ${s.text}`,
+          //   });
             
-          }
+          // }
 
         }
         // Retorno de ok para el sistema de facebook
         return res.ok('EVENT_RECEIVED');
       }
       
-
-
-        // -> Fn -> Guardar mensaje en la base de datos
-        // saveMIn(body);
-
-
-        // entry.messaging.forEach( even => {
-        //   console.log(even);
-        // });
-
-        // console.log('======================>');
-        // console.log(entry);
-        // console.log(message);
-        // console.log(messaging);
-        // console.log(attachments);
-        // console.log(JSON.stringify(body));
-        // console.log('======================>');
-
+      // Returns a '404 Not Found' if event is not from a page subscription
       else {
-        // Returns a '404 Not Found' if event is not from a page subscription
         return res.status(404);
       }
     },
