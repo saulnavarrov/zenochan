@@ -12,98 +12,100 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    // tipo de objeto
+    // 
     object: {
       type: 'String',
       defaultsTo: '',
+      description: 'tipo de objeto'
     },
 
-    // Numero de secuencia para organizar
+    // 
     sequence: {
       type: 'number',
-      defaultsTo: 0
+      defaultsTo: 0,
+      description: 'Numero de secuencia para organizar'
     },
 
-    // Tipo de mensaje enviado
+    // 
     typeMess: {
       type: 'string',
+      description: 'Tipo de mensaje enviado'
     },
 
-    // si es Texto
+    // 
     text: {
       type: 'boolean',
+      description: 'si es Texto o no lo es, para recalcar si responderles o no'
     },
 
-    // Contenido de Texto
+    // 
     textString: {
       type: 'string',
       defaultsTo: '',
+      description: 'Contenido de Texto'
     },
 
+    // 
     textArray: {
       type: 'json',
-      defaultsTo: {}
+      defaultsTo: {},
+      description: 'array del texto'
     },
 
-    // si es stiquer
+    // 
     stikerId: {
       type: 'number',
+      description: 'codigo del stiker para identificarlos mas luego'
     },
 
-    // Contenido adjuntos como imagenes, stikers, gits, sonidos, y localizaciónes
+    // 
     attachments: {
       type: 'json',
-      defaultsTo: {}
+      defaultsTo: {},
+      description: 'Contenido adjuntos como imagenes, stikers, gits, sonidos, y localizaciónes'
     },
 
-    // Si el mensaje se ha leido
+    // 
     read: {
       type: 'number',
-      enum: [0,1]
+      isIn: [0,1],
+      description: 'Si el mensaje se ha leido'
     },
 
+    // Si el mensaje fue enviado o recivido
     sendread: {
       type: 'string',
-      enum: ['a','b']
+      isIn: ['submit', 'toReceibe'],
+      description: 'Si el mensaje fue enviado o recivido'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    // Mensaje completo sin editar puro
+    // 
     messageComplete: {
       type: 'json',
-      defaultsTo: {}
+      defaultsTo: {},
+      description: 'Mensaje completo sin editar puro'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    // id del cliente a quien responderle
+    // 
     idClient: {
       type: 'string',
       defaultsTo: '',
+      description: 'id del cliente a quien responderle'
     },
 
-    // id de la pagina que se utiliza
+    // 
     idPage: {
       type: 'string',
       defaultsTo: '',
+      description: 'id de la pagina que se utiliza'
     },
 
   },
 
 };
-
-
-// object
-// sequence
-// typeMess
-// text
-// textString
-// textArray
-// stikerId
-// attachments
-// messageComplete
-// idClient
-// idPage

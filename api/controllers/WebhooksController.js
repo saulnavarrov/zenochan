@@ -109,18 +109,18 @@ var saveMessageIn = async function (opt, body) {
     // check: 1,
     // responseId: destine, // Id quien Recive
     
-    // - // object
-    // sequence
-    // typeMess
-    // text
-    // textString
-    // textArray
-    // stikerId
-    // attachments
-    messageComplete: body,
-    // idClient
-    // idPage
+    object: opt.ob,
+    sequence: opt.seq,
+    typeMess: opt.type,
+    text: opt.txt,
+    textString: opt.text,
+    textArray: opt.text.split(' '),
+    stikerId: opt.stiker,
+    attachments: opt.attachments,
+    idClient: opt.idClient,
+    idPage: opt.idPage,
     sendread: 'toReceibe',
+    messageComplete: body,
 
   }
 
