@@ -184,7 +184,7 @@ module.exports = {
       var s = {};
       var ob = body.object; // Object
       var en = body.entry[0]; // entrys
-      var st = typeof (body.entry[0].standby[0]) !== 'undefined' ? body.entry[0].standby[0] : body.entry[0].messaging[0]; //stamby
+      var st = typeof (en.standby[]) !== 'undefined' ? en.standby[0] : en.messaging[0]; //stamby
       var ms = typeof (st.message) === 'undefined' ? false : st.message; // Mensajes
       var sq = typeof (ms) === 'undefined' ? false : ms.seq; // secuencia de mensajes
       var tx = typeof (ms) === 'undefined' ? false : typeof (ms.text) === 'string' ? true : false; // si es texto o no
