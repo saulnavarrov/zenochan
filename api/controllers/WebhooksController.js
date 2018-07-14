@@ -112,7 +112,7 @@ var saveMessageIn = async function (opt, body) {
     attachments: opt.attachments,
     idClient: opt.idClient,
     idPage: opt.idPage,
-    sendread: opt.en !== 'undefined' ? 'submit' : 'toReceibe',
+    sendread: opt.en === 'undefined' ? 'submit' : 'toReceibe',
     messageComplete: body,
   }
 
@@ -125,6 +125,18 @@ var saveMessageIn = async function (opt, body) {
   var messengerMessages = await MessengerMessages.create(saveData).fetch();
   console.log(JSON.stringify(messengerMessages));
 
+}
+
+/**
+ * ContadorDePalabras
+ * @description :: 
+ * @param {array} opt :: Array de datos de ingresos
+ * @param {callback} cb Debolución del contenido para el contador del sistema 
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+ */
+var ContadorDePalabras = (opt, cb) => {
+
+  return cb(false, false);
 }
 
 
