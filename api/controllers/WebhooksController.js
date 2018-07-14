@@ -112,7 +112,7 @@ var saveMessageIn = async function (opt, body) {
     attachments: opt.attachments,
     idClient: opt.idClient,
     idPage: opt.idPage,
-    sendread: 'toReceibe',
+    sendread: opt.en !== 'undefined' ? 'submit' : 'toReceibe',
     messageComplete: body,
   }
 
@@ -192,6 +192,7 @@ module.exports = {
 
       if (en) {
         s.ob = ob;
+        s.en = typeof (en.standby);
         s.idClient = st.sender.id;
         s.idPage = en.id;
         s.seq = typeof (st.message) === 'undefined' ? 0 : sq;
