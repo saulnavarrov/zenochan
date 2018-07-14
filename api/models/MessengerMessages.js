@@ -95,6 +95,7 @@ module.exports = {
     // 
     idClient: {
       type: 'string',
+      // collection: ''
       defaultsTo: '',
       description: 'id del cliente a quien responderle'
     },

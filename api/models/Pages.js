@@ -12,7 +12,41 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    idPage: {
+      type: 'string',
+      unique: true,
+      required: true
+    },
 
+    // Nombre de la pagina web en facebook
+    namePage: {
+      type: 'string',
+      unique: true,
+      required: true
+    },
+
+    // Paginas activas
+    active: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
+
+    // Token con el que se reponde los mensajes
+    tokenPage: {
+      type: 'string',
+      defaultsTo: ''
+    },
+
+    // Tipo de paginas
+    typePage: {
+      type: 'string',
+      defaultsTo: 'page'
+    },
+
+    // // Id Paginas
+    // pageIds: {
+    //   model: 'clientsids'
+    // }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

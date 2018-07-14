@@ -144,7 +144,7 @@ module.exports = {
     }
 
     // Impresion de la consola sobre lo que manda Facebook para conectarse con mi App
-    console.log(JSON.stringify(body));
+    // console.log(JSON.stringify(body));
 
     // Verificara que el body venga cargado desde facebook si no es asi no pasara a confirmaciones
     if (!body) {
@@ -178,6 +178,8 @@ module.exports = {
       var body = req.body || 0;
       var object = body.object || 0;
 
+      console.log(JSON.stringify(body))
+
       //  Codigos
       var s = {};
       var ob = body.object; // Object
@@ -201,22 +203,7 @@ module.exports = {
         
         // Verificación de una pagina
         if (object === 'page') {
-
           saveMessageIn(s, body);
-
-          // console.log('ingreso de datos y respuestas');
-          // console.log('// =========================================================> Start');
-          // console.log(s);
-          // console.log('// =========================================================> End');
-
-          // Respuesta si es txt
-          // if(s.txt){
-          //   client.sendMessage(String(s.idClient), {
-          //     text: `Response: ${s.text}`,
-          //   });
-            
-          // }
-
         }
         // Retorno de ok para el sistema de facebook
         return res.ok('EVENT_RECEIVED');
