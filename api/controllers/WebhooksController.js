@@ -306,8 +306,7 @@ module.exports = {
       var body = req.body || 0;
       var object = body.object || 0;
 
-      // console.log(JSON.stringify(body))
-
+      
       //  Codigos
       var s = {};
       var ob = body.object; // Object
@@ -319,7 +318,8 @@ module.exports = {
       var at = typeof (ms) === 'undefined' ? false : typeof (ms.attachments) === 'undefined' ? true : ms.attachments[0]; // Documentos Adjuntos
       var re = typeof (en.standby) === 'undefined' ? false : st.read;
       var sf = typeof (en.standby) === 'undefined' ? false : st.delivery; // Mensajes enviados desde facebook
-
+      
+      
       if (en) {
         s.ob = ob;
         s.en = typeof (en.standby);
@@ -337,6 +337,7 @@ module.exports = {
         if (object === 'page') {
           // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
           //  o es una respuesta automatica
+          console.log(JSON.stringify(s))
           console.log('= = = ================================================================> Controlador: ');
           if(sf){
             SaveMessageOut(s, body);
