@@ -168,8 +168,8 @@ var SaveReadMessage = async function (opt, s, body) {
     console.log('= = = = = ==============> Error', JSON.stringify(reads))
 
   // Actualiza el Mensaje que se ha Leido como tal.
-  if (JSON.stringify(reads) !== []) {
-    var readMes = typeof (reads[0].read) === 'undefined' ? 1 : reads[0].read;
+  if (reads) {
+    var readMes = typeof (reads) === 'undefined' ? 1 : reads[0].read;
     // console.log('= = = = = ==============> ', readMes)
     var readUpdate = await MessengerMessages
       .update({
