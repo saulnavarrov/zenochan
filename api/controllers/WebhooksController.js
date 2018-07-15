@@ -116,23 +116,23 @@ var SaveMessageOut =  async function (opt, body){
  * 
  ****************************************************************************/
 var SaveReadMessage = async function (opt, s, body) {
-  // Estructura del mensaje
-  var saveData = {
-    object: s.ob,
-    sequence: s.seq,
-    typeMess: s.type,
-    text: s.txt,
-    textString: s.text,
-    textArray: !opt.txt ? [] : s.text.split(' '),
-    stikerId: s.stiker,
-    attachments: s.attachments,
-    idClient: s.idClient,
-    idPage: s.idPage,
-    sendread: 'reads',
-    messageComplete: body,
-    timestamp: s.times,
-    read: 1
-  }
+  // // Estructura del mensaje
+  // var saveData = {
+  //   object: s.ob,
+  //   sequence: s.seq,
+  //   typeMess: s.type,
+  //   text: s.txt,
+  //   textString: s.text,
+  //   textArray: !opt.txt ? [] : s.text.split(' '),
+  //   stikerId: s.stiker,
+  //   attachments: s.attachments,
+  //   idClient: s.idClient,
+  //   idPage: s.idPage,
+  //   sendread: 'reads',
+  //   messageComplete: body,
+  //   timestamp: s.times,
+  //   read: 1
+  // }
 
   // Busca el Mensaje con el tiempo donde fue guardado.
   var reads = await MessengerMessages
@@ -140,28 +140,28 @@ var SaveReadMessage = async function (opt, s, body) {
       'timestamp': opt.watermark
     });
 
-  // Actualiza el Mensaje que se ha Leido como tal.
-  if(reads){
-    var readUpdate = await MessengerMessages
-      .update({
-        'timestamp': opt.watermark
-      })
-      .set({
-        read: Number(reads[0].read) + 1,
-      })
-      .fetch();
-    }else{
-      readUpdate = {
-        error: true,
-        message: 'No se encontro el Texto que se va actualizar'
-      }
-    }
+  // // Actualiza el Mensaje que se ha Leido como tal.
+  // if(reads){
+  //   var readUpdate = await MessengerMessages
+  //     .update({
+  //       'timestamp': opt.watermark
+  //     })
+  //     .set({
+  //       read: Number(reads[0].read) + 1,
+  //     })
+  //     .fetch();
+  //   }else{
+  //     readUpdate = {
+  //       error: true,
+  //       message: 'No se encontro el Texto que se va actualizar'
+  //     }
+  //   }
 
   // Guarda el Mensaje de Lectura en el sistema.
-  var messengerMessages = await MessengerMessages.create(saveData).fetch();
+  // var messengerMessages = await MessengerMessages.create(saveData).fetch();
 
   console.log('= =======================================> Start Save Read ');
-  console.log(JSON.stringify(readUpdate));
+  console.log(JSON.stringify(reads));
   console.log('= =======================================> Stop');
 }
 
