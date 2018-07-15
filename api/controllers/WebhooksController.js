@@ -115,7 +115,7 @@ var SaveMessageOut =  async function (opt, body){
  * @param {array} body 
  * 
  ****************************************************************************/
-var SaveReadMessage = async function (opt, s) {
+var SaveReadMessage = async function (opt, s, body) {
   // Estructura del mensaje
   var saveData = {
     object: s.ob,
@@ -307,7 +307,7 @@ module.exports = {
           //  o es una respuesta automatica
           console.log('= = = ================================================================> Read: ', re);
           if(re){
-            SaveReadMessage(re, s);
+            SaveReadMessage(re, s, body);
           }else{
             s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
           }
