@@ -98,11 +98,28 @@ var getConfirmtWebHooks = (opt, cb) => {
  * 
  ****************************************************************************/
 var SaveMessageOut =  async function (opt, body){
+  // Estructura del mensaje
+  var saveData = {
+    object: s.ob,
+    sequence: s.seq,
+    typeMess: 'sendFB',
+    text: s.txt,
+    textString: s.text,
+    textArray: !opt.txt ? [] : s.text.split(' '),
+    stikerId: s.stiker,
+    attachments: s.attachments,
+    idClient: s.idClient,
+    idPage: s.idPage,
+    sendread: 'sendFB',
+    messageComplete: body,
+    timestamp: s.times,
+    read: 1
+  }
 
-
+  
 
   console.log('= =======================================> Start save Out');
-  console.log(opt)
+  console.log(saveData)
   console.log(' = = = = = > Body')
   console.log(JSON.stringify(body));
   console.log('= =======================================> Stop');
