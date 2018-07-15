@@ -182,7 +182,7 @@ var SaveReadMessage = async function (opt, s, body) {
     }else{
       readUpdate = {
         error: true,
-        message: 'No se encontro el Texto que se va actualizar'
+        message: 'No se encontro el mensaje que se va actualizar la lectura o es un mensaje enviado desde facebook'
       }
     }
 
