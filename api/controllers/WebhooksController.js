@@ -118,7 +118,7 @@ var SaveMessageOut =  async function (opt, body){
 var SaveReadMessage = async function (opt, body) {
 
   console.log('= =======================================> Start Save Read ');
-  console.log(body)
+  console.log(JSON.stringify(body));
   console.log('= =======================================> Stop');
 }
 
