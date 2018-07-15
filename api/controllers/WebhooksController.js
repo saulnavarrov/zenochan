@@ -119,10 +119,10 @@ var SaveMessageOut =  async function (opt, body){
   
 
   console.log('= =======================================> Start save Out');
-  console.log(saveData)
-  console.log(' = = = = = > Body')
-  console.log(JSON.stringify(body));
-  console.log('= =======================================> Stop');
+  // console.log(saveData)
+  // console.log(' = = = = = > Body')
+  // console.log(JSON.stringify(body));
+  // console.log('= =======================================> Stop');
   // return cb(false, false);
 }
 
@@ -165,7 +165,7 @@ var SaveReadMessage = async function (opt, s, body) {
       console.log(err)
     });
     
-    console.log('= = = = = ==============> Error > ',reads.length)
+    // console.log('= = = = = ==============> Error > ',reads.length)
 
   // Actualiza el Mensaje que se ha Leido como tal.
   if (reads.length) {
@@ -192,8 +192,8 @@ var SaveReadMessage = async function (opt, s, body) {
   console.log('= =======================================> Start Save Read ');
   // console.log(JSON.stringify(reads[0].read));
   // console.log('= ============== =');
-  console.log(JSON.stringify(readUpdate));
-  console.log('= =======================================> Stop');
+  // console.log(JSON.stringify(readUpdate));
+  // console.log('= =======================================> Stop');
 }
 
 
@@ -224,16 +224,11 @@ var SaveMessageIn = async function (opt, body) {
     timestamp: opt.times
   }
 
-  // -> Fn -> Contador de palabras
-  // CuentaPalabras({
-  //   m: message
-  // });
-
   // Guarda el mensaje
   var messengerMessages = await MessengerMessages.create(saveData).fetch();
   console.log('= =======================================> Start Save Ms In');
-  console.log(JSON.stringify(messengerMessages));
-  console.log('= =======================================> Stop');
+  // console.log(JSON.stringify(messengerMessages));
+  // console.log('= =======================================> Stop');
 
 }
 
@@ -337,8 +332,8 @@ module.exports = {
         if (object === 'page') {
           // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
           //  o es una respuesta automatica
-          console.log(JSON.stringify(s))
           console.log('= = = ================================================================> Controlador: ');
+          console.log(JSON.stringify(s))
           if(sf){
             SaveMessageOut(s, body);
           }else if(re){
