@@ -296,7 +296,8 @@ module.exports = {
       var sq = typeof (ms) === 'undefined' ? false : ms.seq; // secuencia de mensajes
       var tx = typeof (ms) === 'undefined' ? false : typeof (ms.text) === 'string' ? true : false; // si es texto o no
       var at = typeof (ms) === 'undefined' ? false : typeof (ms.attachments) === 'undefined' ? true : ms.attachments[0]; // Documentos Adjuntos
-      var re = typeof (en.standby) === 'undefined' ? false : typeof (st.read) === 'undefined' ? st.delivery : st.read;
+      var re = typeof (en.standby) === 'undefined' ? false : st.read;
+      var sf = typeof (en.standby) === 'undefined' ? false : st.delivery; // Mensajes enviados desde facebook
 
       if (en) {
         s.ob = ob;
@@ -316,7 +317,9 @@ module.exports = {
           // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
           //  o es una respuesta automatica
           console.log('= = = ================================================================> Read: ', re);
-          if(re){
+          if(sf){
+            SaveMessageOut(s, body);
+          }else if(re){
             SaveReadMessage(re, s, body);
           }else{
             s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
