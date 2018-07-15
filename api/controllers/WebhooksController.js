@@ -235,7 +235,7 @@ module.exports = {
         if (object === 'page') {
           // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
           //  o es una respuesta automatica
-          typeof s.type !== '' ? SaveMessageIn(s, body) : SaveMessageOut(s, body);
+          s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
         }
         // Retorno de ok para el sistema de facebook
         return res.ok('EVENT_RECEIVED');
