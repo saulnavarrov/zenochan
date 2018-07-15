@@ -75,7 +75,7 @@ module.exports = {
     // Si el mensaje fue enviado o recivido
     sendread: {
       type: 'string',
-      isIn: ['submit', 'toReceibe'],
+      isIn: ['submit', 'toReceibe', 'reads', 'resFB'],
       description: 'Si el mensaje fue enviado o recivido'
     },
 
