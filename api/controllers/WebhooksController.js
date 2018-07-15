@@ -87,18 +87,30 @@ var getConfirmtWebHooks = (opt, cb) => {
   }
 }
 
+/***************************************************************************
+ * Save
+ * @param {array} opt 
+ * @param {array} body 
+ * @param {callback} cb 
+ */
+var SaveMessageOut =  async function (opt, body, cb){
+
+  console.log('= =======================================> Start');
+  console.log(JSON.stringify(body));
+  console.log('= =======================================> Stop');
+  return cb(false, false);
+}
+
 
 
 /****************************************************************************
  * 
- * saveMessageIn
+ * SaveMessageIn
  * @function
  * @description :: Guardara todos los mensajes que entrano salend del sistema
  * 
  ****************************************************************************/
-var saveMessageIn = async function (opt, body) {
-
-  console.log(opt);
+var SaveMessageIn = async function (opt, body) {  
 
   // Estructura del mensaje
   var saveData = {
@@ -112,7 +124,7 @@ var saveMessageIn = async function (opt, body) {
     attachments: opt.attachments,
     idClient: opt.idClient,
     idPage: opt.idPage,
-    sendread: opt.en === 'undefined' ? 'submit' : 'toReceibe',
+    sendread: 'toReceibe',
     messageComplete: body,
   }
 
@@ -123,18 +135,23 @@ var saveMessageIn = async function (opt, body) {
 
   // Guarda el mensaje
   var messengerMessages = await MessengerMessages.create(saveData).fetch();
+  console.log('= =======================================> Start');
   console.log(JSON.stringify(messengerMessages));
+  console.log('= =======================================> Stop');
 
 }
 
-/**
+
+
+/****************************************************************************
+ *
  * ContadorDePalabras
  * @description :: 
  * @param {array} opt :: Array de datos de ingresos
  * @param {callback} cb Debolución del contenido para el contador del sistema 
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-var ContadorDePalabras = (opt, cb) => {
+var ContadorDePalabras = async function (opt, cb) {
 
   return cb(false, false);
 }
@@ -216,7 +233,9 @@ module.exports = {
         
         // Verificación de una pagina
         if (object === 'page') {
-          saveMessageIn(s, body);
+          // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
+          //  o es una respuesta automatica
+          typeof (en.standby) !== 'undefined' ? SaveMessageIn(s, body) : SaveMessageOut(s, body);
         }
         // Retorno de ok para el sistema de facebook
         return res.ok('EVENT_RECEIVED');
