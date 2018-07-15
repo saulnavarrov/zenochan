@@ -102,7 +102,7 @@ var SaveMessageOut =  async function (opt, body){
   var saveData = {
     object: opt.ob,
     sequence: opt.seq,
-    typeMess: opt.type,
+    typeMess: 'resFB',
     text: opt.txt,
     textString: opt.text,
     textArray: !opt.txt ? [] : opt.text.split(' '),
@@ -110,9 +110,10 @@ var SaveMessageOut =  async function (opt, body){
     attachments: opt.attachments,
     idClient: opt.idClient,
     idPage: opt.idPage,
-    sendread: 'toReceibe',
+    sendread: 'resFB',
     messageComplete: body,
-    timestamp: opt.times
+    timestamp: opt.times,
+    read: 1
   }
 
   
