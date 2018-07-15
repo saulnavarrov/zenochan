@@ -121,6 +121,8 @@ var SaveReadMessage = async function (opt, body) {
     'timestamp': opt.watermark
   });
 
+
+
   console.log('= =======================================> Start Save Read ');
   console.log(JSON.stringify(reads));
   console.log('= =======================================> Stop');
@@ -260,7 +262,7 @@ module.exports = {
         s.type = !ms ? '' : tx ? 'text' : at.type;
         s.stiker = !ms ? 0 : tx ? 0 : typeof (at.payload.sticker_id) === 'undefined' ? 0 : at.payload.sticker_id;
         s.attachments = !ms ? {} : tx ? {} : at;
-        s.times = en.timestamp; // hora en la que se guardo en servidor de facebook
+        s.times = st.timestamp; // hora en la que se guardo en servidor de facebook
         
         // Verificación de una pagina
         if (object === 'page') {
