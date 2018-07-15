@@ -116,6 +116,8 @@ var SaveMessageOut =  async function (opt, body){
  * 
  ****************************************************************************/
 var SaveReadMessage = async function (opt, body) {
+  
+  var reads = await MessengerMessages.find({''})
 
   console.log('= =======================================> Start Save Read ');
   console.log(JSON.stringify(body));
@@ -147,6 +149,7 @@ var SaveMessageIn = async function (opt, body) {
     idPage: opt.idPage,
     sendread: 'toReceibe',
     messageComplete: body,
+    timestamp: opt.times
   }
 
   // -> Fn -> Contador de palabras
@@ -255,6 +258,7 @@ module.exports = {
         s.type = !ms ? '' : tx ? 'text' : at.type;
         s.stiker = !ms ? 0 : tx ? 0 : typeof (at.payload.sticker_id) === 'undefined' ? 0 : at.payload.sticker_id;
         s.attachments = !ms ? {} : tx ? {} : at;
+        s.times = en.timestamp; // hora en la que se guardo en servidor de facebook
         
         // Verificación de una pagina
         if (object === 'page') {
@@ -262,7 +266,7 @@ module.exports = {
           //  o es una respuesta automatica
           console.log('= = = ================================================================> Read: ', re);
           if(re){
-            SaveReadMessage(s, body);
+            SaveReadMessage(re, body);
           }else{
             s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
           }
