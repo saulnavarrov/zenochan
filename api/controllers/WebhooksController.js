@@ -289,7 +289,7 @@ module.exports = {
       var sq = typeof (ms) === 'undefined' ? false : ms.seq; // secuencia de mensajes
       var tx = typeof (ms) === 'undefined' ? false : typeof (ms.text) === 'string' ? true : false; // si es texto o no
       var at = typeof (ms) === 'undefined' ? false : typeof (ms.attachments) === 'undefined' ? true : ms.attachments[0]; // Documentos Adjuntos
-      var re = typeof (en.standby) === 'undefined' ? false : st.read; 
+      var re = typeof (en.standby) === 'undefined' ? false : typeof (st.read) === 'undefined' ? st.delivery : st.read;
 
       if (en) {
         s.ob = ob;
