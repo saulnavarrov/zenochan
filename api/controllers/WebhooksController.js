@@ -120,7 +120,7 @@ var SaveReadMessage = async function (opt, s, body) {
   var saveData = {
     object: s.ob,
     sequence: s.seq,
-    typeMess: s.type,
+    typeMess: 'readsFB',
     text: s.txt,
     textString: s.text,
     textArray: !opt.txt ? [] : s.text.split(' '),
@@ -138,6 +138,11 @@ var SaveReadMessage = async function (opt, s, body) {
   var reads = await MessengerMessages
     .find({
       'timestamp': opt.watermark
+    })
+    .casch(err => {
+      reads = false;
+      console.log('= = = = = ==============> Error')
+      console.log(err)
     });
 
   // Actualiza el Mensaje que se ha Leido como tal.
