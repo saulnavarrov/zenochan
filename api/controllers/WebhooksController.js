@@ -140,28 +140,28 @@ var SaveReadMessage = async function (opt, s, body) {
       'timestamp': opt.watermark
     });
 
-  // // Actualiza el Mensaje que se ha Leido como tal.
-  // if(reads){
-  //   var readUpdate = await MessengerMessages
-  //     .update({
-  //       'timestamp': opt.watermark
-  //     })
-  //     .set({
-  //       read: Number(reads[0].read) + 1,
-  //     })
-  //     .fetch();
-  //   }else{
-  //     readUpdate = {
-  //       error: true,
-  //       message: 'No se encontro el Texto que se va actualizar'
-  //     }
-  //   }
+  // Actualiza el Mensaje que se ha Leido como tal.
+  if(reads){
+    var readUpdate = await MessengerMessages
+      .update({
+        'timestamp': opt.watermark
+      })
+      .set({
+        read: Number(reads[0].read) + 1,
+      })
+      .fetch();
+    }else{
+      readUpdate = {
+        error: true,
+        message: 'No se encontro el Texto que se va actualizar'
+      }
+    }
 
   // Guarda el Mensaje de Lectura en el sistema.
   // var messengerMessages = await MessengerMessages.create(saveData).fetch();
 
   console.log('= =======================================> Start Save Read ');
-  console.log(JSON.stringify(reads));
+  console.log(JSON.stringify(readUpdate));
   console.log('= =======================================> Stop');
 }
 
