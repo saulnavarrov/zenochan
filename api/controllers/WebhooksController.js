@@ -147,7 +147,7 @@ var SaveReadMessage = async function (opt, s, body) {
         'timestamp': opt.watermark
       })
       .set({
-        read: Number(reads[0].read) + 1,
+        read: 1,
       })
       .fetch();
     }else{
@@ -161,6 +161,8 @@ var SaveReadMessage = async function (opt, s, body) {
   // var messengerMessages = await MessengerMessages.create(saveData).fetch();
 
   console.log('= =======================================> Start Save Read ');
+  console.log(JSON.stringify(reads[0].read));
+  console.log('= ============== =');
   console.log(JSON.stringify(readUpdate));
   console.log('= =======================================> Stop');
 }
