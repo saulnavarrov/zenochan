@@ -148,12 +148,12 @@ var SaveReadMessage = async function (opt, s, body) {
       console.log(err)
     });
     
-    console.log('= = = = = ==============> Error', JSON.stringify(reads))
+    // console.log('= = = = = ==============> Error', JSON.stringify(reads))
 
   // Actualiza el Mensaje que se ha Leido como tal.
   if(reads){
     var readMes = typeof (reads[0].read) === 'undefined' ? 1 : reads[0].read;
-    console.log('= = = = = ==============> ', readMes)
+    // console.log('= = = = = ==============> ', readMes)
     var readUpdate = await MessengerMessages
       .update({
         'timestamp': opt.watermark
@@ -173,8 +173,8 @@ var SaveReadMessage = async function (opt, s, body) {
   var messengerMessages = await MessengerMessages.create(saveData).fetch();
 
   console.log('= =======================================> Start Save Read ');
-  console.log(JSON.stringify(reads[0].read));
-  console.log('= ============== =');
+  // console.log(JSON.stringify(reads[0].read));
+  // console.log('= ============== =');
   console.log(JSON.stringify(readUpdate));
   console.log('= =======================================> Stop');
 }
@@ -320,7 +320,7 @@ module.exports = {
         if (object === 'page') {
           // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
           //  o es una respuesta automatica
-          console.log('= = = ================================================================> Read: ', re);
+          console.log('= = = ================================================================> Controlador: ');
           if(sf){
             SaveMessageOut(s, body);
           }else if(re){
