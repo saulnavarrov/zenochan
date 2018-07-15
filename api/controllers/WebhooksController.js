@@ -88,17 +88,17 @@ var getConfirmtWebHooks = (opt, cb) => {
 }
 
 /***************************************************************************
- * Save
+ * 
+ * SaveMessageOut
  * @param {array} opt 
- * @param {array} body 
- * @param {callback} cb 
+ * @param {array} body  
  */
-var SaveMessageOut =  async function (opt, body, cb){
+var SaveMessageOut =  async function (opt, body){
 
   console.log('= =======================================> Start save Out');
   console.log(JSON.stringify(body));
   console.log('= =======================================> Stop');
-  return cb(false, false);
+  // return cb(false, false);
 }
 
 
