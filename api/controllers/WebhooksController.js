@@ -122,7 +122,7 @@ var SaveReadMessage = async function (opt, body) {
   });
 
   console.log('= =======================================> Start Save Read ');
-  console.log(JSON.stringify(body));
+  console.log(JSON.stringify(reads));
   console.log('= =======================================> Stop');
 }
 
