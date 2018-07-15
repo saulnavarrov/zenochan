@@ -119,7 +119,7 @@ var SaveReadMessage = async function (opt, body) {
   
   var reads = await MessengerMessages.find({
     'timestamp': opt.watermark
-  }).fetch();
+  });
 
   console.log('= =======================================> Start Save Read ');
   console.log(JSON.stringify(body));
