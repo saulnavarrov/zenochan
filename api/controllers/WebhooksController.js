@@ -136,7 +136,7 @@ var SaveReadMessage = async function (opt, s, body) {
 
   // Busca el Mensaje con el tiempo donde fue guardado.
   var reads = await MessengerMessages
-    .update({
+    .find({
       'timestamp': opt.watermark
     });
 
