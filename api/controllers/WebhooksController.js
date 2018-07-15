@@ -87,18 +87,39 @@ var getConfirmtWebHooks = (opt, cb) => {
   }
 }
 
+
+
 /***************************************************************************
  * 
  * SaveMessageOut
+ * @description :: Guarda el mensaje de ingresos de facebook de ingresos
  * @param {array} opt 
  * @param {array} body  
- */
+ * 
+ ****************************************************************************/
 var SaveMessageOut =  async function (opt, body){
 
   console.log('= =======================================> Start save Out');
   console.log(JSON.stringify(body));
   console.log('= =======================================> Stop');
   // return cb(false, false);
+}
+
+
+
+/****************************************************************************
+ * 
+ * SaveReadMessage
+ * @description :: Guarda el estado de Lectura.
+ * @param {array} opt 
+ * @param {array} body 
+ * 
+ ****************************************************************************/
+var SaveReadMessage = async function (opt, body) {
+
+  console.log('= =======================================> Start Save Read ');
+  console.log(body)
+  console.log('= =======================================> Stop');
 }
 
 
@@ -150,7 +171,8 @@ var SaveMessageIn = async function (opt, body) {
  * @param {array} opt :: Array de datos de ingresos
  * @param {callback} cb Debolución del contenido para el contador del sistema 
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
- */
+ *
+ *****************************************************************************/
 var ContadorDePalabras = async function (opt, cb) {
 
   return cb(false, false);
@@ -195,6 +217,8 @@ module.exports = {
     }
   },
 
+
+
   /****************************************************************************
    * 
    * postWebHooksIn
@@ -218,6 +242,7 @@ module.exports = {
       var sq = typeof (ms) === 'undefined' ? false : ms.seq; // secuencia de mensajes
       var tx = typeof (ms) === 'undefined' ? false : typeof (ms.text) === 'string' ? true : false; // si es texto o no
       var at = typeof (ms) === 'undefined' ? false : typeof (ms.attachments) === 'undefined' ? true : ms.attachments[0]; // Documentos Adjuntos
+      var re = typeof (en.standby) === 'undefined' ? false : st.read; 
 
       if (en) {
         s.ob = ob;
@@ -235,7 +260,12 @@ module.exports = {
         if (object === 'page') {
           // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
           //  o es una respuesta automatica
-          s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
+          console.log('= = = ================================================================> Read: ', re);
+          if(re){
+            SaveReadMessage(s, body);
+          }else{
+            s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
+          }
         }
         // Retorno de ok para el sistema de facebook
         return res.ok('EVENT_RECEIVED');
