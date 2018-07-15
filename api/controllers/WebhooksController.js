@@ -139,7 +139,7 @@ var SaveReadMessage = async function (opt, s, body) {
     .find({
       'timestamp': opt.watermark
     })
-    .casch(err => {
+    .catch(err => {
       reads = false;
       console.log('= = = = = ==============> Error')
       console.log(err)
