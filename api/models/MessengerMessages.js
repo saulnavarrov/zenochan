@@ -73,9 +73,14 @@ module.exports = {
     },
 
     // Si el mensaje fue enviado o recivido
+    // 'submit', = Enviado desde el Book
+    // 'toReceibe', = Mensaje ingesado
+    // 'reads', = Lectura desde el bot
+    // 'resFB', = Respuesta desde Facebook
+    // 'sendFB', = Enviado desde Facebook
     sendread: {
       type: 'string',
-      isIn: ['submit', 'toReceibe', 'reads', 'resFB'],
+      isIn: ['submit', 'toReceibe', 'reads', 'resFB', 'sendFB'],
       description: 'Si el mensaje fue enviado o recivido'
     },
 
@@ -187,3 +192,109 @@ var mensajeRead = {
      }]
    }]
  }
+
+var times = {
+  "object": "page",
+  "entry": [{
+    "id": "2083506518327974",
+    "time": 1531666183439,
+    "standby": [{
+      "sender": {
+        "id": "1703497029718211"
+      },
+      "recipient": {
+        "id": "2083506518327974"
+      },
+      "timestamp": 1531666183424,
+      "delivery": {
+        "watermark": 1531666182238,
+        "seq": 0
+      }
+    }]
+  }]
+}
+
+
+var esmin = {
+  "createdAt": "2018-07-15T15:29:36.218Z",
+  "updatedAt": "2018-07-15T15:29:36.218Z",
+  "id": "5b4b68602d237f0014d999eb",
+  "object": "page",
+  "sequence": 278386,
+  "typeMess": "text",
+  "text": true,
+  "textString": "quiero una entrada gratis jajajaja",
+  "textArray": ["quiero", "una", "entrada", "gratis", "jajajaja"],
+  "stikerId": 0,
+  "attachments": {},
+  "read": 0,
+  "sendread": "toReceibe",
+  "timestamp": 1531668575867,
+  "messageComplete": {
+    "object": "page",
+    "entry": [{
+      "id": "2083506518327974",
+      "time": 1531668576021,
+      "standby": [{
+        "sender": {
+          "id": "1703497029718211"
+        },
+        "recipient": {
+          "id": "2083506518327974"
+        },
+        "timestamp": 1531668575867,
+        "message": {
+          "mid": "_jtelBuzU0azDlNDkHnDmD2OGniNCp17HMqEXIaaKk6msyDuvxnzJ93JKoW6gBM3glXl3bQLhJrOeIHaZRlHZg",
+          "seq": 278386,
+          "text": "quiero una entrada gratis jajajaja"
+        }
+      }]
+    }]
+  },
+  "idClient": "1703497029718211",
+  "idPage": "2083506518327974"
+}
+
+var enFb = {
+  "object": "page",
+  "entry": [{
+    "id": "2083506518327974",
+    "time": 1531668593739,
+    "standby": [{
+      "sender": {
+        "id": "1703497029718211"
+      },
+      "recipient": {
+        "id": "2083506518327974"
+      },
+      "timestamp": 1531668593710,
+      "delivery": {
+        "mids": ["oQNg0m0FQUIB714ClpdXzj2OGniNCp17HMqEXIaaKk6OjsK3wBcOet3h2QSbiJcvdyF3_p9A77CxshGTfl3QGA"],
+        "watermark": 1531668593430,
+        "seq": 0
+      }
+    }]
+  }]
+}
+
+var enfb2 = {
+  "object": "page",
+  "entry": [{
+    "id": "2083506518327974",
+    "time": 1531668593969,
+    "standby": [{
+      "sender": {
+        "id": "1703497029718211"
+      },
+      "recipient": {
+        "id": "2083506518327974"
+      },
+      "timestamp": 1531668593940,
+      "delivery": {
+        "mids": ["oQNg0m0FQUIB714ClpdXzj2OGniNCp17HMqEXIaaKk6OjsK3wBcOet3h2QSbiJcvdyF3_p9A77CxshGTfl3QGA"],
+        "watermark": 1531668593430,
+        "seq": 0
+      }
+    }]
+  }]
+}

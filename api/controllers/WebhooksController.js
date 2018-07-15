@@ -141,7 +141,7 @@ var SaveReadMessage = async function (opt, s, body) {
   var saveData = {
     object: s.ob,
     sequence: s.seq,
-    typeMess: 'readsFB',
+    typeMess: 'SendMessReadsFB',
     text: s.txt,
     textString: s.text,
     textArray: !opt.txt ? [] : s.text.split(' '),
@@ -149,7 +149,7 @@ var SaveReadMessage = async function (opt, s, body) {
     attachments: s.attachments,
     idClient: s.idClient,
     idPage: s.idPage,
-    sendread: 'reads',
+    sendread: 'resFB',
     messageComplete: body,
     timestamp: s.times,
     read: 1
