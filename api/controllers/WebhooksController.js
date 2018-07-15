@@ -207,7 +207,7 @@ module.exports = {
       var body = req.body || 0;
       var object = body.object || 0;
 
-      console.log(JSON.stringify(body))
+      // console.log(JSON.stringify(body))
 
       //  Codigos
       var s = {};
