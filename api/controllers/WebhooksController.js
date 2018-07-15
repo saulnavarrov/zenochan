@@ -164,7 +164,7 @@ var SaveReadMessage = async function (opt, s, body) {
       console.log(err)
     });
     
-    // console.log('= = = = = ==============> Error', JSON.stringify(reads))
+    console.log('= = = = = ==============> Error', JSON.stringify(reads))
 
   // Actualiza el Mensaje que se ha Leido como tal.
   if(reads !== []){
