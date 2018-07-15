@@ -141,19 +141,21 @@ var SaveReadMessage = async function (opt, s, body) {
     })
     .catch(err => {
       reads = false;
-      console.log('= = = = = ==============> Error')
       console.log(err)
     });
+    
+    console.log('= = = = = ==============> Error', JSON.stringify(reads))
 
   // Actualiza el Mensaje que se ha Leido como tal.
   if(reads){
-    console.log('= = = = = ==============> ', reads[0].read)
+    var readMes = typeof (reads[0].read) === 'undefined' ? 1 : reads[0].read;
+    console.log('= = = = = ==============> ', readMes)
     var readUpdate = await MessengerMessages
       .update({
         'timestamp': opt.watermark
       })
       .set({
-        read: reads[0].read + 1 ,
+        read: readMes + 1 ,
       })
       .fetch();
     }else{
