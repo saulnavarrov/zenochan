@@ -142,6 +142,7 @@ var SaveReadMessage = async function (opt, s, body) {
 
   // Actualiza el Mensaje que se ha Leido como tal.
   if(reads){
+    console.log('= = = = = ==============> ', reads[0].read)
     var readUpdate = await MessengerMessages
       .update({
         'timestamp': opt.watermark
