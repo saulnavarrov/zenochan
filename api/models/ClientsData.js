@@ -61,11 +61,11 @@ module.exports = {
     description: '',
   },
   
-  // // Id de conexion
-  // idsFb: {
-  //   model: 'clientsids',
-  //   description: '',
-  // },
+  // Id de conexion
+  idsFb: {
+    model: 'clientsids',
+    description: '',
+  },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
