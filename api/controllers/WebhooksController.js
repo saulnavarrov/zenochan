@@ -260,6 +260,7 @@ var SaveMessageIn = async function (opt, body) {
  * @param {callback} cb 
  */
 var IdentificacionDePerfiles = (opt, cb) => {
+  sails.log.debug('Function: IdentificacionDePerfiles()');
   console.log(opt)
   
   // Buscando datos creados en el sistema Datos
@@ -276,19 +277,19 @@ var IdentificacionDePerfiles = (opt, cb) => {
     });
 
   console.log(clientsFbDbSave);
-  var dataClientFb = client.getUserProfile(String(opt))
-    .then(user => {
-  //     // if(!clientDbFind){
-  //     //   clientDbFind = await ClientsData.create({
+  // var dataClientFb = client.getUserProfile(String(opt))
+  //   .then(user => {
+  // //     // if(!clientDbFind){
+  // //     //   clientDbFind = await ClientsData.create({
 
-  //     //   }).fetch();
-  //     // }
+  // //     //   }).fetch();
+  // //     // }
       
-  //     console.log(clientDbFind);
+  // //     console.log(clientDbFind);
 
-      profileDataClients = user;
-  //     console.log(profileDataClients);
-    });
+  //     profileDataClients = user;
+  // //     console.log(profileDataClients);
+  //   });
 
     // Buscando datos creados en el sistema Datos
     // var clientsFbDbSave = await ClientsData.find({
