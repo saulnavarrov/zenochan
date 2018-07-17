@@ -243,6 +243,7 @@ var SaveMessageIn = async function (opt, body) {
  * como ejemplo los de son diferentes a los de tipo de textos.
  * @param {array} opt 
  * @param {arry} body 
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
 var FiltrosMessagesIn = (opt, body) => {
   var type = opt.typeMess || null;
@@ -251,7 +252,12 @@ var FiltrosMessagesIn = (opt, body) => {
   if(type === 'text'){
     // Funcion para buscar los datos en la base si existen o no.
     console.log(opt.textArray);
-    
+    ContadorDePalabrasYCorreccion(opt, body);
+  }
+
+  //Contenido no procesado
+  else{
+    console.log('Contenido no admitido')
   }
 
 }
@@ -266,7 +272,7 @@ var FiltrosMessagesIn = (opt, body) => {
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  *
  *****************************************************************************/
-var ContadorDePalabras = async function (opt, cb) {
+var ContadorDePalabrasYCorreccion = async function (opt, body, cb) {
 
   return cb(false, false);
 }
