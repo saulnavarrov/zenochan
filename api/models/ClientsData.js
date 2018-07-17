@@ -67,7 +67,7 @@ module.exports = {
    * 2 = update 
    */
   dataUpdate: {
-    type: 'string',
+    type: 'number',
     isIn: [0,1,2],
     defaultsTo: 0,
     description: `Identificacra los perfiles de las personas con las que nos comunicamos

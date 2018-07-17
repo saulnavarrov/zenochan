@@ -258,7 +258,7 @@ var SaveMessageIn = async function (opt, body) {
  */
 var IdentificacionDePerfiles = (opt, cb) => {
   console.log(opt)
-  const profileData = await client.getUserProfile();
+  const profileData = client.getUserProfile();
 }
 
 
