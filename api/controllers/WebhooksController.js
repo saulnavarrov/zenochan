@@ -319,7 +319,7 @@ var FiltrosMessagesIn = (opt, body) => {
     console.log(opt.textArray);
     // Respuestas Rapida de resolución
     client.sendMessage(String(opt.idClient), {
-      text: `Reenviado: ${opt.text}`,
+      text: `Reenviado: ${opt.textString}`,
     });
 
     // Funcion para controlar las palabras
@@ -331,11 +331,11 @@ var FiltrosMessagesIn = (opt, body) => {
     console.log('Contenido no admitido');
 
     // Respuesta para el cliente que manda el mensaje
-    if(profileDataClients.length){
+    // if(profileDataClients.length){
       client.sendMessage(String(opt.idClient), {
         text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
       });
-    }
+    // }
   }
 
 }
