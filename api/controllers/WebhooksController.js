@@ -230,7 +230,7 @@ var SaveMessageIn = async function (opt, body) {
   // console.log(JSON.stringify(messengerMessages));
   // console.log('= =======================================> Stop');
 
-  await client.sendTextMessage(String(saveData.idClient), 'hola saul' );
+  
 
   // identifica el usuario que envia el mensaje
   IdentificacionDePerfiles(opt.idClient);
@@ -295,7 +295,9 @@ var FiltrosMessagesIn = (opt, body) => {
     console.log('Contenido no admitido');
 
     // Respuesta para el cliente que manda el mensaje
-    
+    client.sendMessage(String(opt), {
+      text: 'Hola Lo siento no soportamos este tipo de mensajes!',
+    });
   }
 
 }
