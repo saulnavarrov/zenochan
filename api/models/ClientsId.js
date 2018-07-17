@@ -25,9 +25,9 @@ module.exports = {
   },
 
   // // Conexion con la Client Data
-  clientsData:{
-    collections: 'clientsdata',
-    via: 'idsFb'
+  dataclients:{
+    collection: 'clientsdata',
+    via: 'idsfbs'
   },
 
   // // Conexion con los datos de las paginas web

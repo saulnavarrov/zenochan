@@ -62,9 +62,8 @@ module.exports = {
   },
   
   // Id de conexion
-  idsFb: {
-    model: 'clientsids',
-    description: '',
+  idsfbs: {
+    model: 'clientsid'
   },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
