@@ -234,7 +234,7 @@ var SaveMessageIn = async function (opt, body) {
   // console.log('= =======================================> Stop');
 
   // identifica el usuario que envia el mensaje
-  // IdentificacionDePerfiles(opt.idClient);
+  IdentificacionDePerfiles(opt.idClient);
 
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
@@ -264,22 +264,22 @@ var IdentificacionDePerfiles = (opt, cb) => {
   console.log(opt)
   
   // Buscando datos creados en el sistema Datos
-  var clientsFbDbSave =  ClientsData
-    .find({
-      idfbs: opt
-    })
-    .catch(err => {
-      return {
-        success: false,
-        message: 'Cliente no Encontrado',
-        error: err
-      }
-    });
+  // var clientsFbDbSave =  ClientsData
+  //   .find({
+  //     idfbs: opt
+  //   })
+  //   .catch(err => {
+  //     return {
+  //       success: false,
+  //       message: 'Cliente no Encontrado',
+  //       error: err
+  //     }
+  //   });
 
   console.log(clientsFbDbSave);
-  // var dataClientFb = client.getUserProfile(String(opt))
-  //   .then(user => {
-  // //     // if(!clientDbFind){
+  var dataClientFb = client.getUserProfile(String(opt))
+    .then(user => {
+      // if(!clientDbFind){
   // //     //   clientDbFind = await ClientsData.create({
 
   // //     //   }).fetch();
@@ -287,9 +287,9 @@ var IdentificacionDePerfiles = (opt, cb) => {
       
   // //     console.log(clientDbFind);
 
-  //     profileDataClients = user;
-  // //     console.log(profileDataClients);
-  //   });
+      profileDataClients = user;
+      console.log(profileDataClients);
+    });
 
     // Buscando datos creados en el sistema Datos
     // var clientsFbDbSave = await ClientsData.find({
