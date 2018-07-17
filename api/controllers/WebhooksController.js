@@ -330,9 +330,11 @@ var FiltrosMessagesIn = (opt, body) => {
     console.log('Contenido no admitido');
 
     // Respuesta para el cliente que manda el mensaje
-    client.sendMessage(String(opt.idClient), {
-      text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
-    });
+    if(profileDataClients.length){
+      client.sendMessage(String(opt.idClient), {
+        text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
+      });
+    }
   }
 
 }
