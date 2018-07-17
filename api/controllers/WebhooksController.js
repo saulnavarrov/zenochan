@@ -256,27 +256,42 @@ var SaveMessageIn = async function (opt, body) {
  * en la manera manual se podran poner el nombre aunque este cambien el perfil de la persona
  * en automatico, cada vez que no coincida con el se cambiara sin ningun previo aviso
  * Defaults Automatico
- * @param {array} opt 
+ * @param {array} opt :: Codigo para identificar el Cliente de facebook
  * @param {callback} cb 
  */
 var IdentificacionDePerfiles = (opt, cb) => {
   console.log(opt)
-  var dataClientFb = client.getUserProfile(String(opt))
-    .then(user => {
-
-      
-
-      // if(!clientDbFind){
-      //   clientDbFind = await ClientsData.create({
-
-      //   }).fetch();
-      // }
-      
-      console.log(clientDbFind);
-
-      profileDataClients = user;
-      console.log(profileDataClients);
+  
+  // Buscando datos creados en el sistema Datos
+  var clientsFbDbSave =  ClientsData
+    .find({
+      idfbs: opt
+    })
+    .catch(err => {
+      return {
+        success: false,
+        message: 'Cliente no Encontrado',
+        error: err
+      }
     });
+
+  console.log(clientsFbDbSave);
+  // var dataClientFb = client.getUserProfile(String(opt))
+  //   .then(user => {
+
+      
+
+  //     // if(!clientDbFind){
+  //     //   clientDbFind = await ClientsData.create({
+
+  //     //   }).fetch();
+  //     // }
+      
+  //     console.log(clientDbFind);
+
+  //     profileDataClients = user;
+  //     console.log(profileDataClients);
+  //   });
 
     // Buscando datos creados en el sistema Datos
     // var clientsFbDbSave = await ClientsData.find({
