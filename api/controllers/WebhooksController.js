@@ -12,7 +12,7 @@ const token_apiSaul = 'EAAFPdRVJsDoBAClzsa0N0RqrFCYqpcLdDKFNPn2XtTAoDYLwhZCocKO0
 // Token de la app para que facebook la reconosca
 const apptoken = 'Sails=3AUVG-R9ZyY85-uFdoYEU0m6xNKz2wV1lV.N0kXRlGwXdFMVuBH0U9bFEvRBya%2BMJWdnkFzNU%2B%2FFIU=Saul';
 
-//
+// Conexion con facebook
 const client = MessengerClient.connect(token_apiSaul);
 
 /************************************************************************************************
@@ -230,6 +230,8 @@ var SaveMessageIn = async function (opt, body) {
   // console.log(JSON.stringify(messengerMessages));
   // console.log('= =======================================> Stop');
 
+  await client.sendTextMessage(String(saveData.idClient), 'hola saul' );
+
   // identifica el usuario que envia el mensaje
   IdentificacionDePerfiles(opt.idClient);
 
@@ -258,7 +260,11 @@ var SaveMessageIn = async function (opt, body) {
  */
 var IdentificacionDePerfiles = (opt, cb) => {
   console.log(opt)
-  const profileData = client.getUserProfile();
+  var profileData = client.getUserProfile(String(opt))
+    .then(user => {
+        console.log(user);
+        return user;
+  })
 }
 
 
@@ -289,6 +295,7 @@ var FiltrosMessagesIn = (opt, body) => {
     console.log('Contenido no admitido');
 
     // Respuesta para el cliente que manda el mensaje
+    
   }
 
 }
