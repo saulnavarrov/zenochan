@@ -25,10 +25,10 @@ module.exports = {
   },
 
   // // Conexion con la Client Data
-  // clientsData:{
-  //   collections: 'clientsdata',
-  //   via: 'idsFb'
-  // },
+  clientsData:{
+    collections: 'clientsdata',
+    via: 'idsFb'
+  },
 
   // // Conexion con los datos de las paginas web
   // pageData: {
