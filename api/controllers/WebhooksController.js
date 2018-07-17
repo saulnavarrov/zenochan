@@ -118,7 +118,7 @@ var SaveMessageOut =  async function (opt, body){
 
   
 
-  console.log('= =======================================> Start save Out');
+  // console.log('= =======================================> Start save Out');
   // console.log(saveData)
   // console.log(' = = = = = > Body')
   // console.log(JSON.stringify(body));
@@ -189,7 +189,7 @@ var SaveReadMessage = async function (opt, s, body) {
   // Guarda el Mensaje de Lectura en el sistema.
   var messengerMessages = await MessengerMessages.create(saveData).fetch();
 
-  console.log('= =======================================> Start Save Read ');
+  // console.log('= =======================================> Start Save Read ');
   // console.log(JSON.stringify(reads[0].read));
   // console.log('= ============== =');
   // console.log(JSON.stringify(readUpdate));
@@ -226,12 +226,35 @@ var SaveMessageIn = async function (opt, body) {
 
   // Guarda el mensaje
   var messengerMessages = await MessengerMessages.create(saveData).fetch();
-  console.log('= =======================================> Start Save Ms In');
+  // console.log('= =======================================> Start Save Ms In');
   // console.log(JSON.stringify(messengerMessages));
   // console.log('= =======================================> Stop');
 
+  // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
+  // ya sea del ultimo en revision.
+  FiltrosMessagesIn(saveData, body);
+
 }
 
+/**
+ * FiltrosMessagesIn
+ * @description :: Filtrara que tipo de mensajes se enviaran al Autor 
+ * debido a que todos estos no pueden ser procesados por su tipo de complejidad
+ * como ejemplo los de son diferentes a los de tipo de textos.
+ * @param {array} opt 
+ * @param {arry} body 
+ */
+var FiltrosMessagesIn = (opt, body) => {
+  var type = opt.typeMess || null;
+
+  // filtros para textos
+  if(type === 'text'){
+    // Funcion para buscar los datos en la base si existen o no.
+    console.log(opt.textArray);
+    
+  }
+
+}
 
 
 /****************************************************************************
