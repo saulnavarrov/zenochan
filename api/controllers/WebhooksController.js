@@ -230,8 +230,6 @@ var SaveMessageIn = async function (opt, body) {
   // console.log(JSON.stringify(messengerMessages));
   // console.log('= =======================================> Stop');
 
-  
-
   // identifica el usuario que envia el mensaje
   IdentificacionDePerfiles(opt.idClient);
 
@@ -287,6 +285,12 @@ var FiltrosMessagesIn = (opt, body) => {
   if(type === 'text'){
     // Funcion para buscar los datos en la base si existen o no.
     console.log(opt.textArray);
+    // Respuestas Rapida de resolución
+    client.sendMessage(String(opt.idClient), {
+      text: `Reenviado: ${opt.text}`,
+    });
+
+    // Funcion para controlar las palabras
     ContadorDePalabrasYCorreccion(opt, body);
   }
 
