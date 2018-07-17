@@ -263,9 +263,17 @@ var IdentificacionDePerfiles = (opt, cb) => {
   console.log(opt)
   client.getUserProfile(String(opt))
     .then(user => {
-        console.log(user);
-        profileDataClients = user;
-  })
+
+      // Buscando datos creados en el sistema Datos
+      var clientDbFind = await ClientsData.find({
+        idfbs: use.id
+      });
+      
+      console.log(clientDbFind);
+
+      profileDataClients = user;
+      console.log(profileDataClients);
+    });
 }
 
 
