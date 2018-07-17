@@ -279,9 +279,9 @@ var IdentificacionDePerfiles = (opt, cb) => {
     });
 
     // Buscando datos creados en el sistema Datos
-    var clientsFbDbSave = await ClientsData.find({
-        idfbs: opt
-      })
+    // var clientsFbDbSave = await ClientsData.find({
+    //     idfbs: opt
+    //   })
 }
 
 
