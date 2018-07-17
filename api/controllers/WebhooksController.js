@@ -276,7 +276,7 @@ var IdentificacionDePerfiles = (opt, cb) => {
   //     }
   //   });
 
-  console.log(clientsFbDbSave);
+  // console.log(clientsFbDbSave);
   var dataClientFb = client.getUserProfile(String(opt))
     .then(user => {
       // if(!clientDbFind){
@@ -332,9 +332,11 @@ var FiltrosMessagesIn = (opt, body) => {
 
     // Respuesta para el cliente que manda el mensaje
     // if(profileDataClients.length){
-      client.sendMessage(String(opt.idClient), {
-        text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
-      });
+      setTimeout(() => {
+        client.sendMessage(String(opt.idClient), {
+          text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
+        });
+      }, 500);
     // }
   }
 
