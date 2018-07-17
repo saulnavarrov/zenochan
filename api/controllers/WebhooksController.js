@@ -234,7 +234,7 @@ var SaveMessageIn = async function (opt, body) {
   // console.log('= =======================================> Stop');
 
   // identifica el usuario que envia el mensaje
-  IdentificacionDePerfiles(opt.idClient);
+  // IdentificacionDePerfiles(opt.idClient);
 
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
@@ -323,7 +323,7 @@ var FiltrosMessagesIn = (opt, body) => {
     });
 
     // Funcion para controlar las palabras
-    ContadorDePalabrasYCorreccion(opt, body);
+    // ContadorDePalabrasYCorreccion(opt, body);
   }
 
   //Contenido no procesado
