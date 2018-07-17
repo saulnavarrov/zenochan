@@ -265,9 +265,16 @@ var IdentificacionDePerfiles = (opt, cb) => {
     .then(user => {
 
       // Buscando datos creados en el sistema Datos
-      var clientDbFind = await ClientsData.find({
-        idfbs: use.id
-      });
+      var clientsFbDbSave = await ClientsData
+        .find({
+          idfbs: opt
+        })
+
+      // if(!clientDbFind){
+      //   clientDbFind = await ClientsData.create({
+
+      //   }).fetch();
+      // }
       
       console.log(clientDbFind);
 
