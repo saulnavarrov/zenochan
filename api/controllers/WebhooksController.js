@@ -261,10 +261,10 @@ var SaveMessageIn = async function (opt, body) {
  */
 var IdentificacionDePerfiles = (opt, cb) => {
   console.log(opt)
-  profileDataClients = client.getUserProfile(String(opt))
+  client.getUserProfile(String(opt))
     .then(user => {
         console.log(user);
-        return user;
+        profileDataClients = user;
   })
 }
 
