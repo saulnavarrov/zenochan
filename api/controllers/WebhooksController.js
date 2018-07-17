@@ -261,14 +261,10 @@ var SaveMessageIn = async function (opt, body) {
  */
 var IdentificacionDePerfiles = (opt, cb) => {
   console.log(opt)
-  client.getUserProfile(String(opt))
+  var dataClientFb = client.getUserProfile(String(opt))
     .then(user => {
 
-      // Buscando datos creados en el sistema Datos
-      var clientsFbDbSave = await ClientsData
-        .find({
-          idfbs: opt
-        })
+      
 
       // if(!clientDbFind){
       //   clientDbFind = await ClientsData.create({
@@ -281,6 +277,11 @@ var IdentificacionDePerfiles = (opt, cb) => {
       profileDataClients = user;
       console.log(profileDataClients);
     });
+
+    // Buscando datos creados en el sistema Datos
+    var clientsFbDbSave = await ClientsData.find({
+        idfbs: opt
+      })
 }
 
 
