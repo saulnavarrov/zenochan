@@ -274,7 +274,8 @@ var FiltrosMessagesIn = (opt, body) => {
  *****************************************************************************/
 var ContadorDePalabrasYCorreccion = async function (opt, body, cb) {
 
-  return cb(false, false);
+  console.log('controlador de palabras')
+  // return cb(false, false);
 }
 
 

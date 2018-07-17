@@ -31,10 +31,10 @@ module.exports = {
   },
 
   // // Conexion con los datos de las paginas web
-  // pageData: {
-  //   collections: 'pages',
-  //   via: 'pageids'
-  // }
+  dataspages: {
+    collection: 'pages',
+    via: 'pagesids'
+  }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

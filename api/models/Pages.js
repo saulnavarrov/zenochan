@@ -43,10 +43,10 @@ module.exports = {
       defaultsTo: 'page'
     },
 
-    // // Id Paginas
-    // pageIds: {
-    //   model: 'clientsids'
-    // }
+    // Id Paginas
+    pagesids: {
+      model: 'clientsid'
+    }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
