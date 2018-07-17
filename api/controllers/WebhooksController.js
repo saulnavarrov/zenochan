@@ -299,7 +299,7 @@ var FiltrosMessagesIn = (opt, body) => {
     console.log('Contenido no admitido');
 
     // Respuesta para el cliente que manda el mensaje
-    client.sendMessage(String(opt), {
+    client.sendMessage(String(opt.idClient), {
       text: 'Hola Lo siento no soportamos este tipo de mensajes!',
     });
   }
