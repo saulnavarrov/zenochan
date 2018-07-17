@@ -15,6 +15,9 @@ const apptoken = 'Sails=3AUVG-R9ZyY85-uFdoYEU0m6xNKz2wV1lV.N0kXRlGwXdFMVuBH0U9bF
 // Conexion con facebook
 const client = MessengerClient.connect(token_apiSaul);
 
+// Guarda de manera temporal la identificación de la personas
+var profileDataClients = {};
+
 /************************************************************************************************
  * getConfirmtWebHooks
  * @description :: Configuración para verificar que facebook se puede conectar con la api del sistema.
@@ -258,7 +261,7 @@ var SaveMessageIn = async function (opt, body) {
  */
 var IdentificacionDePerfiles = (opt, cb) => {
   console.log(opt)
-  var profileData = client.getUserProfile(String(opt))
+  profileDataClients = client.getUserProfile(String(opt))
     .then(user => {
         console.log(user);
         return user;
