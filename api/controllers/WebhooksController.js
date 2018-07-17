@@ -230,13 +230,42 @@ var SaveMessageIn = async function (opt, body) {
   // console.log(JSON.stringify(messengerMessages));
   // console.log('= =======================================> Stop');
 
+  // identifica el usuario que envia el mensaje
+  IdentificacionDePerfiles(opt.idClient);
+
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
   FiltrosMessagesIn(saveData, body);
 
 }
 
-/**
+
+
+/****************************************************************************
+ *
+ * IdentificacionDePerfiles
+ * @description :: Identificacra los perfiles de las personas con las que nos comunicamos
+ * Guardara los datos y los actualizara para la verificación de estos.
+ * tambien mantendra la base de datos actualizada en caso tal de que estos no coincidan.
+ * NOTA:
+ * Esto es vasado en los perfiles de facebook y se podran cambiar o actualizar de manera 
+ * automatica o manual
+ * en la manera manual se podran poner el nombre aunque este cambien el perfil de la persona
+ * en automatico, cada vez que no coincida con el se cambiara sin ningun previo aviso
+ * Defaults Automatico
+ * @param {array} opt 
+ * @param {callback} cb 
+ */
+var IdentificacionDePerfiles = (opt, cb) => {
+  console.log(opt)
+  const profileData = await client.getUserProfile();
+}
+
+
+
+
+/****************************************************************************
+ *
  * FiltrosMessagesIn
  * @description :: Filtrara que tipo de mensajes se enviaran al Autor 
  * debido a que todos estos no pueden ser procesados por su tipo de complejidad
@@ -257,7 +286,9 @@ var FiltrosMessagesIn = (opt, body) => {
 
   //Contenido no procesado
   else{
-    console.log('Contenido no admitido')
+    console.log('Contenido no admitido');
+
+    // Respuesta para el cliente que manda el mensaje
   }
 
 }
