@@ -336,7 +336,7 @@ var FiltrosMessagesIn = (opt, body) => {
         client.sendMessage(String(opt.idClient), {
           text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
         });
-      }, 500);
+      }, 200);
     // }
   }
 
