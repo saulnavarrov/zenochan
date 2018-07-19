@@ -207,9 +207,7 @@ var SaveReadMessage = async function (opt, s, body) {
  * @description :: Guardara todos los mensajes que entrano salend del sistema
  * 
  ****************************************************************************/
-var SaveMessageIn = async function (opt, body) {  
-  // identifica el usuario que envia el mensaje
-  IdentificacionDePerfiles(opt.idClient);
+var SaveMessageIn = async function (opt, body) {
 
   // Estructura del mensaje
   var saveData = {
@@ -439,6 +437,13 @@ module.exports = {
         
         // Verificación de una pagina
         if (object === 'page') {
+
+          // identifica el usuario que envia el mensaje
+          // Si tiene usuario
+          if(s.idClient){
+            IdentificacionDePerfiles(s.idClient);
+          }
+
           // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
           //  o es una respuesta automatica
           console.log('= = = ================================================================> Controlador: ');
