@@ -119,7 +119,6 @@ var SaveMessageOut =  async function (opt, body){
     read: 1
   }
 
-  
 
   // console.log('= =======================================> Start save Out');
   // console.log(saveData)
@@ -209,6 +208,8 @@ var SaveReadMessage = async function (opt, s, body) {
  * 
  ****************************************************************************/
 var SaveMessageIn = async function (opt, body) {  
+  // identifica el usuario que envia el mensaje
+  IdentificacionDePerfiles(opt.idClient);
 
   // Estructura del mensaje
   var saveData = {
@@ -233,8 +234,6 @@ var SaveMessageIn = async function (opt, body) {
   // console.log(JSON.stringify(messengerMessages));
   // console.log('= =======================================> Stop');
 
-  // identifica el usuario que envia el mensaje
-  IdentificacionDePerfiles(opt.idClient);
 
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
