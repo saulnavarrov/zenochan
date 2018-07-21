@@ -258,21 +258,23 @@ var SaveMessageIn = async function (opt, body) {
 var IdentificacionDePerfiles = (opt, cb) => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
   console.log(opt)
+
+  
   
   // Buscando datos creados en el sistema Datos
-  var clientsDataDbFind =  ClientsData.find({
-    idfbs: ''
-  })
-  .catch(err => {
-    return {
-      success: false,
-      message: 'Cliente no Encontrado',
-      error: err
-    }
-  });;
+  // var clientsDataDbFind =  ClientsData.find({
+  //   idfbs: ''
+  // })
+  // .catch(err => {
+  //   return {
+  //     success: false,
+  //     message: 'Cliente no Encontrado',
+  //     error: err
+  //   }
+  // });;
 
-  console.log('===========> Users')
-  console.log(clientsDataDbFind);
+  // console.log('===========> Users')
+  // console.log(clientsDataDbFind);
   // var clientsFbDbSave = await ClientsData
   //   .find({
   //     idfbs: opt
