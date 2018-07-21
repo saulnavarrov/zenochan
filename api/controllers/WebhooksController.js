@@ -273,12 +273,12 @@ var IdentificacionDePerfiles = async (opt, cb) => {
   if(clientsDataId !== []){
     dataClientFb = clientsDataId;
   }
-  // else{
-  //   // Traera del facebook los datos del usuario
-  //   var dataClientFb = client.getUserProfile(String(opt))
-  //     .then(user => {
-  //       return user;
-  //     });
+  else{
+    // Traera del facebook los datos del usuario
+    var dataClientFb = client.getUserProfile(String(opt))
+      .then(user => {
+        return user;
+      });
 
   //   // // Creara el nuevo perfil
   //   // var saveClientFbNew = await DataClients.findOrCreate({
@@ -291,11 +291,11 @@ var IdentificacionDePerfiles = async (opt, cb) => {
   //   // // profileDataClients = user;/*  */
     console.log('=========> ');
   //   console.log(profileDataClients);
-  //   console.log(dataClientFb);
-  //   // console.log('UserData Client New');
+    console.log(dataClientFb);
+    console.log('UserData Client New');
     console.log(clientsDataId)
     console.log('===============>')
-  // }
+  }
 
   // console.log(clientsDataId);
   
