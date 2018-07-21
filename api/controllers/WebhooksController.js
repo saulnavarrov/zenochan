@@ -259,7 +259,13 @@ var IdentificacionDePerfiles = (opt, cb) => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
   console.log(opt)
 
-  
+  var clientsDataId = DataClients.findOrCreate({
+    idfbs: String(opt.idClient)
+  }).fetch();
+
+  console.log('=========> ');
+  console.log(clientsDataId);
+  console.log('===============>')
   
   // Buscando datos creados en el sistema Datos
   // var clientsDataDbFind =  ClientsData.find({
@@ -290,14 +296,6 @@ var IdentificacionDePerfiles = (opt, cb) => {
   // console.log(clientsFbDbSave);
   var dataClientFb = client.getUserProfile(String(opt))
     .then(user => {
-      // if(!clientDbFind){
-  // //     //   clientDbFind = await ClientsData.create({
-
-  // //     //   }).fetch();
-  // //     // }
-      
-  // //     console.log(clientDbFind);
-
       profileDataClients = user;
       console.log(profileDataClients);
     });
