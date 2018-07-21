@@ -258,23 +258,50 @@ var SaveMessageIn = async function (opt, body) {
 var IdentificacionDePerfiles = async (opt, cb) => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
 
-  var clientsDataId = await DataClients.find({"idfbs": String(opt.idClient)});
+  var clientsDataId = await DataClients.find({
+      "idfbs": String(opt.idClient)
+    })
+    .catch(err => {
+      return {
+        success: false,
+        message: 'Cliente no Encontrado',
+        error: err
+      }
+    });
 
-  console.log('=========> ');
-  console.log(clientsDataId);
-  console.log('===============>')
+  if(clientsDataId !== []){
+    dataClientFb = clientsDataId;
+  }else{
+    // Traera del facebook los datos del usuario
+    var dataClientFb = client.getUserProfile(String(opt))
+      .then(user => {
+        return user;
+      });
+
+    // // Creara el nuevo perfil
+    // var saveClientFbNew = await DataClients.findOrCreate({
+    //   idfbs: String(opt.idClient)
+    // }, {
+    //   idfbs: String(user.id),
+
+    // }).fetch();
+
+    // // profileDataClients = user;/*  */
+    console.log('=========> ');
+    console.log(profileDataClients);
+    console.log(dataClientFb);
+    // console.log('UserData Client New');
+    // console.log(saveClientFbNew)
+    console.log('===============>')
+  }
+
+  // console.log(clientsDataId);
   
   // Buscando datos creados en el sistema Datos
   // var clientsDataDbFind =  ClientsData.find({
   //   idfbs: ''
   // })
-  // .catch(err => {
-  //   return {
-  //     success: false,
-  //     message: 'Cliente no Encontrado',
-  //     error: err
-  //   }
-  // });;
+  // 
 
   // console.log('===========> Users')
   // console.log(clientsDataDbFind);
@@ -291,11 +318,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
   //   });
 
   // console.log(clientsFbDbSave);
-  var dataClientFb = client.getUserProfile(String(opt))
-    .then(user => {
-      profileDataClients = user;
-      console.log(profileDataClients);
-    });
+  
 
     // Buscando datos creados en el sistema Datos
     // var clientsFbDbSave = await ClientsData.find({
@@ -316,7 +339,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
  * @param {arry} body 
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-var FiltrosMessagesIn = (opt, body) => {
+var FiltrosMessagesIn = async (opt, body) => {
   var type = opt.typeMess || null;
 
   // filtros para textos
