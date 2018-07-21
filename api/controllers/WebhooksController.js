@@ -272,7 +272,8 @@ var IdentificacionDePerfiles = async (opt, cb) => {
   
   if(clientsDataId !== []){
     dataClientFb = clientsDataId;
-  }else{
+  }
+  // else{
   //   // Traera del facebook los datos del usuario
   //   var dataClientFb = client.getUserProfile(String(opt))
   //     .then(user => {
