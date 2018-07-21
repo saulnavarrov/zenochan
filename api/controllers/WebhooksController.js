@@ -269,31 +269,32 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
+  
   if(clientsDataId !== []){
     dataClientFb = clientsDataId;
   }else{
-    // Traera del facebook los datos del usuario
-    var dataClientFb = client.getUserProfile(String(opt))
-      .then(user => {
-        return user;
-      });
+  //   // Traera del facebook los datos del usuario
+  //   var dataClientFb = client.getUserProfile(String(opt))
+  //     .then(user => {
+  //       return user;
+  //     });
 
-    // // Creara el nuevo perfil
-    // var saveClientFbNew = await DataClients.findOrCreate({
-    //   idfbs: String(opt.idClient)
-    // }, {
-    //   idfbs: String(user.id),
+  //   // // Creara el nuevo perfil
+  //   // var saveClientFbNew = await DataClients.findOrCreate({
+  //   //   idfbs: String(opt.idClient)
+  //   // }, {
+  //   //   idfbs: String(user.id),
 
-    // }).fetch();
+  //   // }).fetch();
 
-    // // profileDataClients = user;/*  */
+  //   // // profileDataClients = user;/*  */
     console.log('=========> ');
-    console.log(profileDataClients);
-    console.log(dataClientFb);
-    // console.log('UserData Client New');
-    // console.log(saveClientFbNew)
+  //   console.log(profileDataClients);
+  //   console.log(dataClientFb);
+  //   // console.log('UserData Client New');
+    console.log(clientsDataId)
     console.log('===============>')
-  }
+  // }
 
   // console.log(clientsDataId);
   
