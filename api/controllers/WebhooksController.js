@@ -278,6 +278,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
     var dataClientFb = client.getUserProfile(String(opt))
       .then(user => {
         dataClientFb = user;
+        console.log(user);
       });
 
   //   // // Creara el nuevo perfil
@@ -290,7 +291,6 @@ var IdentificacionDePerfiles = async (opt, cb) => {
 
   //   // // profileDataClients = user;/*  */
     console.log('=========> ');
-    console.log(dataClientFb);
     console.log('UserData Client New');
     console.log(typeof(clientsDataId));
     console.log(clientsDataId)
