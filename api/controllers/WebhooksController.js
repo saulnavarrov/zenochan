@@ -259,7 +259,7 @@ var IdentificacionDePerfiles = (opt, cb) => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
   console.log(opt)
 
-  var clientsDataId = DataClients.find({
+  var clientsDataId = await DataClients.find({
     idfbs: String(opt.idClient)
   });
 
