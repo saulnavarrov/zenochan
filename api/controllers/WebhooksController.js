@@ -277,57 +277,58 @@ var IdentificacionDePerfiles = async (opt, cb) => {
     // Traera del facebook los datos del usuario
     var dataClientFb = client.getUserProfile(String(opt))
       .then(user => {
-        profileDataClients = user;
-        console.log(user);
+        if(user){
+          // Llamando la funcion y pasando la correspondiente variable.
+          CreateUpdateUsersClints(1, user);
+        }
       });
-
-  //   // // Creara el nuevo perfil
-  //   // var saveClientFbNew = await DataClients.findOrCreate({
-  //   //   idfbs: String(opt.idClient)
-  //   // }, {
-  //   //   idfbs: String(user.id),
-
-  //   // }).fetch();
-
-  //   // // profileDataClients = user;/*  */
-    console.log('=========> ');
-    console.log('UserData Client New');
-    console.log(typeof(clientsDataId));
-    console.log(clientsDataId)
-    console.log('===============>')
   }
-
-  // console.log(clientsDataId);
-  
-  // Buscando datos creados en el sistema Datos
-  // var clientsDataDbFind =  ClientsData.find({
-  //   idfbs: ''
-  // })
-  // 
-
-  // console.log('===========> Users')
-  // console.log(clientsDataDbFind);
-  // var clientsFbDbSave = await ClientsData
-  //   .find({
-  //     idfbs: opt
-  //   })
-  //   .catch(err => {
-  //     return {
-  //       success: false,
-  //       message: 'Cliente no Encontrado',
-  //       error: err
-  //     }
-  //   });
-
-  // console.log(clientsFbDbSave);
-  
-
-    // Buscando datos creados en el sistema Datos
-    // var clientsFbDbSave = await ClientsData.find({
-    //     idfbs: opt
-    //   })
 }
 
+
+var CreateUpdateUsersClints = async (typeData, opt) => {
+  var user = opt;
+  if(typeData === 0){
+    console.log({
+      success: false,
+      message: `Las actualizaciones para este usuario se encuentra desactivadas por 
+      favor procesa a actualizar de manera manual o automatica esta opción`,
+      error: 'Actualizaciones Desactivadas para este Usuario'
+    })
+  }
+  // Creación de nuevos clientes
+  else if (typeData === 1){
+    if(!user){
+      console.log(user)
+      //   var newClienteData = await DataClients.create({
+      //       idfbs: String(user.id),
+      //       first_name: user.first_name,
+      //       last_name: user.last_name,
+      //       profile_pic: user.profile_pic,
+      //       locale: user.locale,
+      //       timezone: user.timezone,
+      //       gender: user.gender,
+      //       active: 'true',
+    
+      //     })
+      //     .fetch();
+    }
+  }
+  // Actualiza Automaticas
+  else if (typeData === 2) {
+
+  }
+  // Actualizaciones Manuales
+  else if (typeData === 3) {
+
+  }
+  // No hace nada
+  else{
+
+  }
+  // Verificacion de contenido no es vacio
+  // }
+}
 
 
 

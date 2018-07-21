@@ -72,7 +72,7 @@ module.exports = {
     /**
      * 0 = update auto
      * 1 = update manual
-     * 2 = update 
+     * 2 = update not
      */
     'dataUpdate': {
       type: 'number',
@@ -86,6 +86,10 @@ module.exports = {
         automatica o manual
         en la manera manual se podran poner el nombre aunque este cambien el perfil de la persona
         en automatico, cada vez que no coincida con el se cambiara sin ningun previo aviso
+        0: Actualizaciones Desactivadas
+        1: Create New Clients User
+        2: Actualizaciones Automaticas del Usuario
+        3: Actualizaciones Manuales
         Defaults Automatico`
     },
 
