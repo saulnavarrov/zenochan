@@ -279,7 +279,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       .then(user => {
         if(user){
           // Llamando la funcion y pasando la correspondiente variable.
-          CreateUpdateUsersClints(1, user);
+          CreateUpdateUsersClints('a', user);
         }
       });
   }
@@ -289,20 +289,27 @@ var IdentificacionDePerfiles = async (opt, cb) => {
 var CreateUpdateUsersClints = async (typeData, opt) => {
   var user = opt;
 
-  // console.log(opt)
-  console.log(typeData)
-  if(typeData === 0){
-    console.log({
-      success: false,
-      message: `Las actualizaciones para este usuario se encuentra desactivadas por 
-      favor procesa a actualizar de manera manual o automatica esta opción`,
-      error: 'Actualizaciones Desactivadas para este Usuario'
-    });
+  
+  if(typeData === 'a'){
+    console.log(opt)
+    console.log(typeData)
+
   }
+
+
+
+  // if(typeData === 0){
+    // console.log({
+      // success: false,
+      // message: `Las actualizaciones para este usuario se encuentra desactivadas por 
+      // favor procesa a actualizar de manera manual o automatica esta opción`,
+      // error: 'Actualizaciones Desactivadas para este Usuario'
+    // });
+  // }
   // Creación de nuevos clientes
-  if (typeData === Number(1)){
-    if(user.length>0){
-      console.log(user)
+  // if (typeData === Number(1)){
+    // if(user.length>0){
+      // console.log(user)
       //   var newClienteData = await DataClients.create({
   //     //       idfbs: String(user.id),
   //     //       first_name: user.first_name,
@@ -315,8 +322,8 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
     
   //     //     })
   //     //     .fetch();
-    }
-  }
+    // }
+  // }
   // // Actualiza Automaticas
   // else if (typeData === 2) {
 

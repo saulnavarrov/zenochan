@@ -86,8 +86,8 @@ module.exports = {
         automatica o manual
         en la manera manual se podran poner el nombre aunque este cambien el perfil de la persona
         en automatico, cada vez que no coincida con el se cambiara sin ningun previo aviso
-        a: Actualizaciones Desactivadas
-        b: Create New Clients User
+        a: Create New Clients User
+        b: Actualizaciones Desactivadas
         c: Actualizaciones Automaticas del Usuario
         d: Actualizaciones Manuales
         Defaults Automatico`
