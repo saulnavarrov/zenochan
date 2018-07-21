@@ -291,19 +291,19 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
 
   console.log(opt)
   console.log(typeData)
-  // if(typeData === 0){
-  //   console.log({
-  //     success: false,
-  //     message: `Las actualizaciones para este usuario se encuentra desactivadas por 
-  //     favor procesa a actualizar de manera manual o automatica esta opción`,
-  //     error: 'Actualizaciones Desactivadas para este Usuario'
-  //   })
-  // }
-  // // Creación de nuevos clientes
-  // else if (typeData === 1){
-  //   if(!user){
-  //     console.log(user)
-  //     //   var newClienteData = await DataClients.create({
+  if(typeData === 0){
+    console.log({
+      success: false,
+      message: `Las actualizaciones para este usuario se encuentra desactivadas por 
+      favor procesa a actualizar de manera manual o automatica esta opción`,
+      error: 'Actualizaciones Desactivadas para este Usuario'
+    });
+  }
+  // Creación de nuevos clientes
+  else if (typeData === 1){
+    if(user.length>0){
+      console.log(user)
+      //   var newClienteData = await DataClients.create({
   //     //       idfbs: String(user.id),
   //     //       first_name: user.first_name,
   //     //       last_name: user.last_name,
@@ -316,7 +316,7 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
   //     //     })
   //     //     .fetch();
   //   }
-  // }
+  }
   // // Actualiza Automaticas
   // else if (typeData === 2) {
 
@@ -326,9 +326,9 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
 
   // }
   // // No hace nada
-  // else{
+  else{
 
-  // }
+  }
   // Verificacion de contenido no es vacio
   // }
 }
