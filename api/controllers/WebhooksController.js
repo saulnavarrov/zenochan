@@ -255,13 +255,10 @@ var SaveMessageIn = async function (opt, body) {
  * @param {array} opt :: Codigo para identificar el Cliente de facebook
  * @param {callback} cb 
  */
-var IdentificacionDePerfiles = (opt, cb) => {
+var IdentificacionDePerfiles = async (opt, cb) => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
-  console.log(opt)
 
-  var clientsDataId = DataClients.find({
-    idfbs: String(opt.idClient)
-  });
+  var clientsDataId = await DataClients.find({"idfbs": String(opt.idClient)});
 
   console.log('=========> ');
   console.log(clientsDataId);
