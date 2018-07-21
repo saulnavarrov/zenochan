@@ -290,7 +290,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
 
   //   // // profileDataClients = user;/*  */
     console.log('=========> ');
-    console.log(dataClientFb);
+    // console.log(dataClientFb);
     console.log('UserData Client New');
     console.log(typeof(clientsDataId));
     console.log(clientsDataId)
