@@ -289,7 +289,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
 var CreateUpdateUsersClints = async (typeData, opt) => {
   var user = opt;
 
-  console.log(opt)
+  // console.log(opt)
   console.log(typeData)
   if(typeData === 0){
     console.log({
@@ -315,7 +315,7 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
     
   //     //     })
   //     //     .fetch();
-  //   }
+    }
   }
   // // Actualiza Automaticas
   // else if (typeData === 2) {
