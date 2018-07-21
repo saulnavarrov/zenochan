@@ -261,13 +261,6 @@ var IdentificacionDePerfiles = (opt, cb) => {
 
   var clientsDataId = DataClients.find({
     idfbs: String(opt.idClient)
-  })
-  .catch(err=>{
-    return {
-      success: false,
-      message: 'Cliente No encontrado',
-      error: err
-    }
   });
 
   console.log('=========> ');
