@@ -232,7 +232,6 @@ var SaveMessageIn = async function (opt, body) {
   // console.log(JSON.stringify(messengerMessages));
   // console.log('= =======================================> Stop');
 
-
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
   FiltrosMessagesIn(saveData, body);
@@ -261,7 +260,20 @@ var IdentificacionDePerfiles = (opt, cb) => {
   console.log(opt)
   
   // Buscando datos creados en el sistema Datos
-  // var clientsFbDbSave =  ClientsData
+  var clientsDataDbFind =  ClientsData.find({
+    idfbs: ''
+  })
+  .catch(err => {
+    return {
+      success: false,
+      message: 'Cliente no Encontrado',
+      error: err
+    }
+  });;
+
+  console.log('===========> Users')
+  console.log(clientsDataDbFind);
+  // var clientsFbDbSave = await ClientsData
   //   .find({
   //     idfbs: opt
   //   })
