@@ -288,44 +288,47 @@ var IdentificacionDePerfiles = async (opt, cb) => {
 
 var CreateUpdateUsersClints = async (typeData, opt) => {
   var user = opt;
-  if(typeData === 0){
-    console.log({
-      success: false,
-      message: `Las actualizaciones para este usuario se encuentra desactivadas por 
-      favor procesa a actualizar de manera manual o automatica esta opción`,
-      error: 'Actualizaciones Desactivadas para este Usuario'
-    })
-  }
-  // Creación de nuevos clientes
-  else if (typeData === 1){
-    if(!user){
-      console.log(user)
-      //   var newClienteData = await DataClients.create({
-      //       idfbs: String(user.id),
-      //       first_name: user.first_name,
-      //       last_name: user.last_name,
-      //       profile_pic: user.profile_pic,
-      //       locale: user.locale,
-      //       timezone: user.timezone,
-      //       gender: user.gender,
-      //       active: 'true',
+
+  console.log(opt)
+  console.log(typeData)
+  // if(typeData === 0){
+  //   console.log({
+  //     success: false,
+  //     message: `Las actualizaciones para este usuario se encuentra desactivadas por 
+  //     favor procesa a actualizar de manera manual o automatica esta opción`,
+  //     error: 'Actualizaciones Desactivadas para este Usuario'
+  //   })
+  // }
+  // // Creación de nuevos clientes
+  // else if (typeData === 1){
+  //   if(!user){
+  //     console.log(user)
+  //     //   var newClienteData = await DataClients.create({
+  //     //       idfbs: String(user.id),
+  //     //       first_name: user.first_name,
+  //     //       last_name: user.last_name,
+  //     //       profile_pic: user.profile_pic,
+  //     //       locale: user.locale,
+  //     //       timezone: user.timezone,
+  //     //       gender: user.gender,
+  //     //       active: 'true',
     
-      //     })
-      //     .fetch();
-    }
-  }
-  // Actualiza Automaticas
-  else if (typeData === 2) {
+  //     //     })
+  //     //     .fetch();
+  //   }
+  // }
+  // // Actualiza Automaticas
+  // else if (typeData === 2) {
 
-  }
-  // Actualizaciones Manuales
-  else if (typeData === 3) {
+  // }
+  // // Actualizaciones Manuales
+  // else if (typeData === 3) {
 
-  }
-  // No hace nada
-  else{
+  // }
+  // // No hace nada
+  // else{
 
-  }
+  // }
   // Verificacion de contenido no es vacio
   // }
 }
