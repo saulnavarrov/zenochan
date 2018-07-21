@@ -300,7 +300,7 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
     });
   }
   // Creación de nuevos clientes
-  else if (typeData === 1){
+  if (typeData === Number(1)){
     if(user.length>0){
       console.log(user)
       //   var newClienteData = await DataClients.create({
