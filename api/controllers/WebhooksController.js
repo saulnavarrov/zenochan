@@ -269,8 +269,8 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-    console.log('/****************************************************************************');
-    console.log(clientsDataId)
+      console.log('/****************************************************************************');
+      console.log(clientsDataId[0])
     if(clientsDataId[0].length){
       profileDataClients = clientsDataId[0];
       console.log('/****************************************************************************');
