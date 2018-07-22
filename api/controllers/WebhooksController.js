@@ -271,7 +271,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
 
   
   if(clientsDataId.length > 0){
-    dataClientFb = clientsDataId;
+    profileDataClients = clientsDataId;
   }
   else{
     // Traera del facebook los datos del usuario
@@ -291,6 +291,24 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
 
   
   if(typeData === 'a'){
+    if(user.length > 0){
+
+      var newClienteData = await DataClients.create({
+            idfbs: String(user.id),
+            first_name: user.first_name,
+            last_name: user.last_name,
+            profile_pic: user.profile_pic,
+            locale: user.locale,
+            timezone: user.timezone,
+            gender: user.gender,
+            active: 'true',
+  
+          })
+          .fetch();
+      
+      profileDataClients = newClienteData;
+
+    }
     console.log(opt)
     console.log(typeData)
 
@@ -310,18 +328,6 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
   // if (typeData === Number(1)){
     // if(user.length>0){
       // console.log(user)
-      //   var newClienteData = await DataClients.create({
-  //     //       idfbs: String(user.id),
-  //     //       first_name: user.first_name,
-  //     //       last_name: user.last_name,
-  //     //       profile_pic: user.profile_pic,
-  //     //       locale: user.locale,
-  //     //       timezone: user.timezone,
-  //     //       gender: user.gender,
-  //     //       active: 'true',
-    
-  //     //     })
-  //     //     .fetch();
     // }
   // }
   // // Actualiza Automaticas
