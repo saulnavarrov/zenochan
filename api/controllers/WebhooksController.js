@@ -259,7 +259,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
 
   var clientsDataId = await DataClients.find({
-      "idfbs": String(opt.idClient)
+      "idfbs": String(opt)
     })
     .catch(err => {
       return {
@@ -269,7 +269,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-  console.log(opt)
+  console.log(clientsDataId)
   // if(clientsDataId.length > 0){
   //   profileDataClients = clientsDataId;
   // }
