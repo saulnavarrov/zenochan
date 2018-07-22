@@ -276,16 +276,17 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       profileDataClients = clientsDataId[0];
       console.log('/****************************************************************************');
     }
-  // else{
+  else{
   //   // Traera del facebook los datos del usuario
-  //   var dataClientFb = client.getUserProfile(String(opt))
-  //     .then(user => {
-  //       if(user){
-  //         // Llamando la funcion y pasando la correspondiente variable.
-  //         CreateUpdateUsersClints('a', user);
-  //       }
-  //     });
-  // }
+    var dataClientFb = client.getUserProfile(String(opt))
+      .then(user => {
+        if(user){
+          // Llamando la funcion y pasando la correspondiente variable.
+          // CreateUpdateUsersClints('a', user);
+          console.log(user)
+        }
+      });
+  }
 }
 
 
