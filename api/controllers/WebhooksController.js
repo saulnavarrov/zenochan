@@ -18,6 +18,8 @@ const client = MessengerClient.connect(token_apiSaul);
 // Guarda de manera temporal la identificación de la personas
 var profileDataClients = {};
 
+
+
 /************************************************************************************************
  * getConfirmtWebHooks
  * @description :: Configuración para verificar que facebook se puede conectar con la api del sistema.
@@ -118,7 +120,6 @@ var SaveMessageOut =  async function (opt, body){
     timestamp: opt.times,
     read: 1
   }
-
 
   // console.log('= =======================================> Start save Out');
   // console.log(saveData)
@@ -235,8 +236,8 @@ var SaveMessageIn = async function (opt, body) {
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
   FiltrosMessagesIn(saveData, body);
-
 }
+
 
 
 
@@ -491,8 +492,7 @@ module.exports = {
         // Verificación de una pagina
         if (object === 'page') {
 
-          // identifica el usuario que envia el mensaje
-          // Si tiene usuario
+          // identifica el usuario que envia el mensaje Si tiene usuario
           if(s.seq >= 1){
             IdentificacionDePerfiles(s.idClient);
           }
