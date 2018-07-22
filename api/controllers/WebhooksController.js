@@ -284,45 +284,45 @@ var IdentificacionDePerfiles = async (opt, cb) => {
         .then(user => {
           if(user){
             // Llamando la funcion y pasando la correspondiente variable.
-            // CreateUpdateUsersClints('a', user);
+            CreateUpdateUsersClints('a', user);
             profileDataClients = user;
             console.log('Nuevo Usuario ====>');
             console.log(user)
+
           }
         });
     }
 }
 
 
-// var CreateUpdateUsersClints = async (typeData, opt) => {
-//   var user = opt;
+var CreateUpdateUsersClints = async (typeData, opt) => {
+  var user = opt;
 
   
-//   if(typeData === 'a'){
-//     if(user){
+  if(typeData === 'a'){
+    if(user){
 
-//       var newClienteData = await DataClients.create({
-//             idfbs: String(user.id),
-//             first_name: user.first_name,
-//             last_name: user.last_name,
-//             profile_pic: user.profile_pic,
-//             locale: user.locale,
-//             timezone: user.timezone,
-//             gender: user.gender,
-//             active: 'true',
+      var newClienteData = await DataClients.create({
+            idfbs: String(user.id),
+            first_name: user.first_name,
+            last_name: user.last_name,
+            profile_pic: user.profile_pic,
+            locale: user.locale,
+            timezone: user.timezone,
+            gender: user.gender,
+            active: 'true',
   
-//           })
-//           .fetch();
+          })
+          .fetch();
       
-//       profileDataClients = newClienteData;
-//           console.log(newClienteData)
-//     }
-//     console.log(opt)
-//     console.log(typeData)
+      profileDataClients = newClienteData;
+          console.log(newClienteData)
+    }
+    console.log(opt)
+    console.log(typeData)
 
-//   }
-
-
+  }
+}
 
   // if(typeData === 0){
     // console.log({
