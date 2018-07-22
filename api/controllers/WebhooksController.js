@@ -269,10 +269,10 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-  console.log(clientsDataId)
-  // if(clientsDataId.length > 0){
-  //   profileDataClients = clientsDataId;
-  // }
+  // console.log(clientsDataId)
+  if(clientsDataId[0].length){
+    profileDataClients = clientsDataId;
+  }
   // else{
   //   // Traera del facebook los datos del usuario
   //   var dataClientFb = client.getUserProfile(String(opt))
