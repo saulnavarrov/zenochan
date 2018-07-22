@@ -270,10 +270,10 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-    console.log('/****************************************************************************');
-    console.log(clientsDataId.length)
-
-    if(clientsDataId !== 'undefined'){
+    // console.log('/****************************************************************************');
+    // console.log(clientsDataId.length)
+    
+    if (clientsDataId.length > 0) {
       console.log('/****************************************************************************');
         profileDataClients = clientsDataId[0];
       console.log('/****************************************************************************');
