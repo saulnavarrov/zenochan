@@ -493,7 +493,7 @@ module.exports = {
 
           // identifica el usuario que envia el mensaje
           // Si tiene usuario
-          if(S.seq >= 1){
+          if(s.seq >= 1){
             IdentificacionDePerfiles(s.idClient);
           }
 
