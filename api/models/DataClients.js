@@ -69,11 +69,6 @@ module.exports = {
       description: 'El usuario esta activo.',
     },
 
-    /**
-     * 0 = update auto
-     * 1 = update manual
-     * 2 = update not
-     */
     'dataUpdate': {
       type: 'string',
       isIn: ['a','b','c','d'],
