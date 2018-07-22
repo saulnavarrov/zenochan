@@ -291,7 +291,7 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
 
   
   if(typeData === 'a'){
-    if(user.length > 0){
+    if(user){
 
       var newClienteData = await DataClients.create({
             idfbs: String(user.id),
@@ -307,7 +307,7 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
           .fetch();
       
       profileDataClients = newClienteData;
-
+          console.log(newClienteData)
     }
     console.log(opt)
     console.log(typeData)
