@@ -269,50 +269,50 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-  // console.log(clientsDataId)
-  if(clientsDataId.length > 0){
-    profileDataClients = clientsDataId;
-  }
-  else{
-    // Traera del facebook los datos del usuario
-    var dataClientFb = client.getUserProfile(String(opt))
-      .then(user => {
-        if(user){
-          // Llamando la funcion y pasando la correspondiente variable.
-          CreateUpdateUsersClints('a', user);
-        }
-      });
-  }
+  console.log(clientsDataId)
+  // if(clientsDataId.length > 0){
+  //   profileDataClients = clientsDataId;
+  // }
+  // else{
+  //   // Traera del facebook los datos del usuario
+  //   var dataClientFb = client.getUserProfile(String(opt))
+  //     .then(user => {
+  //       if(user){
+  //         // Llamando la funcion y pasando la correspondiente variable.
+  //         CreateUpdateUsersClints('a', user);
+  //       }
+  //     });
+  // }
 }
 
 
-var CreateUpdateUsersClints = async (typeData, opt) => {
-  var user = opt;
+// var CreateUpdateUsersClints = async (typeData, opt) => {
+//   var user = opt;
 
   
-  if(typeData === 'a'){
-    if(user){
+//   if(typeData === 'a'){
+//     if(user){
 
-      var newClienteData = await DataClients.create({
-            idfbs: String(user.id),
-            first_name: user.first_name,
-            last_name: user.last_name,
-            profile_pic: user.profile_pic,
-            locale: user.locale,
-            timezone: user.timezone,
-            gender: user.gender,
-            active: 'true',
+//       var newClienteData = await DataClients.create({
+//             idfbs: String(user.id),
+//             first_name: user.first_name,
+//             last_name: user.last_name,
+//             profile_pic: user.profile_pic,
+//             locale: user.locale,
+//             timezone: user.timezone,
+//             gender: user.gender,
+//             active: 'true',
   
-          })
-          .fetch();
+//           })
+//           .fetch();
       
-      profileDataClients = newClienteData;
-          console.log(newClienteData)
-    }
-    console.log(opt)
-    console.log(typeData)
+//       profileDataClients = newClienteData;
+//           console.log(newClienteData)
+//     }
+//     console.log(opt)
+//     console.log(typeData)
 
-  }
+//   }
 
 
 
