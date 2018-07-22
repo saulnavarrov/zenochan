@@ -270,23 +270,23 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-    if(clientsDataId[0].id !== ''){
+    if(typeof (clientsDataId[0].id) !== 'undefined'){
       console.log('/****************************************************************************');
         console.log(clientsDataId[0])
-      profileDataClients = clientsDataId[0];
+        profileDataClients = clientsDataId[0];
       console.log('/****************************************************************************');
     }
-  else{
-  //   // Traera del facebook los datos del usuario
-    var dataClientFb = client.getUserProfile(String(opt))
-      .then(user => {
-        if(user){
-          // Llamando la funcion y pasando la correspondiente variable.
-          // CreateUpdateUsersClints('a', user);
-          console.log(user)
-        }
-      });
-  }
+    else{
+      // Traera del facebook los datos del usuario
+      var dataClientFb = client.getUserProfile(String(opt))
+        .then(user => {
+          if(user){
+            // Llamando la funcion y pasando la correspondiente variable.
+            // CreateUpdateUsersClints('a', user);
+            console.log(user)
+          }
+        });
+    }
 }
 
 
