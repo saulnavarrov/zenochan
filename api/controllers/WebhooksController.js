@@ -269,7 +269,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-  
+  // console.log(clientsDataId)
   if(clientsDataId.length > 0){
     profileDataClients = clientsDataId;
   }
