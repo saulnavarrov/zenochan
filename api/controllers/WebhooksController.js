@@ -270,9 +270,11 @@ var IdentificacionDePerfiles = async (opt, cb) => {
     });
 
     if(clientsDataId[0].length){
+      console.log('/****************************************************************************');
       console.log(clientsDataId)
-    profileDataClients = clientsDataId[0];
-  }
+      profileDataClients = clientsDataId[0];
+      console.log('/****************************************************************************');
+    }
   // else{
   //   // Traera del facebook los datos del usuario
   //   var dataClientFb = client.getUserProfile(String(opt))
