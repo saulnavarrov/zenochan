@@ -283,6 +283,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
           if(user){
             // Llamando la funcion y pasando la correspondiente variable.
             // CreateUpdateUsersClints('a', user);
+            console.log('Nuevo Usuario ====>');
             console.log(user)
           }
         });
