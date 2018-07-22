@@ -269,8 +269,8 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-  // console.log(clientsDataId)
-  if(clientsDataId[0].length){
+    if(clientsDataId[0].length){
+      console.log(clientsDataId)
     profileDataClients = clientsDataId[0];
   }
   // else{
