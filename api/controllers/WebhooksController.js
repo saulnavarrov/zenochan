@@ -270,7 +270,9 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-    console.log(clientsDataId[0])
+    console.log('/****************************************************************************');
+    console.log(clientsDataId)
+
     if(typeof (clientsDataId) !== 'undefined'){
       console.log('/****************************************************************************');
         profileDataClients = clientsDataId[0];
@@ -283,6 +285,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
           if(user){
             // Llamando la funcion y pasando la correspondiente variable.
             // CreateUpdateUsersClints('a', user);
+            profileDataClients = user;
             console.log('Nuevo Usuario ====>');
             console.log(user)
           }
