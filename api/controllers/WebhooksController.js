@@ -284,10 +284,10 @@ var IdentificacionDePerfiles = async (opt, cb) => {
         .then(user => {
           if(user){
             // Llamando la funcion y pasando la correspondiente variable.
-            CreateUpdateUsersClints('a', user);
-            profileDataClients = user;
             console.log('Nuevo Usuario ====>');
-            console.log(user)
+            // profileDataClients = user;
+            CreateUpdateUsersClints('a', user);
+            // console.log(user)
 
           }
         });
@@ -315,11 +315,12 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
           })
           .fetch();
       
+      console.log('Nuevo Usuario ====>');      
       profileDataClients = newClienteData;
-          console.log(newClienteData)
+      console.log(newClienteData)
     }
-    console.log(opt)
-    console.log(typeData)
+    // console.log(opt)
+    // console.log(typeData)
 
   }
 }
