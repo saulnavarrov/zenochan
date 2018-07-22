@@ -271,7 +271,7 @@ var IdentificacionDePerfiles = async (opt, cb) => {
 
   // console.log(clientsDataId)
   if(clientsDataId[0].length){
-    profileDataClients = clientsDataId;
+    profileDataClients = clientsDataId[0];
   }
   // else{
   //   // Traera del facebook los datos del usuario
