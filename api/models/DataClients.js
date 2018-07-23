@@ -72,7 +72,7 @@ module.exports = {
     'dataUpdate': {
       type: 'string',
       isIn: ['a','b','c','d'],
-      defaultsTo: 'a',
+      defaultsTo: 'b',
       description: `Identificacra los perfiles de las personas con las que nos comunicamos
         Guardara los datos y los actualizara para la verificación de estos.
         tambien mantendra la base de datos actualizada en caso tal de que estos no coincidan.
@@ -81,10 +81,10 @@ module.exports = {
         automatica o manual
         en la manera manual se podran poner el nombre aunque este cambien el perfil de la persona
         en automatico, cada vez que no coincida con el se cambiara sin ningun previo aviso
-        a: Create New Clients User
-        b: Actualizaciones Desactivadas
-        c: Actualizaciones Automaticas del Usuario
-        d: Actualizaciones Manuales
+        a: Create New Clients User (no usar)
+        b: Actualizaciones Automaticas del Usuario
+        c: Actualizaciones Manuales
+        d: Actualizaciones Desactivadas
         Defaults Automatico`
     },
 

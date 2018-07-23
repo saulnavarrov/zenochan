@@ -254,13 +254,14 @@ var SaveMessageIn = async function (opt, body) {
  * en automatico, cada vez que no coincida con el se cambiara sin ningun previo aviso
  * Defaults Automatico
  * @param {array} opt :: Codigo para identificar el Cliente de facebook
- * @param {callback} cb 
+ * 
  */
-var IdentificacionDePerfiles = async (opt, cb) => {
+var IdentificacionDePerfiles = async idFb => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
 
+  // Busqueda del usuario cliente en la base de datos
   var clientsDataId = await DataClients.find({
-      "idfbs": String(opt)
+      "idfbs": String(idFb)
     })
     .catch(err => {
       return {
@@ -270,38 +271,61 @@ var IdentificacionDePerfiles = async (opt, cb) => {
       }
     });
 
-    // console.log('/****************************************************************************');
-    // console.log(clientsDataId.length)
-    
+    // Verificación de contenido de usuario en caso de no exista este lo genera automaticamente
     if (clientsDataId.length > 0) {
-      console.log('/****************************************************************************');
-        profileDataClients = clientsDataId[0];
-      console.log('/****************************************************************************');
+      // Actualiza los datos del usuario en la variable global
+      profileDataClients = clientsDataId[0];
+      
+      // Actualizaciones de datos
+      GetDataUserProfileFb(idfb, clientsDataId[0].dataUpdate);
     }
     else{
-      // Traera del facebook los datos del usuario
-      var dataClientFb = client.getUserProfile(String(opt))
-        .then(user => {
-          if(user){
-            // Llamando la funcion y pasando la correspondiente variable.
-            console.log('Nuevo Usuario ====>');
-            // profileDataClients = user;
-            CreateUpdateUsersClints('a', user);
-            // console.log(user)
-
-          }
-        });
+      // Ejecutara la funcion adecuada para la busqueda de los datos de los usuarios.
+      // Accion de crear nuevo usuarios
+      GetDataUserProfileFb(idFb, 'a');
     }
 }
 
 
-var CreateUpdateUsersClints = async (typeData, opt) => {
-  var user = opt;
 
+/****************************************************************************************
+ * GetDataUserProfileFb
+ * @description :: Buscara los datos en facebook y los traera de vuelta para poder
+ *    ser creados o a su vez actualizado de manera automaticamente o manual
+ * @param {string} idfb :: ID del usuario que viene de facebook
+ * @param {string} act :: Accion que va tomar la funcion luego despues de encontrar el usuario 
+ *    y entregarla posteriormente a otro usuario
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+ */
+var GetDataUserProfileFb = async (idfb, act) => {
   
-  if(typeData === 'a'){
-    if(user){
+  // Traera del facebook los datos del usuario
+  client.getUserProfile(String(idfb))
+    .then(user => {
+      if (user) {
+        // Llamando la funcion y pasando la correspondiente variable.
+        CreateUpdateUsersClints(user, act);
+      }
+    });
+}
 
+
+
+/****************************************************************************************
+ * CreateUpdateUsersClints
+ * @description :: Craara los nuevos usuarios, tambien dara la accion para actualizarlos y
+ *    contara con la funcion para actualizarlos de manera manual.
+ *    si el usuario esta desactivado, debera responder con un mensaje de alerta.
+ * @param {string} idfb :: ID del usuario que viene de facebook
+ * @param {string} act :: Accion que va tomar la funcion luego despues de encontrar el usuario 
+ *    y entregarla posteriormente a otro usuario
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com> 
+ */
+var CreateUpdateUsersClints = async (user, act) => {
+
+  // Creación de un usuario nuevo.
+  if(act === 'a'){
+    if(user){
       var newClienteData = await DataClients.create({
             idfbs: String(user.id),
             first_name: user.first_name,
@@ -314,46 +338,15 @@ var CreateUpdateUsersClints = async (typeData, opt) => {
   
           })
           .fetch();
-      
-      console.log('Nuevo Usuario ====>');      
+      // Actualiza los datos del usuario en la variable global
       profileDataClients = newClienteData;
-      console.log(newClienteData)
     }
-    // console.log(opt)
-    // console.log(typeData)
-
   }
+
+  // Actualización Automatica de los usuarios
+  // if()
 }
 
-  // if(typeData === 0){
-    // console.log({
-      // success: false,
-      // message: `Las actualizaciones para este usuario se encuentra desactivadas por 
-      // favor procesa a actualizar de manera manual o automatica esta opción`,
-      // error: 'Actualizaciones Desactivadas para este Usuario'
-    // });
-  // }
-  // Creación de nuevos clientes
-  // if (typeData === Number(1)){
-    // if(user.length>0){
-      // console.log(user)
-    // }
-  // }
-  // // Actualiza Automaticas
-  // else if (typeData === 2) {
-
-  // }
-  // // Actualizaciones Manuales
-  // else if (typeData === 3) {
-
-  // }
-//   // // No hace nada
-//   else{
-
-//   }
-//   // Verificacion de contenido no es vacio
-//   // }
-// }
 
 
 
@@ -403,7 +396,8 @@ var FiltrosMessagesIn = async (opt, body) => {
 /****************************************************************************
  *
  * ContadorDePalabras
- * @description :: 
+ * @description :: Contara las palabras y actualizara su contador, a su vez respondera que
+ *    palabras no exiten en la base de datos y la restaurara.
  * @param {array} opt :: Array de datos de ingresos
  * @param {callback} cb Debolución del contenido para el contador del sistema 
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
@@ -421,6 +415,10 @@ var ContadorDePalabrasYCorreccion = async function (opt, body, cb) {
  */
 module.exports = {
   
+  /**
+   * getWebHooks
+   * @description :: Conexion con la facebook desde Facebook 
+   */
   'getWebHooks': (req, res)=>{
 
     var body = req.query || 0;
@@ -481,7 +479,7 @@ module.exports = {
       var re = typeof (en.standby) === 'undefined' ? false : st.read;
       var sf = typeof (en.standby) === 'undefined' ? false : st.delivery; // Mensajes enviados desde facebook
       
-      
+      // Si tiene datos el Entry
       if (en) {
         s.ob = ob;
         s.en = typeof (en.standby);
@@ -508,11 +506,14 @@ module.exports = {
           console.log('= = = ================================================================> Controlador: ');
           console.log(JSON.stringify(s))
           if(sf){
+            // Guarda el mensaje y aqui empiezan todo el enrrollo  
             SaveMessageOut(s, body);
           }else if(re){
+            // Datos de read de facebook
             SaveReadMessage(re, s, body);
           }else{
-            s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
+            //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
+            s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); 
           }
         }
         // Retorno de ok para el sistema de facebook
