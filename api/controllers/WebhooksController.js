@@ -107,7 +107,7 @@ var SaveMessageOut =  async function (opt, body){
   var saveData = {
     object: opt.ob,
     sequence: opt.seq,
-    typeMess: 'resFB',
+    typeMess: opt.typeMess,
     text: opt.txt,
     textString: opt.text,
     textArray: !opt.txt ? [] : opt.text.split(' '),
@@ -115,11 +115,13 @@ var SaveMessageOut =  async function (opt, body){
     attachments: opt.attachments,
     idClient: opt.idClient,
     idPage: opt.idPage,
-    sendread: 'resFB',
+    sendread: 'submit',
     messageComplete: body,
     timestamp: opt.times,
     read: 1
   }
+
+  await MessengerMessages.create(saveData).fetch();
 
   // console.log('= =======================================> Start save Out');
   // console.log(saveData)
@@ -223,7 +225,7 @@ var SaveMessageIn = async function (opt, body) {
   }
 
   // Guarda el mensaje
-  var messengerMessages = await MessengerMessages.create(saveData).fetch();
+  await MessengerMessages.create(saveData).fetch();
   // console.log('= =======================================> Start Save Ms In');
   // console.log(JSON.stringify(messengerMessages));
   // console.log('= =======================================> Stop');
@@ -298,7 +300,6 @@ var GetDataUserProfileFb = async (idfb, act) => {
   client.getUserProfile(String(idfb))
     .then(user => {
       if (user) {
-        console.log(user);
         // Llamando la funcion y pasando la correspondiente variable.
         CreateUpdateUsersClints(user, act);
       }
@@ -400,14 +401,16 @@ var FiltrosMessagesIn = async (opt, body) => {
   // filtros para textos
   if(type === 'text'){
     // Funcion para buscar los datos en la base si existen o no.
-    console.log(opt.textArray);
     // Respuestas Rapida de resolución
+    opt.textString = `Renviado: ${opt.textString}`;
+    opt.typeMess = 'text';
     client.sendMessage(String(opt.idClient), {
-      text: `Reenviado: ${opt.textString}`,
+      text: `${opt.textString}`,
     });
+    SaveMessageOut(opt, body)
 
     // Funcion para controlar las palabras
-    // ContadorDePalabrasYCorreccion(opt, body);
+    ContadorDePalabrasYCorreccion(opt, body);
   }
 
   //Contenido no procesado
