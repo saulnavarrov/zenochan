@@ -298,6 +298,7 @@ var GetDataUserProfileFb = async (idfb, act) => {
   client.getUserProfile(String(idfb))
     .then(user => {
       if (user) {
+        console.log(user);
         // Llamando la funcion y pasando la correspondiente variable.
         CreateUpdateUsersClints(user, act);
       }
