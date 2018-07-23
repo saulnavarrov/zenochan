@@ -131,6 +131,7 @@ var SaveMessageOut =  async function (opt, body){
 
 
 
+
 /****************************************************************************
  * 
  * SaveReadMessage
@@ -190,13 +191,7 @@ var SaveReadMessage = async function (opt, s, body) {
     }
 
   // Guarda el Mensaje de Lectura en el sistema.
-  var messengerMessages = await MessengerMessages.create(saveData).fetch();
-
-  // console.log('= =======================================> Start Save Read ');
-  // console.log(JSON.stringify(reads[0].read));
-  // console.log('= ============== =');
-  // console.log(JSON.stringify(readUpdate));
-  // console.log('= =======================================> Stop');
+  await MessengerMessages.create(saveData).fetch();
 }
 
 
@@ -253,8 +248,8 @@ var SaveMessageIn = async function (opt, body) {
  * en la manera manual se podran poner el nombre aunque este cambien el perfil de la persona
  * en automatico, cada vez que no coincida con el se cambiara sin ningun previo aviso
  * Defaults Automatico
- * @param {array} opt :: Codigo para identificar el Cliente de facebook
- * 
+ * @param {string} idfb :: Codigo para identificar el Cliente de facebook
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
 var IdentificacionDePerfiles = async idFb => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
