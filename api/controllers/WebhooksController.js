@@ -335,7 +335,6 @@ var CreateUpdateUsersClints = async (user, act) => {
             timezone: user.timezone,
             gender: user.gender,
             active: 'true',
-  
           })
           .fetch();
       // Actualiza los datos del usuario en la variable global
@@ -344,7 +343,24 @@ var CreateUpdateUsersClints = async (user, act) => {
   }
 
   // Actualización Automatica de los usuarios
-  // if()
+  if(act === 'b'){
+    if(use){
+      var updateClientData = await DataClients.update({
+        "idfbs": String(user.id)
+        })
+        .set({
+          first_name: user.first_name,
+          last_name: user.last_name,
+          profile_pic: user.profile_pic,
+          locale: user.locale,
+          timezone: user.timezone,
+          gender: user.gender,
+        })
+        .fetch();
+      // Actualiza los datos del usuario en la variable global      
+      profileDataClients = updateClientData;
+    }
+  }
 }
 
 

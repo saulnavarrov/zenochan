@@ -69,6 +69,36 @@ module.exports = {
       description: 'El usuario esta activo.',
     },
 
+    'activeBot': {
+      type: 'string',
+      isIn: ['a', 'i', 't1', 't7', 't15', 't30'],
+      defaultsTo: 'a',
+      description: `Permitira activar o desactivar el Bot para una persona, Si
+      esta opcion se encuentra desctivada, el bot no respondera nada a la persona 
+      y debera esperar a que un usuario administrador o que meneje la pagina, le responda
+      esta enviara un mensaje al admin para que esta pueda ser respondida lo mas antes posible
+      a: Activo siempre para respuestas
+      i: Inactivo: hasta que el admin envie el comando de activación
+      t1: Inactive Temporalmente 1 dia
+      t7: Inactive Temporalmente 7 dia 
+      t15: Inactive Temporalmente 15 dia
+      t30: Inactive Temporalmente 30 dia `
+    },
+
+    roles: {
+      type: 'String',
+      isIn: ['a','c','r','u'],
+      defaultsTo: 'u',
+      description: `Es necesario el rol de estas paginas ya que cuando se require enviar mensajes
+      de alerta de algun error estos deben ser notificados al admininistrador o personal encargado
+      tendra como default u
+      a: Administradores
+      c: Comunicadores
+      r: Root Dueños de la pagina
+      u: Usuarios Comunes y Corrientes
+      `
+    },
+
     'dataUpdate': {
       type: 'string',
       isIn: ['a','b','c','d'],
