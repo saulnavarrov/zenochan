@@ -339,7 +339,7 @@ var CreateUpdateUsersClints = async (user, act) => {
 
   // Actualización Automatica de los usuarios
   if(act === 'b'){
-    if(use){
+    if(user){
       var updateClientData = await DataClients.update({
         "idfbs": String(user.id)
         })
