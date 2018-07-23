@@ -272,7 +272,7 @@ var IdentificacionDePerfiles = async idFb => {
       profileDataClients = clientsDataId[0];
       
       // Actualizaciones de datos
-      GetDataUserProfileFb(idfb, clientsDataId[0].dataUpdate);
+      GetDataUserProfileFb(idfb, profileDataClients.dataUpdate);
     }
     else{
       // Ejecutara la funcion adecuada para la busqueda de los datos de los usuarios.
