@@ -125,7 +125,7 @@ var SaveMessageOut =  async function (opt, body){
 
   await MessengerMessages.create(saveData).fetch();
 
-  resolver el problema del doble submit debido
+  // resolver el problema del doble submit debido
 
   // console.log('= =======================================> Start save Out');
   // console.log(saveData)
