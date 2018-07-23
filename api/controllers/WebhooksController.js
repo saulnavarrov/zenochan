@@ -361,8 +361,36 @@ var CreateUpdateUsersClints = async (user, act) => {
       profileDataClients = updateClientData;
     }
   }
-}
 
+  // Actualización Manual por parte de los admins0
+  if (act === 'c') {
+    if (use) {
+      var updateClientData = await DataClients.update({
+          "idfbs": String(user.id)
+        })
+        .set({
+          first_name: user.first_name,
+          last_name: user.last_name,
+          profile_pic: user.profile_pic,
+          locale: user.locale,
+          timezone: user.timezone,
+          gender: user.gender,
+        })
+        .fetch();
+      // Actualiza los datos del usuario en la variable global      
+      profileDataClients = updateClientData;
+    }
+  }
+  
+  // Actualizaciones desactivadas se activan par
+  if (act === 'd') {
+    
+    /**
+     * AQUI LAS ACTUALIZACIONES DEBEN CAMBIAR, Y SI NO DEBE ENVIAR UNA ALVERTENCIA DE QUE LAS ACTUALIZACIONES
+     * ESTAN DESACTIVADAS PARA ESTE USUARIO.
+     */
+  }
+}
 
 
 
