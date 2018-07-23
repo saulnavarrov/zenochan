@@ -103,11 +103,13 @@ var getConfirmtWebHooks = (opt, cb) => {
  * 
  ****************************************************************************/
 var SaveMessageOut =  async function (opt, body){
+  sails.log.debug('Funcion SaveMensaje out')
+
   // Estructura del mensaje
   var saveData = {
     object: opt.ob,
     sequence: opt.seq,
-    typeMess: opt.typeMess,
+    typeMess: 'text',
     text: opt.txt,
     textString: opt.text,
     textArray: !opt.txt ? [] : opt.text.split(' '),
@@ -143,6 +145,8 @@ var SaveMessageOut =  async function (opt, body){
  * 
  ****************************************************************************/
 var SaveReadMessage = async function (opt, s, body) {
+  sails.log.debug('Funcion SaveMensaje Read');
+
   // Estructura del mensaje
   var saveData = {
     object: s.ob,
@@ -206,6 +210,7 @@ var SaveReadMessage = async function (opt, s, body) {
  * 
  ****************************************************************************/
 var SaveMessageIn = async function (opt, body) {
+  sails.log.debug('Funcion SaveMensaje In');
 
   // Estructura del mensaje
   var saveData = {
@@ -403,7 +408,6 @@ var FiltrosMessagesIn = async (opt, body) => {
     // Funcion para buscar los datos en la base si existen o no.
     // Respuestas Rapida de resolución
     opt.textString = `Renviado: ${opt.textString}`;
-    opt.typeMess = 'text';
     client.sendMessage(String(opt.idClient), {
       text: `${opt.textString}`,
     });
