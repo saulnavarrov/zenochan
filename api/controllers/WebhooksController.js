@@ -108,7 +108,7 @@ var SaveMessageOut =  async function (opt, body){
   // Estructura del mensaje
   var saveData = {
     object: opt.ob,
-    sequence: opt.seq,
+    sequence: opt.seq || 0,
     typeMess: 'text',
     text: opt.txt,
     textString: opt.text,
@@ -124,6 +124,8 @@ var SaveMessageOut =  async function (opt, body){
   }
 
   await MessengerMessages.create(saveData).fetch();
+
+  resolver el problema del doble submit debido
 
   // console.log('= =======================================> Start save Out');
   // console.log(saveData)
