@@ -341,7 +341,7 @@ var CreateUpdateUsersClints = async (user, act) => {
   // Actualización Automatica de los usuarios
   if(act === 'b'){
     if(user){
-      var updateClientData = await DataClients.update({
+      await DataClients.update({
         "idfbs": String(user.id)
         })
         .set({
@@ -351,17 +351,14 @@ var CreateUpdateUsersClints = async (user, act) => {
           locale: user.locale,
           timezone: user.timezone,
           gender: user.gender,
-        })
-        .fetch();
-      // Actualiza los datos del usuario en la variable global      
-      profileDataClients = updateClientData;
+        });
     }
   }
 
   // Actualización Manual por parte de los admins0
   if (act === 'c') {
     if (use) {
-      var updateClientData = await DataClients.update({
+      await DataClients.update({
           "idfbs": String(user.id)
         })
         .set({
@@ -371,10 +368,7 @@ var CreateUpdateUsersClints = async (user, act) => {
           locale: user.locale,
           timezone: user.timezone,
           gender: user.gender,
-        })
-        .fetch();
-      // Actualiza los datos del usuario en la variable global      
-      profileDataClients = updateClientData;
+        });
     }
   }
   
