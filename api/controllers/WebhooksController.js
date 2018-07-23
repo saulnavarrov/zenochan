@@ -417,16 +417,15 @@ var FiltrosMessagesIn = async (opt, body) => {
 
   //Contenido no procesado
   else{
-    console.log('Contenido no admitido');
 
     // Respuesta para el cliente que manda el mensaje
-    // if(profileDataClients.length){
+    if(profileDataClients.length){
       setTimeout(() => {
         client.sendMessage(String(opt.idClient), {
           text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
         });
       }, 300);
-    // }
+    }
   }
 
 }
