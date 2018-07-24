@@ -549,13 +549,13 @@ module.exports = {
           console.log(JSON.stringify(s))
           if(sf){
             // Guarda el mensaje y aqui empiezan todo el enrrollo  
-            SaveMessageOut(s, body);
+            // --> SaveMessageOut(s, body);
           }else if(re){
             // Datos de read de facebook
-            SaveReadMessage(re, s, body);
+            // --> SaveReadMessage(re, s, body);
           }else{
             //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
-            s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); 
+            // --> s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); 
           }
         }
         // Retorno de ok para el sistema de facebook
