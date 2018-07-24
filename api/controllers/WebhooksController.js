@@ -546,7 +546,8 @@ module.exports = {
           // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
           //  o es una respuesta automatica
           console.log('= = = ================================================================> Controlador: ');
-          console.log(JSON.stringify(s))
+          console.log(JSON.stringify(ob));
+          console.log('= = = ================================================================> Controlador: ');
           if(sf){
             // Guarda el mensaje y aqui empiezan todo el enrrollo  
             // --> SaveMessageOut(s, body);
