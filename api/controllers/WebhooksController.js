@@ -123,7 +123,7 @@ var SaveMessageOut =  async function (opt, body){
     read: 1
   }
 
-  await MessengerMessages.create(saveData).fetch();
+  // await MessengerMessages.create(saveData).fetch();
 
   // resolver el problema del doble submit debido
 
@@ -191,12 +191,12 @@ var SaveReadMessage = async function (opt, s, body) {
         read: readMes + 1 ,
       })
       .fetch();
-    }else{
-      readUpdate = {
-        error: true,
-        message: 'No se encontro el mensaje que se va actualizar la lectura o es un mensaje enviado desde facebook'
-      }
+  }else{
+    readUpdate = {
+      error: true,
+      message: 'No se encontro el mensaje que se va actualizar la lectura o es un mensaje enviado desde facebook'
     }
+  }
 
   // Guarda el Mensaje de Lectura en el sistema.
   await MessengerMessages.create(saveData).fetch();
