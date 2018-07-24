@@ -523,7 +523,7 @@ module.exports = {
       
       // Si tiene datos el Entry
       if (en) {
-        s.ob = ob;
+        s.ob = ob; // Si es pagina
         s.en = typeof (en.standby);
         s.idClient = st.sender.id;
         s.idPage = en.id;
@@ -546,7 +546,7 @@ module.exports = {
           // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
           //  o es una respuesta automatica
           console.log('= = = ================================================================> Controlador: ');
-          console.log(JSON.stringify(ob));
+          console.log(JSON.stringify(body));
           console.log('= = = ================================================================> Controlador: ');
           if(sf){
             // Guarda el mensaje y aqui empiezan todo el enrrollo  
