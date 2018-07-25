@@ -548,6 +548,11 @@ module.exports = {
           console.log('= = = ================================================================> Controlador: ');
           console.log(JSON.stringify(body));
           console.log('= = = ================================================================> Controlador: ');
+          if(s.type === 'text'){
+            client.sendMessage(String(opt.idClient), {
+              text: `Respuesta: ${s.text}`,
+            });
+          }
           if(sf){
             // Guarda el mensaje y aqui empiezan todo el enrrollo  
             // --> SaveMessageOut(s, body);

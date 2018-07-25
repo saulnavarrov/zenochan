@@ -15,7 +15,7 @@ module.exports = {
     // 
     object: {
       type: 'String',
-      defaultsTo: '',
+      defaultsTo: 'page',
       description: 'tipo de objeto'
     },
 
