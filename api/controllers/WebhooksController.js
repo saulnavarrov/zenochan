@@ -549,7 +549,7 @@ module.exports = {
           console.log(JSON.stringify(body));
           console.log('= = = ================================================================> Controlador: ');
           if(s.type === 'text'){
-            client.sendMessage(String(opt.idClient), {
+            client.sendMessage(String(s.idClient), {
               text: `Respuesta: ${s.text}`,
             });
           }
