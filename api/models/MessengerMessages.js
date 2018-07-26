@@ -13,56 +13,121 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     // 
-    object: {
-      type: 'String',
-      defaultsTo: 'page',
-      description: 'tipo de objeto'
-    },
-
-    // 
-    sequence: {
-      type: 'number',
-      defaultsTo: 0,
-      description: 'Numero de secuencia para organizar'
-    },
-
-    // 
-    typeMess: {
-      type: 'string',
-      description: 'Tipo de mensaje enviado'
-    },
-
-    // 
-    text: {
-      type: 'boolean',
-      description: 'si es Texto o no lo es, para recalcar si responderles o no'
-    },
-
-    // 
-    textString: {
+    idClient: {
       type: 'string',
       defaultsTo: '',
-      description: 'Contenido de Texto'
+      description: 'Id del usuario que envia el mensaje a la pagina',
     },
 
-    // 
-    textArray: {
-      type: 'json',
-      defaultsTo: {},
-      description: 'array del texto'
+    idPage: {
+      type: 'string',
+      defaultsTo: '',
+      description: `Id de la pagina con la que se comunica el usuario`
     },
 
-    // 
-    stikerId: {
+    times: {
       type: 'number',
-      description: 'codigo del stiker para identificarlos mas luego'
+      defaultsTo: 0,
+      description: `Fecha y hora en que llega el mensaje
+        Tambien se usa para darle lectuara a un mensaje`
     },
 
-    // 
-    attachments: {
+    tm: {
+      type: 'string',
+      defaultsTo: 'message',
+      description: `Tipo de mensaje que llega
+        Este dira que tipo de mensaje es el que se aplica debido a su contenido
+        actualmente existen 3 tipos de mensajes:
+        delivery: Mensajes enviados desde el servidor o confiramcion de que se 
+            envio un mensaje por el bot
+        read: Mensaje de lectura del chat
+        message: Contenido o cuerpo con el cual se trabajan todos los datos`
+    },
+
+    seq: {
+      type: 'number',
+      defaultsTo: 0,
+      description: `Numero de secuencia
+        del mensaje que llega, este numero lo genera facebook y va adjunto en cada
+        mensaje que recivimos.
+        Solo para Read y Delivery viene en 0`
+    },
+
+    typ: {
+      type: 'string',
+      defaultsTo: 'text',
+      description: `Determina el mensaje que viene de parte del cliente
+        y el que se le enviara para respuesta
+        Esto permitira el control de los mensajes para su procesamiento final`
+    },
+
+    tym: {
+      type: 'boolean',
+      defaultsTo: false,
+      description: `Este valor determina si el contenido
+        contiene mensaje en caractere de datos`,
+    },
+
+    txt: {
+      type: 'string',
+      defaultsTo: '',
+      description: `Contenido en texto que viene por parte del servidor o el
+        sea para entregar un mensaje por parte del bot o entrad del mensaje`
+    },
+    
+    txa: {
       type: 'json',
       defaultsTo: {},
-      description: 'Contenido adjuntos como imagenes, stikers, gits, sonidos, y localizaciónes'
+      description: `Array del mensaje que viene por parte del usuario y las respuesta
+        que es posible que se le de`
+    },
+
+    aty: {
+      type: 'boolean',
+      defaultsTo: false,
+      description: `Verificación de que el mensaje contiene
+        adjuntos aparte del texto como se ven las urls,
+        con este se determina si contiene el adjunto de las imagenes,
+        stikers, entre otras mas`
+    },
+
+    att: {
+      type: 'json',
+      defaultsTo: {},
+      description: `contiene todo el contenido del adjunto en formato JSON
+        para trabajarlo desde lado del cliente`
+    },
+
+    mid: {
+      type: 'string',
+      defaultsTo: '',
+      description: `Id del mensaje de entrada o de salida que entrega el servidor de
+        facebook para identificar y evitar la duplicacion de datos`
+    },
+
+    sti: {
+      type: 'number',
+      defaultsTo: 0,
+      description: `Identificación del stiker
+        Este es un numero que viene en `
+    },
+
+    uri: {
+      type: 'string',
+      defaultsTo: '',
+      description: `Url de los archivos adjuntos`
+    },
+
+    mes: {
+      type: 'json',
+      defaultsTo: {},
+      description: `Conjunto de datos completo de JSON`
+    },
+
+    bod: {
+      type: 'json',
+      defaultsTo: {},
+      description: `Conjunto de datos completo del mensaje sin modificaciones`
     },
 
     // 
@@ -73,228 +138,41 @@ module.exports = {
     },
 
     // Si el mensaje fue enviado o recivido
-    // 'submit', = Enviado desde el Book
-    // 'toReceibe', = Mensaje ingesado
-    // 'reads', = Lectura desde el bot
-    // 'resFB', = Respuesta desde Facebook
-    // 'sendFB', = Enviado desde Facebook
-    sendread: {
+    // 'sb', = Enviado desde el Book
+    // 'tR', = Mensaje ingesado
+    // 're', = Lectura desde el bot
+    // 'rF', = Respuesta desde Facebook
+    sendRead: {
       type: 'string',
-      isIn: ['submit', 'toReceibe', 'reads', 'resFB', 'sendFB'],
+      defaultsTo: 'tR',
+      isIn: ['sb', 'tR', 're', 'rF'],
       description: 'Si el mensaje fue enviado o recivido'
     },
 
-    timestamp: {
-      type: 'number',
-      description: 'La hora en que llega el mensaje, sirve para identificar el mensaje saber cual darle read'
-    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    // 
-    messageComplete: {
-      type: 'json',
-      defaultsTo: {},
-      description: 'Mensaje completo sin editar puro'
-    },
+
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    // 
-    idClient: {
-      type: 'string',
-      // collection: ''
-      defaultsTo: '',
-      description: 'id del cliente a quien responderle'
-    },
 
-    // 
-    idPage: {
-      type: 'string',
-      defaultsTo: '',
-      description: 'id de la pagina que se utiliza'
-    },
+    // idClient: {
+    //   type: 'string',
+    //   // collection: ''
+    //   defaultsTo: '',
+    //   description: 'id del cliente a quien responderle'
+    // },
+
+    // // 
+    // idPage: {
+    //   type: 'string',
+    //   defaultsTo: '',
+    //   description: 'id de la pagina que se utiliza'
+    // },
 
   },
 
 };
-
-
-/**
- * 
- * // Mensaje para eduardo
- {
-   "object": "page",
-   "entry": [{
-     "id": "1467462703307477",
-     "time": 1531585403491,
-     "messaging": [{
-       "sender": {
-         "id": "2186998384647446"
-       },
-       "recipient": {
-         "id": "1467462703307477"
-       },
-       "timestamp": 1531583554948,
-       "message": {
-         "mid": "Pxv1otsbU1MFOFiXWQ2PpVm9kMljBAIXfWscbQpz_4qi9RaekLg_k7Qy_8DRwWbQD9lSQ-3fq8jXGYlSWWtkCg",
-         "seq": 278088,
-         "text": "hola que mas pues"
-       }
-     }]
-   }]
- }
-
- *
- * // Mensaje para saul
- {
-   "object": "page",
-   "entry": [{
-     "id": "1467462703307477",
-     "time": 1531585647981,
-     "messaging": [{
-       "sender": {
-         "id": "2186998384647446"
-       },
-       "recipient": {
-         "id": "1467462703307477"
-       },
-       "timestamp": 1531583554948,
-       "message": {
-         "mid": "Pxv1otsbU1MFOFiXWQ2PpVm9kMljBAIXfWscbQpz_4qi9RaekLg_k7Qy_8DRwWbQD9lSQ-3fq8jXGYlSWWtkCg",
-         "seq": 278088,
-         "text": "hola que mas pues"
-       }
-     }]
-   }]
- }
- */
-
-// var mensajeRead = {
-//    "object": "page",
-//    "entry": [{
-//      "id": "2083506518327974",
-//      "time": 1531614758062,
-//      "standby": [{
-//        "sender": {
-//          "id": "1703497029718211"
-//        },
-//        "recipient": {
-//          "id": "2083506518327974"
-//        },
-//        "timestamp": 1531614758047,
-//        "read": {
-//          "watermark": 1531614733308,
-//          "seq": 0
-//        }
-//      }]
-//    }]
-//  }
-
-// var times = {
-//   "object": "page",
-//   "entry": [{
-//     "id": "2083506518327974",
-//     "time": 1531666183439,
-//     "standby": [{
-//       "sender": {
-//         "id": "1703497029718211"
-//       },
-//       "recipient": {
-//         "id": "2083506518327974"
-//       },
-//       "timestamp": 1531666183424,
-//       "delivery": {
-//         "watermark": 1531666182238,
-//         "seq": 0
-//       }
-//     }]
-//   }]
-// }
-
-
-// var esmin = {
-//   "createdAt": "2018-07-15T15:29:36.218Z",
-//   "updatedAt": "2018-07-15T15:29:36.218Z",
-//   "id": "5b4b68602d237f0014d999eb",
-//   "object": "page",
-//   "sequence": 278386,
-//   "typeMess": "text",
-//   "text": true,
-//   "textString": "quiero una entrada gratis jajajaja",
-//   "textArray": ["quiero", "una", "entrada", "gratis", "jajajaja"],
-//   "stikerId": 0,
-//   "attachments": {},
-//   "read": 0,
-//   "sendread": "toReceibe",
-//   "timestamp": 1531668575867,
-//   "messageComplete": {
-//     "object": "page",
-//     "entry": [{
-//       "id": "2083506518327974",
-//       "time": 1531668576021,
-//       "standby": [{
-//         "sender": {
-//           "id": "1703497029718211"
-//         },
-//         "recipient": {
-//           "id": "2083506518327974"
-//         },
-//         "timestamp": 1531668575867,
-//         "message": {
-//           "mid": "_jtelBuzU0azDlNDkHnDmD2OGniNCp17HMqEXIaaKk6msyDuvxnzJ93JKoW6gBM3glXl3bQLhJrOeIHaZRlHZg",
-//           "seq": 278386,
-//           "text": "quiero una entrada gratis jajajaja"
-//         }
-//       }]
-//     }]
-//   },
-//   "idClient": "1703497029718211",
-//   "idPage": "2083506518327974"
-// }
-
-// var enFb = {
-//   "object": "page",
-//   "entry": [{
-//     "id": "2083506518327974",
-//     "time": 1531668593739,
-//     "standby": [{
-//       "sender": {
-//         "id": "1703497029718211"
-//       },
-//       "recipient": {
-//         "id": "2083506518327974"
-//       },
-//       "timestamp": 1531668593710,
-//       "delivery": {
-//         "mids": ["oQNg0m0FQUIB714ClpdXzj2OGniNCp17HMqEXIaaKk6OjsK3wBcOet3h2QSbiJcvdyF3_p9A77CxshGTfl3QGA"],
-//         "watermark": 1531668593430,
-//         "seq": 0
-//       }
-//     }]
-//   }]
-// }
-
-// var enfb2 = {
-//   "object": "page",
-//   "entry": [{
-//     "id": "2083506518327974",
-//     "time": 1531668593969,
-//     "standby": [{
-//       "sender": {
-//         "id": "1703497029718211"
-//       },
-//       "recipient": {
-//         "id": "2083506518327974"
-//       },
-//       "timestamp": 1531668593940,
-//       "delivery": {
-//         "mids": ["oQNg0m0FQUIB714ClpdXzj2OGniNCp17HMqEXIaaKk6OjsK3wBcOet3h2QSbiJcvdyF3_p9A77CxshGTfl3QGA"],
-//         "watermark": 1531668593430,
-//         "seq": 0
-//       }
-//     }]
-//   }]
-// }

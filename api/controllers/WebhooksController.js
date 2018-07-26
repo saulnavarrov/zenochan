@@ -94,6 +94,106 @@ var getConfirmtWebHooks = (opt, cb) => {
 
 
 
+
+
+
+/****************************************************************************
+ * 
+ * SaveMessageIn
+ * @function
+ * @description :: Guardara todos los mensajes que entrano salend del sistema
+ * 
+ ****************************************************************************/
+var SaveMessageIn = async function (opt) {
+  sails.log.debug('Funcion SaveMensaje In');
+
+  // Estructura del mensaje
+  var saveData = opt;
+
+  // Guarda el mensaje
+  var saveMessengerMessages = await MessengerMessages.create(saveData).fetch();
+  // console.log('= =======================================> Start Save Ms In');
+  console.log(JSON.stringify(saveMessengerMessages));
+  // console.log('= =======================================> Stop');
+
+  // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
+  // ya sea del ultimo en revision.
+  // FiltrosMessagesIn(saveData, body);
+}
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************************************
+ *
+ * FiltrosMessagesIn
+ * @description :: Filtrara que tipo de mensajes se enviaran al Autor 
+ * debido a que todos estos no pueden ser procesados por su tipo de complejidad
+ * como ejemplo los de son diferentes a los de tipo de textos.
+ * @param {array} opt 
+ * @param {arry} body 
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+ */
+// var FiltrosMessagesIn = async (opt, body) => {
+//   var type = opt.typeMess || null;
+
+//   // filtros para textos
+//   if(type === 'text'){
+//     // Funcion para buscar los datos en la base si existen o no.
+//     // Respuestas Rapida de resolución
+//     opt.textString = `Renviado: ${opt.textString}`;
+//     client.sendMessage(String(opt.idClient), {
+//       text: `${opt.textString}`,
+//     });
+//     SaveMessageOut(opt, body)
+
+//     // Funcion para controlar las palabras
+//     ContadorDePalabrasYCorreccion(opt, body);
+//   }
+
+//   //Contenido no procesado
+//   else{
+
+//     // Respuesta para el cliente que manda el mensaje
+//     if(opt.sequence > 0){
+//       setTimeout(() => {
+//         client.sendMessage(String(opt.idClient), {
+//           text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
+//         });
+//       }, 300);
+//     }
+//   }
+// }
+
+
+/****************************************************************************
+ *
+ * ContadorDePalabras
+ * @description :: Contara las palabras y actualizara su contador, a su vez respondera que
+ *    palabras no exiten en la base de datos y la restaurara.
+ * @param {array} opt :: Array de datos de ingresos
+ * @param {callback} cb Debolución del contenido para el contador del sistema 
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+ *
+ *****************************************************************************/
+// var ContadorDePalabrasYCorreccion = async function (opt, body, cb) {
+
+//   console.log('controlador de palabras')
+//   // return cb(false, false);
+// }
+
+
+
+
+
+
 /***************************************************************************
  * 
  * SaveMessageOut
@@ -102,38 +202,38 @@ var getConfirmtWebHooks = (opt, cb) => {
  * @param {array} body  
  * 
  ****************************************************************************/
-var SaveMessageOut =  async function (opt, body){
-  sails.log.debug('Funcion SaveMensaje out')
+// var SaveMessageOut =  async function (opt, body){
+//   sails.log.debug('Funcion SaveMensaje out')
 
-  // Estructura del mensaje
-  var saveData = {
-    object: opt.ob,
-    sequence: opt.seq || 0,
-    typeMess: 'text',
-    text: opt.txt,
-    textString: opt.text,
-    textArray: !opt.txt ? [] : opt.text.split(' '),
-    stikerId: opt.stiker,
-    attachments: opt.attachments,
-    idClient: opt.idClient,
-    idPage: opt.idPage,
-    sendread: 'submit',
-    messageComplete: body,
-    timestamp: opt.times,
-    read: 1
-  }
+//   // Estructura del mensaje
+//   var saveData = {
+//     object: opt.ob,
+//     sequence: opt.seq || 0,
+//     typeMess: 'text',
+//     text: opt.txt,
+//     textString: opt.text,
+//     textArray: !opt.txt ? [] : opt.text.split(' '),
+//     stikerId: opt.stiker,
+//     attachments: opt.attachments,
+//     idClient: opt.idClient,
+//     idPage: opt.idPage,
+//     sendread: 'submit',
+//     messageComplete: body,
+//     timestamp: opt.times,
+//     read: 1
+//   }
 
-  // await MessengerMessages.create(saveData).fetch();
+//   // await MessengerMessages.create(saveData).fetch();
 
-  // resolver el problema del doble submit debido
+//   // resolver el problema del doble submit debido
 
-  // console.log('= =======================================> Start save Out');
-  // console.log(saveData)
-  // console.log(' = = = = = > Body')
-  // console.log(JSON.stringify(body));
-  // console.log('= =======================================> Stop');
-  // return cb(false, false);
-}
+//   // console.log('= =======================================> Start save Out');
+//   // console.log(saveData)
+//   // console.log(' = = = = = > Body')
+//   // console.log(JSON.stringify(body));
+//   // console.log('= =======================================> Stop');
+//   // return cb(false, false);
+// }
 
 
 
@@ -203,44 +303,6 @@ var SaveMessageOut =  async function (opt, body){
 // }
 
 
-
-/****************************************************************************
- * 
- * SaveMessageIn
- * @function
- * @description :: Guardara todos los mensajes que entrano salend del sistema
- * 
- ****************************************************************************/
-// var SaveMessageIn = async function (opt, body) {
-//   sails.log.debug('Funcion SaveMensaje In');
-
-//   // Estructura del mensaje
-//   var saveData = {
-//     object: opt.ob,
-//     sequence: opt.seq,
-//     typeMess: opt.type,
-//     text: opt.txt,
-//     textString: opt.text,
-//     textArray: !opt.txt ? [] : opt.text.split(' '),
-//     stikerId: opt.stiker,
-//     attachments: opt.attachments,
-//     idClient: opt.idClient,
-//     idPage: opt.idPage,
-//     sendread: 'toReceibe',
-//     messageComplete: body,
-//     timestamp: opt.times
-//   }
-
-//   // Guarda el mensaje
-//   await MessengerMessages.create(saveData).fetch();
-//   // console.log('= =======================================> Start Save Ms In');
-//   // console.log(JSON.stringify(messengerMessages));
-//   // console.log('= =======================================> Stop');
-
-//   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
-//   // ya sea del ultimo en revision.
-//   FiltrosMessagesIn(saveData, body);
-// }
 
 
 
@@ -392,63 +454,7 @@ var CreateUpdateUsersClints = async (user, act) => {
 
 
 
-/****************************************************************************
- *
- * FiltrosMessagesIn
- * @description :: Filtrara que tipo de mensajes se enviaran al Autor 
- * debido a que todos estos no pueden ser procesados por su tipo de complejidad
- * como ejemplo los de son diferentes a los de tipo de textos.
- * @param {array} opt 
- * @param {arry} body 
- * @author :: SaulNavarrov <Sinavarrov@gmail.com>
- */
-// var FiltrosMessagesIn = async (opt, body) => {
-//   var type = opt.typeMess || null;
 
-//   // filtros para textos
-//   if(type === 'text'){
-//     // Funcion para buscar los datos en la base si existen o no.
-//     // Respuestas Rapida de resolución
-//     opt.textString = `Renviado: ${opt.textString}`;
-//     client.sendMessage(String(opt.idClient), {
-//       text: `${opt.textString}`,
-//     });
-//     SaveMessageOut(opt, body)
-
-//     // Funcion para controlar las palabras
-//     ContadorDePalabrasYCorreccion(opt, body);
-//   }
-
-//   //Contenido no procesado
-//   else{
-
-//     // Respuesta para el cliente que manda el mensaje
-//     if(opt.sequence > 0){
-//       setTimeout(() => {
-//         client.sendMessage(String(opt.idClient), {
-//           text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
-//         });
-//       }, 300);
-//     }
-//   }
-// }
-
-
-/****************************************************************************
- *
- * ContadorDePalabras
- * @description :: Contara las palabras y actualizara su contador, a su vez respondera que
- *    palabras no exiten en la base de datos y la restaurara.
- * @param {array} opt :: Array de datos de ingresos
- * @param {callback} cb Debolución del contenido para el contador del sistema 
- * @author :: SaulNavarrov <Sinavarrov@gmail.com>
- *
- *****************************************************************************/
-// var ContadorDePalabrasYCorreccion = async function (opt, body, cb) {
-
-//   console.log('controlador de palabras')
-//   // return cb(false, false);
-// }
 
 
 /************************************************************************
@@ -529,6 +535,9 @@ module.exports = {
           // Guarda el contenido de Texto
           var txt = tym ? em[tm].text : false;
 
+          // Cadena de array
+          var txa = tym ? em[tm].text.split(' ') : [];
+
           // Guarda la secuencia que viene de facebook
           var seq = tm === 'message' ? em[tm].seq : 0;
 
@@ -556,17 +565,18 @@ module.exports = {
           ss.idClient = String(em.sender.id); // Id del cliente
           ss.idPage = String(em.recipient.id); // Id de la pagina
           ss.times = em.timestamp; // Hora y fecha en que entra el mensaje
-          ss.tm = tm; // Tipo de mensaje que envia Facebook a mi Servidor, por ahora hay solo 3
+          ss.tm = tm; // Tipo de mensaje que envia Facebook a mi Servidor, por ahora hay solo 4
           ss.seq = seq; // Numero de secuencia del mensaje enviado por el usuario
           ss.typ = typ; // Tipo de mensaje que envia el cliente. (Texto, Imagen, Stiker, localizacion, Documentos)
           ss.tym = tym; // Si el mensaje contiene texto o no
-          ss.txt = txt // Texto del mensaje
+          ss.txt = txt; // Texto del mensaje
+          ss.txa = txa; // Cadena de Array del texto de entrada para ser procesado
           ss.aty = aty; // Verificación de contenido adjunto
           ss.att = att; // contenido adjunto
           ss.mid = mid; // Id del mensaje enviado desde facebook y desde el bot
           ss.sti = sti; // Numero del Stiker
           ss.uri = uri; // Url del stiker
-          ss.mes = tm === 'NN' ? false : em[tm]; // Contenido en secuencia del mensaje
+          ss.mes = tm === 'NN' ? false : delete em[tm]['attachments'] ? em[tm] : em[tm]; // Contenido en secuencia del mensaje
           ss.bod = b; // Cuerpo completo del mensaje de entrada
 
 
@@ -575,6 +585,7 @@ module.exports = {
             IdentificacionDePerfiles(ss.idClient);
           }
           
+
           // Control del flujo de datos Read, Delivery, messagings
           // Flujo para Los Reads
           if(tm === 'read') {
