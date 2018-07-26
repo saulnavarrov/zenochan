@@ -554,7 +554,7 @@ module.exports = {
           var mid = tm === 'read' ? '' : tm === 'delivery' ? em[tm].mids[0] : em[tm].mid;
 
           // Identificación de Stikers
-          var sti = typ === 'image' ? em[tm].sticker_id : '';
+          var sti = typ === 'image' ? em[tm].sticker_id : 0;
 
           // Url de los documentos
           var uri = sti < 1 ? '' : att.payload.url;
