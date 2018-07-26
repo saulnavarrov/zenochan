@@ -543,7 +543,7 @@ module.exports = {
 
 
           // ***************************
-          ss.em = em; // Entry
+          // ss.em = em; // Entry
           ss.idClient = String(em.sender.id); // Id del cliente
           ss.idPage = String(em.recipient.id); // Id de la pagina
           ss.times = em.timestamp; // Hora y fecha en que entra el mensaje
