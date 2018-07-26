@@ -533,7 +533,7 @@ module.exports = {
           var tym = tm === 'message' ? typeof (em[tm].text) === 'string' ? true : false : false;
 
           // Guarda el contenido de Texto
-          var txt = tym ? em[tm].text : false;
+          var txt = tym ? em[tm].text : '';
 
           // Cadena de array
           var txa = tym ? em[tm].text.split(' ') : [];
