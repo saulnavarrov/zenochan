@@ -569,7 +569,8 @@ module.exports = {
           console.log("-------------------------------------------->");
           console.log('Contenidos   : ', ob, ' ', tm);
           console.log('-------------------------------------------->');
-          console.log(ss);
+          // console.log(ss);
+          console.log(JSON.stringify(body));
         }else{
           return res.status(404);
         }
