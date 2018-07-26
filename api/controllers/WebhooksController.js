@@ -513,7 +513,7 @@ module.exports = {
       // Si tiene datos el Entry
       if(en){
         console.log('Entrada de datos')
-        console.log(req);
+        console.log(body);
         // // Identificación de objetivo que envia el mensaje
         // if (ob === 'page') {
         //   // Control de datos
