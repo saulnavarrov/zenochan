@@ -610,6 +610,9 @@ module.exports = {
             console.log("--------------------------------------------> ", tm);
             console.log('Type: message -> ', tm);
 
+            // Ejecutando función
+            SaveMessageIn(ss);
+
             // Devuelve al servidor de Facebook que el mensaje ha sido recivido
             //   y que ya puede enviar los demas mensajes
             return res.ok('EVENT_RECEIVED');
