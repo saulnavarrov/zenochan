@@ -146,61 +146,61 @@ var SaveMessageOut =  async function (opt, body){
  * @param {array} body 
  * 
  ****************************************************************************/
-var SaveReadMessage = async function (opt, s, body) {
-  sails.log.debug('Funcion SaveMensaje Read');
+// var SaveReadMessage = async function (opt, s, body) {
+//   sails.log.debug('Funcion SaveMensaje Read');
 
-  // Estructura del mensaje
-  var saveData = {
-    object: s.ob,
-    sequence: s.seq,
-    typeMess: 'SendMessReadsFB',
-    text: s.txt,
-    textString: s.text,
-    textArray: !opt.txt ? [] : s.text.split(' '),
-    stikerId: s.stiker,
-    attachments: s.attachments,
-    idClient: s.idClient,
-    idPage: s.idPage,
-    sendread: 'resFB',
-    messageComplete: body,
-    timestamp: s.times,
-    read: 1
-  }
+//   // Estructura del mensaje
+//   var saveData = {
+//     object: s.ob,
+//     sequence: s.seq,
+//     typeMess: 'SendMessReadsFB',
+//     text: s.txt,
+//     textString: s.text,
+//     textArray: !opt.txt ? [] : s.text.split(' '),
+//     stikerId: s.stiker,
+//     attachments: s.attachments,
+//     idClient: s.idClient,
+//     idPage: s.idPage,
+//     sendread: 'resFB',
+//     messageComplete: body,
+//     timestamp: s.times,
+//     read: 1
+//   }
 
-  // Busca el Mensaje con el tiempo donde fue guardado.
-  var reads = await MessengerMessages
-    .find({
-      'timestamp': opt.watermark
-    })
-    .catch(err => {
-      reads = false;
-      console.log(err)
-    });
+//   // Busca el Mensaje con el tiempo donde fue guardado.
+//   var reads = await MessengerMessages
+//     .find({
+//       'timestamp': opt.watermark
+//     })
+//     .catch(err => {
+//       reads = false;
+//       console.log(err)
+//     });
     
-    // console.log('= = = = = ==============> Error > ',reads.length)
+//     // console.log('= = = = = ==============> Error > ',reads.length)
 
-  // Actualiza el Mensaje que se ha Leido como tal.
-  if (reads.length) {
-    var readMes = typeof (reads) === 'undefined' ? 1 : reads[0].read;
-    // console.log('= = = = = ==============> ', readMes)
-    var readUpdate = await MessengerMessages
-      .update({
-        'timestamp': opt.watermark
-      })
-      .set({
-        read: readMes + 1 ,
-      })
-      .fetch();
-  }else{
-    readUpdate = {
-      error: true,
-      message: 'No se encontro el mensaje que se va actualizar la lectura o es un mensaje enviado desde facebook'
-    }
-  }
+//   // Actualiza el Mensaje que se ha Leido como tal.
+//   if (reads.length) {
+//     var readMes = typeof (reads) === 'undefined' ? 1 : reads[0].read;
+//     // console.log('= = = = = ==============> ', readMes)
+//     var readUpdate = await MessengerMessages
+//       .update({
+//         'timestamp': opt.watermark
+//       })
+//       .set({
+//         read: readMes + 1 ,
+//       })
+//       .fetch();
+//   }else{
+//     readUpdate = {
+//       error: true,
+//       message: 'No se encontro el mensaje que se va actualizar la lectura o es un mensaje enviado desde facebook'
+//     }
+//   }
 
-  // Guarda el Mensaje de Lectura en el sistema.
-  await MessengerMessages.create(saveData).fetch();
-}
+//   // Guarda el Mensaje de Lectura en el sistema.
+//   await MessengerMessages.create(saveData).fetch();
+// }
 
 
 
@@ -211,36 +211,36 @@ var SaveReadMessage = async function (opt, s, body) {
  * @description :: Guardara todos los mensajes que entrano salend del sistema
  * 
  ****************************************************************************/
-var SaveMessageIn = async function (opt, body) {
-  sails.log.debug('Funcion SaveMensaje In');
+// var SaveMessageIn = async function (opt, body) {
+//   sails.log.debug('Funcion SaveMensaje In');
 
-  // Estructura del mensaje
-  var saveData = {
-    object: opt.ob,
-    sequence: opt.seq,
-    typeMess: opt.type,
-    text: opt.txt,
-    textString: opt.text,
-    textArray: !opt.txt ? [] : opt.text.split(' '),
-    stikerId: opt.stiker,
-    attachments: opt.attachments,
-    idClient: opt.idClient,
-    idPage: opt.idPage,
-    sendread: 'toReceibe',
-    messageComplete: body,
-    timestamp: opt.times
-  }
+//   // Estructura del mensaje
+//   var saveData = {
+//     object: opt.ob,
+//     sequence: opt.seq,
+//     typeMess: opt.type,
+//     text: opt.txt,
+//     textString: opt.text,
+//     textArray: !opt.txt ? [] : opt.text.split(' '),
+//     stikerId: opt.stiker,
+//     attachments: opt.attachments,
+//     idClient: opt.idClient,
+//     idPage: opt.idPage,
+//     sendread: 'toReceibe',
+//     messageComplete: body,
+//     timestamp: opt.times
+//   }
 
-  // Guarda el mensaje
-  await MessengerMessages.create(saveData).fetch();
-  // console.log('= =======================================> Start Save Ms In');
-  // console.log(JSON.stringify(messengerMessages));
-  // console.log('= =======================================> Stop');
+//   // Guarda el mensaje
+//   await MessengerMessages.create(saveData).fetch();
+//   // console.log('= =======================================> Start Save Ms In');
+//   // console.log(JSON.stringify(messengerMessages));
+//   // console.log('= =======================================> Stop');
 
-  // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
-  // ya sea del ultimo en revision.
-  FiltrosMessagesIn(saveData, body);
-}
+//   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
+//   // ya sea del ultimo en revision.
+//   FiltrosMessagesIn(saveData, body);
+// }
 
 
 
@@ -402,37 +402,36 @@ var CreateUpdateUsersClints = async (user, act) => {
  * @param {arry} body 
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-var FiltrosMessagesIn = async (opt, body) => {
-  var type = opt.typeMess || null;
+// var FiltrosMessagesIn = async (opt, body) => {
+//   var type = opt.typeMess || null;
 
-  // filtros para textos
-  if(type === 'text'){
-    // Funcion para buscar los datos en la base si existen o no.
-    // Respuestas Rapida de resolución
-    opt.textString = `Renviado: ${opt.textString}`;
-    client.sendMessage(String(opt.idClient), {
-      text: `${opt.textString}`,
-    });
-    SaveMessageOut(opt, body)
+//   // filtros para textos
+//   if(type === 'text'){
+//     // Funcion para buscar los datos en la base si existen o no.
+//     // Respuestas Rapida de resolución
+//     opt.textString = `Renviado: ${opt.textString}`;
+//     client.sendMessage(String(opt.idClient), {
+//       text: `${opt.textString}`,
+//     });
+//     SaveMessageOut(opt, body)
 
-    // Funcion para controlar las palabras
-    ContadorDePalabrasYCorreccion(opt, body);
-  }
+//     // Funcion para controlar las palabras
+//     ContadorDePalabrasYCorreccion(opt, body);
+//   }
 
-  //Contenido no procesado
-  else{
+//   //Contenido no procesado
+//   else{
 
-    // Respuesta para el cliente que manda el mensaje
-    if(opt.sequence > 0){
-      setTimeout(() => {
-        client.sendMessage(String(opt.idClient), {
-          text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
-        });
-      }, 300);
-    }
-  }
-
-}
+//     // Respuesta para el cliente que manda el mensaje
+//     if(opt.sequence > 0){
+//       setTimeout(() => {
+//         client.sendMessage(String(opt.idClient), {
+//           text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
+//         });
+//       }, 300);
+//     }
+//   }
+// }
 
 
 /****************************************************************************
@@ -445,11 +444,11 @@ var FiltrosMessagesIn = async (opt, body) => {
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  *
  *****************************************************************************/
-var ContadorDePalabrasYCorreccion = async function (opt, body, cb) {
+// var ContadorDePalabrasYCorreccion = async function (opt, body, cb) {
 
-  console.log('controlador de palabras')
-  // return cb(false, false);
-}
+//   console.log('controlador de palabras')
+//   // return cb(false, false);
+// }
 
 
 /************************************************************************
@@ -549,9 +548,9 @@ module.exports = {
           console.log(JSON.stringify(body));
           console.log('= = = ================================================================> Controlador: ');
           if(s.type === 'text'){
-            client.sendMessage(String(s.idClient), {
-              text: `Respuesta: ${s.text}`,
-            });
+            // client.sendMessage(String(s.idClient), {
+            //   text: `Respuesta: ${s.text}`,
+            // });
           }
           if(sf){
             // Guarda el mensaje y aqui empiezan todo el enrrollo  
