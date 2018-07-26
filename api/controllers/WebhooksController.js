@@ -577,7 +577,7 @@ module.exports = {
           
           // Control del flujo de datos Read, Delivery, messagings
           // Flujo para Los Reads
-          if(tm === 'Read') {
+          if(tm === 'read') {
             console.log("-------------------------------------------->");
             console.log('Type: Read -> ', tm);
 
