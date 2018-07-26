@@ -508,7 +508,7 @@ module.exports = {
       // var ss = {};                // Contenido enviado desglosado
       // var b = body;
       // var ob = ss.ob = b.object;  // Objeto de todo (page, personal)
-      // var en = b.entry[0];        // Contenido de Entry
+      var en = b.entry[0];        // Contenido de Entry
 
       // Si tiene datos el Entry
       if(en){
@@ -575,6 +575,7 @@ module.exports = {
         //   // console.log(ss); 
         //   // console.log(JSON.stringify(body));
         // }
+        return res.ok('EVENT_RECEIVED');
       }
       // Returns a '404 Not Found' if event is not from a page subscription
       else {
