@@ -510,9 +510,10 @@ module.exports = {
       var ob = ss.ob = b.object;  // Objeto de todo (page, personal)
       var en = b.entry[0];        // Contenido de Entry
 
-      console.log(JSON.stringify(body));
       // Si tiene datos el Entry
       if(en){
+        console.log('Entrada de datos')
+        console.log(JSON.stringify(body));
         // // Identificación de objetivo que envia el mensaje
         // if (ob === 'page') {
         //   // Control de datos
