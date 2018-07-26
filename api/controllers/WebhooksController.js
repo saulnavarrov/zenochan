@@ -505,15 +505,15 @@ module.exports = {
   'postWebHooksIn': (req, res) => {
       // variable Principal del sistema
       var body = req.body || 0;
-      var ss = {};                // Contenido enviado desglosado
-      var b = body;
-      var ob = ss.ob = b.object;  // Objeto de todo (page, personal)
-      var en = b.entry[0];        // Contenido de Entry
+      // var ss = {};                // Contenido enviado desglosado
+      // var b = body;
+      // var ob = ss.ob = b.object;  // Objeto de todo (page, personal)
+      // var en = b.entry[0];        // Contenido de Entry
 
       // Si tiene datos el Entry
       if(en){
         console.log('Entrada de datos')
-        console.log(JSON.stringify(req));
+        console.log(req);
         // // Identificación de objetivo que envia el mensaje
         // if (ob === 'page') {
         //   // Control de datos
