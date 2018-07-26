@@ -556,7 +556,7 @@ module.exports = {
           ss.idClient = String(em.sender.id); // Id del cliente
           ss.idPage = String(em.recipient.id); // Id de la pagina
           ss.times = em.timestamp; // Hora y fecha en que entra el mensaje
-          ss.tm = tm; // Tipo de mensaje que envia Facebook a mi Servidor, por ahora hay solo 4
+          ss.tm = tm; // Tipo de mensaje que envia Facebook a mi Servidor, por ahora hay solo 3
           ss.seq = seq; // Numero de secuencia del mensaje enviado por el usuario
           ss.typ = typ; // Tipo de mensaje que envia el cliente. (Texto, Imagen, Stiker, localizacion, Documentos)
           ss.tym = tym; // Si el mensaje contiene texto o no
@@ -575,13 +575,52 @@ module.exports = {
             IdentificacionDePerfiles(ss.idClient);
           }
           
+          // Control del flujo de datos Read, Delivery, messagings
+          // Flujo para Los Reads
+          if(tm === 'Read') {
+            console.log("-------------------------------------------->");
+            console.log('Type: Read -> ', tm);
+
+            // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+            //   y que ya puede enviar los demas mensajes
+            return res.ok('EVENT_RECEIVED');
+          }
+          // Flujo para los Deliverys
+          else if (tm === 'delivery') {
+            console.log("-------------------------------------------->");
+            console.log('Type: Dekuvery -> ', tm);
+
+            // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+            //   y que ya puede enviar los demas mensajes
+            return res.ok('EVENT_RECEIVED');
+          }
+          // Flujo para los Messages
+          else if (tm === 'message') {
+            console.log("-------------------------------------------->");
+            console.log('Type: message -> ', tm);
+
+            // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+            //   y que ya puede enviar los demas mensajes
+            return res.ok('EVENT_RECEIVED');
+          }
+
+          // No hay nada
+          else {
+            console.log("-------------------------------------------->");
+            console.error('Que Paso');
+
+            // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+            //   y que ya puede enviar los demas mensajes
+            return res.ok('EVENT_RECEIVED');
+          }
 
           // Salida 
-          console.log("-------------------------------------------->");
-          console.log('Contenidos   : ', ob, ' ', tm);
-          console.log('-------------------------------------------->');
-          console.log(ss); 
+          // console.log('-------------------------------------------->');
+          // console.log(ss); 
           // console.log(JSON.stringify(body));
+
+          // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+          //   y que ya puede enviar los demas mensajes
           return res.ok('EVENT_RECEIVED');
         }
       }
