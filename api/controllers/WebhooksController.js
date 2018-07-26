@@ -139,7 +139,7 @@ var saveResponseMessageOut = async (opt, type) => {
 
     // Respuesta del cliente.
     client.sendMessage(String(opt.idClient), {
-      text: `Re: ${opt.text}`,
+      text: `${opt.text}`,
     });
   }
 }
@@ -260,10 +260,17 @@ var FilterDataMessageIn = async (opt) => {
     // Respuesta para el cliente que manda el mensaje
     if(opt.sequence > 0){
       setTimeout(() => {
-        client.sendMessage(String(opt.idClient), {
-          text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
-        });
-      }, 300);
+        var texto = `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`;
+
+        saveResponseMessageOut({
+          idClient: opt.idClient,
+          idPage: opt.idPage,
+          text: texto
+        },'text');
+        // client.sendMessage(String(opt.idClient), {
+        //   text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
+        // });
+      }, 333);
     }
   }
 }
