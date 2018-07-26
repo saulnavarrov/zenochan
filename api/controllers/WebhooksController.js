@@ -93,6 +93,105 @@ var getConfirmtWebHooks = (opt, cb) => {
 }
 
 
+/**
+ * saveResponseMessageOut
+ * @description :: Cuando se responde un mensaje este va cargado de una serie de contextos
+ *    y que a su vez funcionan como cuando lo envias desde facebook
+ *    Gracias al Paquete de NPM 'messaging-api-messenger', esto es solucionado de una manera
+ *    mucho mas efectiva donde, nos ahorramos mucho codigo para el envio de datos, el detalle
+ *    es que esto al momento de guardarlos y luego visualizarlo en la base de datos o en la pagina
+ *    para obtener un control de lo que se envia (Llevar un registro doble, tanto en facebook como 
+ *    en el sistema), no deja guardarlos.
+ * 
+ * @param {json} opt :: Contenido y cuerpo del mensaje que desea enviar
+ * @param {string} type :: Tipo de mensaje que desea enviar
+ * @author :: SaulNavarrov <sinavarrov@gmail.com>
+ */
+var saveResponseMessageOut = async (opt, type) => {
+  
+  // Guardar los de tipo Texto
+  if(type === 'text'){
+
+    // Data de lo que se va a guardar
+    var saveData = {
+      idClient: opt.idClient,
+      idPage: opt.idPage,
+      times: 0,
+      tm: 'ZenBot',
+      seq: 0,
+      typ: 'text',
+      tym: true,
+      txt: opt.txt,
+      txa: opt.txt.split(' '),
+      aty: false,
+      att: {},
+      mid: 'SendMessageBotReemplace',
+      sti: 0,
+      uri: '',
+      mes: {},
+      bod: {},
+      read: 0,
+      sendRead: 'sb'
+    }
+
+
+
+    client.sendMessage(String(opt.idClient), {
+      text: `Re: ${opt.txt}`,
+    });
+  }
+}
+
+/**
+ *{
+   "_id": ObjectId("5b5a38bd399c1000140c5a8a"),
+   "idClient": "1703497029718211",
+   "idPage": "2083506518327974",
+   "times": 1532639421689.0,
+   "tm": "message",
+   "seq": NumberInt(282017),
+   "typ": "text",
+   "tym": true,
+   "txt": "PPP ppp",
+   "txa": [
+     "PPP",
+     "ppp"
+   ],
+   "aty": false,
+   "att": false,
+   "mid": "kR6EpVKdOstKyqhEEWvXmj2OGniNCp17HMqEXIaaKk4rlteIDcvrd9HgHXjH-vmSqvqZMpeihnHDejdDUTMZuw",
+   "sti": NumberInt(0),
+   "uri": "",
+   "mes": {
+     "mid": "kR6EpVKdOstKyqhEEWvXmj2OGniNCp17HMqEXIaaKk4rlteIDcvrd9HgHXjH-vmSqvqZMpeihnHDejdDUTMZuw",
+     "seq": NumberInt(282017),
+     "text": "PPP ppp"
+   },
+   "bod": {
+     "object": "page",
+     "entry": [{
+       "id": "2083506518327974",
+       "time": 1532639421812.0,
+       "standby": [{
+         "sender": {
+           "id": "1703497029718211"
+         },
+         "recipient": {
+           "id": "2083506518327974"
+         },
+         "timestamp": 1532639421689.0,
+         "message": {
+           "mid": "kR6EpVKdOstKyqhEEWvXmj2OGniNCp17HMqEXIaaKk4rlteIDcvrd9HgHXjH-vmSqvqZMpeihnHDejdDUTMZuw",
+           "seq": NumberInt(282017),
+           "text": "PPP ppp"
+         }
+       }]
+     }]
+   },
+   "read": NumberInt(0),
+   "sendRead": "tR"
+ }
+ */
 
 
 
@@ -104,7 +203,7 @@ var getConfirmtWebHooks = (opt, cb) => {
  * @description :: Guardara todos los mensajes que entrano salend del sistema
  * 
  ****************************************************************************/
-var SaveMessageIn = async function (opt) {
+var SaveMessageIn = async (opt) => {
   sails.log.debug('= =======================================> Funcion SaveMensaje In');
 
   // Estructura del mensaje
@@ -139,11 +238,9 @@ var FilterDataMessageIn = async (opt) => {
   if(type === 'text'){
     // Funcion para buscar los datos en la base si existen o no.
     // Respuestas Rapida de resolución
-//     opt.textString = `Renviado: ${opt.textString}`;
-    client.sendMessage(String(opt.idClient), {
-      text: `Re: ${opt.txt}`,
-    });
-//     SaveMessageOut(opt, body)
+    saveResponseMessageOut(`Resp: ${opt.txt}`, 'text')
+    
+    // SaveMessageOut(opt, body)
 
 //     // Funcion para controlar las palabras
 //     ContadorDePalabrasYCorreccion(opt, body);
