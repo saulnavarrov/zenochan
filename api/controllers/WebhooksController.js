@@ -559,6 +559,12 @@ module.exports = {
           ss.bod = b; // Cuerpo completo del mensaje de entrada
 
 
+          // Identificacion de los perfiles clientes
+          if(seq > 0){
+            IdentificacionDePerfiles(ss.idClient);
+          }
+
+          
           // Salida 
           console.log("-------------------------------------------->");
           console.log('Contenidos   : ', x, ' ', tm);
