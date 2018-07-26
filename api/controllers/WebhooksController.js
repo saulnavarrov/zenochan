@@ -551,7 +551,7 @@ module.exports = {
           var typ = tm !== 'message' ? tm : tym ? 'text' : aty ? att.type : false;
 
           // ID del mensaje que envia facebook al usuario o que envia el bot
-          var mid = tm === 'read' ? '' : tm === 'delivery' ? em[tm].mids[0] : em[tm].mid;
+          var mid = tm === 'read' ? '' : tm === 'delivery' ? typeof (em[tm].mids[0]) === 'object' ? em[tm].mids[0] : '' : em[tm].mid;
 
           // Identificación de Stikers
           var sti = typ === 'image' ? em[tm].sticker_id : 0;
