@@ -238,7 +238,9 @@ var FilterDataMessageIn = async (opt) => {
   if(type === 'text'){
     // Funcion para buscar los datos en la base si existen o no.
     // Respuestas Rapida de resolución
-    saveResponseMessageOut(`Resp: ${opt.txt}`, 'text')
+    saveResponseMessageOut({
+      txt: `Resp: ${opt.txt}`
+    }, 'text');
     
     // SaveMessageOut(opt, body)
 
@@ -258,6 +260,8 @@ var FilterDataMessageIn = async (opt) => {
     }
   }
 }
+
+
 
 
 /****************************************************************************
