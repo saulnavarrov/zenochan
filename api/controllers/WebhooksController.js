@@ -105,7 +105,7 @@ var getConfirmtWebHooks = (opt, cb) => {
  * 
  ****************************************************************************/
 var SaveMessageIn = async function (opt) {
-  sails.log.debug('Funcion SaveMensaje In');
+  sails.log.debug('= =======================================> Funcion SaveMensaje In');
 
   // Estructura del mensaje
   var saveData = opt;
@@ -113,64 +113,54 @@ var SaveMessageIn = async function (opt) {
   // Guarda el mensaje
   var saveMessengerMessages = await MessengerMessages.create(saveData).fetch();
   // console.log('= =======================================> Start Save Ms In');
-  console.log(JSON.stringify(saveMessengerMessages));
+  // console.log(JSON.stringify(saveMessengerMessages));
   // console.log('= =======================================> Stop');
 
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
-  // FiltrosMessagesIn(saveData, body);
+  FilterDataMessageIn(saveData);
 }
-
-
-
-
-
-
-
-
-
 
 
 /****************************************************************************
  *
- * FiltrosMessagesIn
+ * FilterDataMessageIn
  * @description :: Filtrara que tipo de mensajes se enviaran al Autor 
  * debido a que todos estos no pueden ser procesados por su tipo de complejidad
  * como ejemplo los de son diferentes a los de tipo de textos.
  * @param {array} opt 
- * @param {arry} body 
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-// var FiltrosMessagesIn = async (opt, body) => {
-//   var type = opt.typeMess || null;
+var FilterDataMessageIn = async (opt) => {
+  sails.log.debug('= =======================================> Funcion Filter Data Message');
+  var type = opt.typ || null;
 
-//   // filtros para textos
-//   if(type === 'text'){
-//     // Funcion para buscar los datos en la base si existen o no.
-//     // Respuestas Rapida de resolución
+  // filtros para textos
+  if(type === 'text'){
+    // Funcion para buscar los datos en la base si existen o no.
+    // Respuestas Rapida de resolución
 //     opt.textString = `Renviado: ${opt.textString}`;
-//     client.sendMessage(String(opt.idClient), {
-//       text: `${opt.textString}`,
-//     });
+    client.sendMessage(String(opt.idClient), {
+      text: `Re: ${opt.txt}`,
+    });
 //     SaveMessageOut(opt, body)
 
 //     // Funcion para controlar las palabras
 //     ContadorDePalabrasYCorreccion(opt, body);
-//   }
+  }
 
-//   //Contenido no procesado
-//   else{
-
-//     // Respuesta para el cliente que manda el mensaje
-//     if(opt.sequence > 0){
-//       setTimeout(() => {
-//         client.sendMessage(String(opt.idClient), {
-//           text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
-//         });
-//       }, 300);
-//     }
-//   }
-// }
+  //Contenido no procesado
+  else{
+    // Respuesta para el cliente que manda el mensaje
+    if(opt.sequence > 0){
+      setTimeout(() => {
+        client.sendMessage(String(opt.idClient), {
+          text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
+        });
+      }, 300);
+    }
+  }
+}
 
 
 /****************************************************************************
