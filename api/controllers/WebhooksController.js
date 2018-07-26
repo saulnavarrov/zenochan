@@ -108,6 +108,7 @@ var getConfirmtWebHooks = (opt, cb) => {
  * @author :: SaulNavarrov <sinavarrov@gmail.com>
  */
 var saveResponseMessageOut = async (opt, type) => {
+  sails.log.debug('= =======================================> Funcion save response message out');
   
   // Guardar los de tipo Texto
   if(type === 'text'){
