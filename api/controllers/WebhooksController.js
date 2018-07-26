@@ -504,73 +504,106 @@ module.exports = {
    ****************************************************************************/
   'postWebHooksIn': (req, res) => {
       // variable Principal del sistema
-      var body = req.body || 0;
-      var object = body.object || 0;
+      var body = b = req.body || 0;
+      var ss = {};                // Contenido enviado desglosado
+      var ob = ss.ob = b.object;  // Objeto de todo (page, personal)
+      var en = b.entry[0];        // Contenido de Entry
 
-      
-      //  Codigos
-      var s = {};
-      var ob = body.object; // Object
-      var en = body.entry[0]; // entrys
-      var st = typeof (en.standby) !== 'undefined' ? en.standby[0] : en.messaging[0]; //stamby
-      var ms = typeof (st.message) === 'undefined' ? false : st.message; // Mensajes
-      var sq = typeof (ms) === 'undefined' ? false : ms.seq; // secuencia de mensajes
-      var tx = typeof (ms) === 'undefined' ? false : typeof (ms.text) === 'string' ? true : false; // si es texto o no
-      var at = typeof (ms) === 'undefined' ? false : typeof (ms.attachments) === 'undefined' ? true : ms.attachments[0]; // Documentos Adjuntos
-      var re = typeof (en.standby) === 'undefined' ? false : st.read;
-      var sf = typeof (en.standby) === 'undefined' ? false : st.delivery; // Mensajes enviados desde facebook
-      
       // Si tiene datos el Entry
-      if (en) {
-        s.ob = ob; // Si es pagina
-        s.en = typeof (en.standby);
-        s.idClient = st.sender.id;
-        s.idPage = en.id;
-        s.seq = typeof (st.message) === 'undefined' ? 0 : sq;
-        s.txt = tx;
-        s.text = !tx ? '' : st.message.text;
-        s.type = !ms ? '' : tx ? 'text' : at.type;
-        s.stiker = !ms ? 0 : tx ? 0 : typeof (at.payload.sticker_id) === 'undefined' ? 0 : at.payload.sticker_id;
-        s.attachments = !ms ? {} : tx ? {} : at;
-        s.times = st.timestamp; // hora en la que se guardo en servidor de facebook
-        
-        // Verificación de una pagina
-        if (object === 'page') {
+      if(en){
+        // Identificación de objetivo que envia el mensaje
+        if (ob === 'page') {
+          // Control de datos
+          // en.messaging[0];
+          var em = typeof (en.standby) === 'object' ? en.standby[0] : en.messaging[0];
 
-          // identifica el usuario que envia el mensaje Si tiene usuario
-          if(s.seq >= 1){
-            IdentificacionDePerfiles(s.idClient);
-          }
+          // Tipo de mensaje (Read, Messageclient, Messaging, Delivery)
+          var tm = typeof (em.message) === 'object' ? 'message' : typeof (em.read) === 'object' ? 'read' : typeof (em.delivery) === 'object' ? 'delivery' : 'NN';
 
-          // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
-          //  o es una respuesta automatica
-          console.log('= = = ================================================================> Controlador: ');
-          console.log(JSON.stringify(body));
-          console.log('= = = ================================================================> Controlador: ');
-          if(s.type === 'text'){
-            // client.sendMessage(String(s.idClient), {
-            //   text: `Respuesta: ${s.text}`,
-            // });
-          }
-          if(sf){
-            // Guarda el mensaje y aqui empiezan todo el enrrollo  
-            // --> SaveMessageOut(s, body);
-          }else if(re){
-            // Datos de read de facebook
-            // --> SaveReadMessage(re, s, body);
-          }else{
-            //  SaveMessageIn(s, body) : SaveMessageOut(s, body);
-            // --> s.type === '' ? SaveMessageOut(s, body) : SaveMessageIn(s, body); 
-          }
+          // Sabe si contiene texto o no contiene texto
+          var tym = tm === 'message' ? typeof (em[tm].text) === 'string' ? true : false : false;
+
+          // Guarda el contenido de Texto
+          var txt = tym ? em[tm].text : false;
+
+          // Guarda la secuencia que viene de facebook
+          var seq = tm === 'message' ? em[tm].seq : 0;
+
+          // Sabe que contenido tiene el Attachments
+          var aty = tm === 'message' ? typeof (em[tm].attachments) === 'object' ? true : false : false;
+
+          // Contenido del Attachments (archivos adjuntos enviados por el usuario)
+          var att = aty ? em[tm].attachments[0] : false;
+
+          // Que tipo de contenido me envia el usuario (Texto, Imagen, Archivo, Stiker)
+          var typ = tm !== 'message' ? tm : tym ? 'Text' : aty ? att.type : false;
+
+          // ID del mensaje que envia facebook al usuario o que envia el bot
+          var mid = tm === 'read' ? '' : tm === 'delivery' ? em[tm].mids[0] : em[tm].mid;
+
+
+          // ***************************
+          ss.em = em; // Entry
+          ss.idClient = String(em.sender.id); // Id del cliente
+          ss.idPage = String(em.recipient.id); // Id de la pagina
+          ss.times = em.timestamp; // Hora y fecha en que entra el mensaje
+          ss.tm = tm; // Tipo de mensaje que envia Facebook a mi Servidor, por ahora hay solo 4
+          ss.seq = seq; // Numero de secuencia del mensaje enviado por el usuario
+          ss.typ = typ; // Tipo de mensaje que envia el cliente. (Texto, Imagen, Stiker, localizacion, Documentos)
+          ss.tym = tym; // Si el mensaje contiene texto o no
+          ss.txt = txt // Texto del mensaje
+          ss.aty = aty; // Verificación de contenido adjunto
+          ss.att = att; // contenido adjunto
+          ss.mid = mid; // Id del mensaje enviado desde facebook y desde el bot
+          ss.mes = tm === 'NN' ? false : em[tm]; // Contenido en secuencia del mensaje
+          ss.bod = b; // Cuerpo completo del mensaje de entrada
+
+
+          // Salida 
+          console.log("-------------------------------------------->");
+          console.log('Contenidos   : ', x, ' ', tm);
+          console.log('-------------------------------------------->');
+          console.log(ss);
+        }else{
+          return res.status(404);
         }
-        // Retorno de ok para el sistema de facebook
-        return res.ok('EVENT_RECEIVED');
       }
-      
       // Returns a '404 Not Found' if event is not from a page subscription
       else {
         return res.status(404);
       }
+
+
+
+      
+       // Mensajes enviados desde facebook
+      // if(ob){
+      // // Si tiene datos el Entry
+      // if (en) {
+        
+        
+      //   if (ob === 'page') {
+
+      //     // identifica el usuario que envia el mensaje Si tiene usuario
+      //     if(s.seq >= 1){
+      //       IdentificacionDePerfiles(s.idClient);
+      //     }
+
+      //     // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
+      //     //  o es una respuesta automatica
+      //     console.log('= = = ================================================================> Controlador: ');
+      //     console.log(JSON.stringify(body));
+      //     console.log('= = = ================================================================> Controlador: ');
+
+        
+      //   // Retorno de ok para el sistema de facebook
+      //   return res.ok('EVENT_RECEIVED');
+      // }
+      
+      // Returns a '404 Not Found' if event is not from a page subscription
+      // else {
+      //   return res.status(404);
+      // }
     },
 };
 
