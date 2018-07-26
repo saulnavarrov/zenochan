@@ -134,9 +134,10 @@ var saveResponseMessageOut = async (opt, type) => {
       read: 0,
       sendRead: 'sb'
     }
+  
+    var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
-
-
+    // Respuesta del cliente.
     client.sendMessage(String(opt.idClient), {
       text: `Re: ${opt.text}`,
     });
