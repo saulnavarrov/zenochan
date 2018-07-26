@@ -563,11 +563,11 @@ module.exports = {
           if(seq > 0){
             IdentificacionDePerfiles(ss.idClient);
           }
-
           
+
           // Salida 
           console.log("-------------------------------------------->");
-          console.log('Contenidos   : ', x, ' ', tm);
+          console.log('Contenidos   : ', ob, ' ', tm);
           console.log('-------------------------------------------->');
           console.log(ss);
         }else{
