@@ -578,7 +578,7 @@ module.exports = {
           // Control del flujo de datos Read, Delivery, messagings
           // Flujo para Los Reads
           if(tm === 'read') {
-            console.log("-------------------------------------------->");
+            console.log("--------------------------------------------> ", tm);
             console.log('Type: Read -> ', tm);
 
             // Devuelve al servidor de Facebook que el mensaje ha sido recivido
@@ -587,7 +587,7 @@ module.exports = {
           }
           // Flujo para los Deliverys
           else if (tm === 'delivery') {
-            console.log("-------------------------------------------->");
+            console.log("--------------------------------------------> ", tm);
             console.log('Type: Dekuvery -> ', tm);
 
             // Devuelve al servidor de Facebook que el mensaje ha sido recivido
@@ -596,7 +596,7 @@ module.exports = {
           }
           // Flujo para los Messages
           else if (tm === 'message') {
-            console.log("-------------------------------------------->");
+            console.log("--------------------------------------------> ", tm);
             console.log('Type: message -> ', tm);
 
             // Devuelve al servidor de Facebook que el mensaje ha sido recivido
@@ -606,7 +606,7 @@ module.exports = {
 
           // No hay nada
           else {
-            console.log("-------------------------------------------->");
+            console.log("--------------------------------------------> ERROR:", tm);
             console.error('Que Paso');
 
             // Devuelve al servidor de Facebook que el mensaje ha sido recivido
