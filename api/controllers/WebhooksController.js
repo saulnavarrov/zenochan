@@ -516,6 +516,7 @@ module.exports = {
         // Identificación de objetivo que envia el mensaje
         if (ob === 'page') {
           // Control de datos
+          // * * * **********************************************************************
           // en.messaging[0];
           var em = typeof (en.standby) === 'object' ? en.standby[0] : en.messaging[0];
 
@@ -538,10 +539,16 @@ module.exports = {
           var att = aty ? em[tm].attachments[0] : false;
 
           // Que tipo de contenido me envia el usuario (Texto, Imagen, Archivo, Stiker)
-          var typ = tm !== 'message' ? tm : tym ? 'Text' : aty ? att.type : false;
+          var typ = tm !== 'message' ? tm : tym ? 'text' : aty ? att.type : false;
 
           // ID del mensaje que envia facebook al usuario o que envia el bot
           var mid = tm === 'read' ? '' : tm === 'delivery' ? em[tm].mids[0] : em[tm].mid;
+
+          // Identificación de Stikers
+          var sti = typ === 'image' ? em[tm].sticker_id : '';
+
+          // Url de los documentos
+          var uri = sti < 1 ? '' : att.payload.url;
 
 
           // ***************************
