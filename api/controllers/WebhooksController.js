@@ -513,69 +513,67 @@ module.exports = {
       console.log(JSON.stringify(body));
       // Si tiene datos el Entry
       if(en){
-        // Identificación de objetivo que envia el mensaje
-        if (ob === 'page') {
-          // Control de datos
-          // en.messaging[0];
-          var em = typeof (en.standby) === 'object' ? en.standby[0] : en.messaging[0];
+        // // Identificación de objetivo que envia el mensaje
+        // if (ob === 'page') {
+        //   // Control de datos
+        //   // en.messaging[0];
+        //   var em = typeof (en.standby) === 'object' ? en.standby[0] : en.messaging[0];
 
-          // Tipo de mensaje (Read, Messageclient, Messaging, Delivery)
-          var tm = typeof (em.message) === 'object' ? 'message' : typeof (em.read) === 'object' ? 'read' : typeof (em.delivery) === 'object' ? 'delivery' : 'NN';
+        //   // Tipo de mensaje (Read, Messageclient, Messaging, Delivery)
+        //   var tm = typeof (em.message) === 'object' ? 'message' : typeof (em.read) === 'object' ? 'read' : typeof (em.delivery) === 'object' ? 'delivery' : 'NN';
 
-          // Sabe si contiene texto o no contiene texto
-          var tym = tm === 'message' ? typeof (em[tm].text) === 'string' ? true : false : false;
+        //   // Sabe si contiene texto o no contiene texto
+        //   var tym = tm === 'message' ? typeof (em[tm].text) === 'string' ? true : false : false;
 
-          // Guarda el contenido de Texto
-          var txt = tym ? em[tm].text : false;
+        //   // Guarda el contenido de Texto
+        //   var txt = tym ? em[tm].text : false;
 
-          // Guarda la secuencia que viene de facebook
-          var seq = tm === 'message' ? em[tm].seq : 0;
+        //   // Guarda la secuencia que viene de facebook
+        //   var seq = tm === 'message' ? em[tm].seq : 0;
 
-          // Sabe que contenido tiene el Attachments
-          var aty = tm === 'message' ? typeof (em[tm].attachments) === 'object' ? true : false : false;
+        //   // Sabe que contenido tiene el Attachments
+        //   var aty = tm === 'message' ? typeof (em[tm].attachments) === 'object' ? true : false : false;
 
-          // Contenido del Attachments (archivos adjuntos enviados por el usuario)
-          var att = aty ? em[tm].attachments[0] : false;
+        //   // Contenido del Attachments (archivos adjuntos enviados por el usuario)
+        //   var att = aty ? em[tm].attachments[0] : false;
 
-          // Que tipo de contenido me envia el usuario (Texto, Imagen, Archivo, Stiker)
-          var typ = tm !== 'message' ? tm : tym ? 'Text' : aty ? att.type : false;
+        //   // Que tipo de contenido me envia el usuario (Texto, Imagen, Archivo, Stiker)
+        //   var typ = tm !== 'message' ? tm : tym ? 'Text' : aty ? att.type : false;
 
-          // ID del mensaje que envia facebook al usuario o que envia el bot
-          var mid = tm === 'read' ? '' : tm === 'delivery' ? em[tm].mids[0] : em[tm].mid;
-
-
-          // ***************************
-          // ss.em = em; // Entry
-          ss.idClient = String(em.sender.id); // Id del cliente
-          ss.idPage = String(em.recipient.id); // Id de la pagina
-          ss.times = em.timestamp; // Hora y fecha en que entra el mensaje
-          ss.tm = tm; // Tipo de mensaje que envia Facebook a mi Servidor, por ahora hay solo 4
-          ss.seq = seq; // Numero de secuencia del mensaje enviado por el usuario
-          ss.typ = typ; // Tipo de mensaje que envia el cliente. (Texto, Imagen, Stiker, localizacion, Documentos)
-          ss.tym = tym; // Si el mensaje contiene texto o no
-          ss.txt = txt // Texto del mensaje
-          ss.aty = aty; // Verificación de contenido adjunto
-          ss.att = att; // contenido adjunto
-          ss.mid = mid; // Id del mensaje enviado desde facebook y desde el bot
-          ss.mes = tm === 'NN' ? false : em[tm]; // Contenido en secuencia del mensaje
-          ss.bod = b; // Cuerpo completo del mensaje de entrada
+        //   // ID del mensaje que envia facebook al usuario o que envia el bot
+        //   var mid = tm === 'read' ? '' : tm === 'delivery' ? em[tm].mids[0] : em[tm].mid;
 
 
-          // Identificacion de los perfiles clientes
-          if(seq > 0){
-            IdentificacionDePerfiles(ss.idClient);
-          }
+        //   // ***************************
+        //   // ss.em = em; // Entry
+        //   ss.idClient = String(em.sender.id); // Id del cliente
+        //   ss.idPage = String(em.recipient.id); // Id de la pagina
+        //   ss.times = em.timestamp; // Hora y fecha en que entra el mensaje
+        //   ss.tm = tm; // Tipo de mensaje que envia Facebook a mi Servidor, por ahora hay solo 4
+        //   ss.seq = seq; // Numero de secuencia del mensaje enviado por el usuario
+        //   ss.typ = typ; // Tipo de mensaje que envia el cliente. (Texto, Imagen, Stiker, localizacion, Documentos)
+        //   ss.tym = tym; // Si el mensaje contiene texto o no
+        //   ss.txt = txt // Texto del mensaje
+        //   ss.aty = aty; // Verificación de contenido adjunto
+        //   ss.att = att; // contenido adjunto
+        //   ss.mid = mid; // Id del mensaje enviado desde facebook y desde el bot
+        //   ss.mes = tm === 'NN' ? false : em[tm]; // Contenido en secuencia del mensaje
+        //   ss.bod = b; // Cuerpo completo del mensaje de entrada
+
+
+        //   // Identificacion de los perfiles clientes
+        //   if(seq > 0){
+        //     IdentificacionDePerfiles(ss.idClient);
+        //   }
           
 
-          // Salida 
-          console.log("-------------------------------------------->");
-          console.log('Contenidos   : ', ob, ' ', tm);
-          console.log('-------------------------------------------->');
-          // console.log(ss); 
-          // console.log(JSON.stringify(body));
-        }else{
-          return res.status(404);
-        }
+        //   // Salida 
+        //   console.log("-------------------------------------------->");
+        //   console.log('Contenidos   : ', ob, ' ', tm);
+        //   console.log('-------------------------------------------->');
+        //   // console.log(ss); 
+        //   // console.log(JSON.stringify(body));
+        // }
       }
       // Returns a '404 Not Found' if event is not from a page subscription
       else {
