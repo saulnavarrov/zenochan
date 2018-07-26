@@ -509,6 +509,7 @@ module.exports = {
       var ob = ss.ob = b.object;  // Objeto de todo (page, personal)
       var en = b.entry[0];        // Contenido de Entry
 
+      console.log(JSON.stringify(body));
       // Si tiene datos el Entry
       if(en){
         // Identificación de objetivo que envia el mensaje
@@ -570,7 +571,7 @@ module.exports = {
           console.log('Contenidos   : ', ob, ' ', tm);
           console.log('-------------------------------------------->');
           // console.log(ss); 
-          console.log(JSON.stringify(body));
+          // console.log(JSON.stringify(body));
         }else{
           return res.status(404);
         }
