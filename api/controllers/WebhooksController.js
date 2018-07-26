@@ -137,7 +137,7 @@ var saveResponseMessageOut = async (opt, type) => {
 
 
     client.sendMessage(String(opt.idClient), {
-      text: `Re: ${opt.txt}`,
+      text: `Re: ${opt.text}`,
     });
   }
 }
@@ -238,14 +238,19 @@ var FilterDataMessageIn = async (opt) => {
   if(type === 'text'){
     // Funcion para buscar los datos en la base si existen o no.
     // Respuestas Rapida de resolución
+    var texto = `Resp: ${opt.txt}`;
+
+    // Funcion de respuestas
     saveResponseMessageOut({
-      txt: `Resp: ${opt.txt}`
+      idClient: opt.idClient,
+      idPage: opt.idPage,
+      text: texto,
     }, 'text');
     
     // SaveMessageOut(opt, body)
 
-//     // Funcion para controlar las palabras
-//     ContadorDePalabrasYCorreccion(opt, body);
+    // Funcion para controlar las palabras
+    // ContadorDePalabrasYCorreccion(opt, body);
   }
 
   //Contenido no procesado
@@ -688,16 +693,7 @@ module.exports = {
             //   y que ya puede enviar los demas mensajes
             return res.ok('EVENT_RECEIVED');
           }
-          // Flujo para los Deliverys
-          else if (tm === 'delivery') {
-            console.log("--------------------------------------------> ", tm);
-            // console.log('Type: Dekuvery -> ', tm);
-            // console.log(ss);
 
-            // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-            //   y que ya puede enviar los demas mensajes
-            return res.ok('EVENT_RECEIVED');
-          }
           // Flujo para los Messages
           else if (tm === 'message') {
             console.log("--------------------------------------------> ", tm);
@@ -705,6 +701,17 @@ module.exports = {
 
             // Ejecutando función
             SaveMessageIn(ss);
+
+            // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+            //   y que ya puede enviar los demas mensajes
+            return res.ok('EVENT_RECEIVED');
+          }
+
+          // Flujo para los Deliverys
+          else if (tm === 'delivery') {
+            console.log("--------------------------------------------> ", tm);
+            // console.log('Type: Dekuvery -> ', tm);
+            // console.log(ss);
 
             // Devuelve al servidor de Facebook que el mensaje ha sido recivido
             //   y que ya puede enviar los demas mensajes
