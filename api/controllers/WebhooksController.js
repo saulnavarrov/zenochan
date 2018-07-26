@@ -557,6 +557,8 @@ module.exports = {
           ss.aty = aty; // Verificación de contenido adjunto
           ss.att = att; // contenido adjunto
           ss.mid = mid; // Id del mensaje enviado desde facebook y desde el bot
+          ss.sti = sti; // Numero del Stiker
+          ss.uri = uri; // Url del stiker
           ss.mes = tm === 'NN' ? false : em[tm]; // Contenido en secuencia del mensaje
           ss.bod = b; // Cuerpo completo del mensaje de entrada
 
@@ -573,8 +575,8 @@ module.exports = {
           console.log('-------------------------------------------->');
           console.log(ss); 
           // console.log(JSON.stringify(body));
+          return res.ok('EVENT_RECEIVED');
         }
-        return res.ok('EVENT_RECEIVED');
       }
       // Returns a '404 Not Found' if event is not from a page subscription
       else {
