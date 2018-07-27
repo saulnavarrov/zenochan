@@ -229,7 +229,7 @@ var SaveMessageIn = async (opt) => {
 
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
-  FilterDataMessageIn(saveData);
+  FilterDataMessageIn(opt);
 }
 
 
@@ -749,6 +749,7 @@ module.exports = {
               else if (tm === 'message') {
                 console.log("--------------------------------------------> ", tm);
                 console.log('Type: message -> ', tm);
+                console.log(ss.tokenPage)
 
                 // Ejecutando función
                 SaveMessageIn(ss);
