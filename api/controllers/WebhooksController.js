@@ -715,7 +715,6 @@ module.exports = {
           ss.bod = b; // Cuerpo completo del mensaje de entrada
 
           
-          
           // Identificación de la Pagina para traer los datos de la pagina la que va a responder
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
           var dataPageGet = await getDataPage({idPage: ss.idPage});
