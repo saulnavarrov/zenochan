@@ -566,16 +566,17 @@ var CreateUpdateUsersClints = async (user, act) => {
  * @param {array} opt :: array de datos
  * @author :: SaulNavarrov < Sinavarrov @gmail.com >
  */
-var getDataPage = async (opt) => {
+var getDataPage = async (opt, cb) => {
   var idPage = opt.idPage;
 
   var getDataPageDb = await DataPages.find({
     idPage: idPage
   });
 
-  dataPageConnectGlobal = getDataPageDb[0];
+  return cb(getDataPageDb[0]);
+  // dataPageConnectGlobal = getDataPageDb[0];
 
-  console.log(getDataPageDb);
+  // console.log(getDataPageDb);
   // console.log(opt);
 
 }
@@ -713,11 +714,13 @@ module.exports = {
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
           if (typeof (ss.idPage) === 'string' )
           {
-            getDataPage({idPage: ss.idPage});
+            var getDataPagedbs = getDataPage({idPage: ss.idPage});
+
+            console.log(getDataPagedbs);
           }
 
           
-          setInterval(() => {
+          // setInterval(() => {
             // // Identificacion de los perfiles clientes
             // if (seq > 0){
             //   IdentificacionDePerfiles(ss.idClient);
@@ -728,7 +731,7 @@ module.exports = {
           // Control del flujo de datos Read, Delivery, messagings
           // Flujo para Los Reads
           
-          //   if(tm === 'read') {
+          // if(tm === 'read') {
           //     console.log("--------------------------------------------> ", tm);
           //     // console.log('Type: Read -> ', tm);
           //     // console.log(ss);
@@ -779,46 +782,14 @@ module.exports = {
 
           //   // Devuelve al servidor de Facebook que el mensaje ha sido recivido
           //   //   y que ya puede enviar los demas mensajes
-          }, 333);
-          // return res.ok('EVENT_RECEIVED');
-        // }
+          // }, 333);
+          return res.ok('EVENT_RECEIVED');
+        }
       }
       // Returns a '404 Not Found' if event is not from a page subscription
       else {
         return res.status(404);
       }
-
-
-
-      
-       // Mensajes enviados desde facebook
-      // if(ob){
-      // // Si tiene datos el Entry
-      // if (en) {
-        
-        
-      //   if (ob === 'page') {
-
-      //     // identifica el usuario que envia el mensaje Si tiene usuario
-      //     if(s.seq >= 1){
-      //       IdentificacionDePerfiles(s.idClient);
-      //     }
-
-      //     // Guarda el mensaje dependiendo si viene o va el mensaje, e identifica si viene desde facebook
-      //     //  o es una respuesta automatica
-      //     console.log('= = = ================================================================> Controlador: ');
-      //     console.log(JSON.stringify(body));
-      //     console.log('= = = ================================================================> Controlador: ');
-
-        
-      //   // Retorno de ok para el sistema de facebook
-      //   return res.ok('EVENT_RECEIVED');
-      // }
-      
-      // Returns a '404 Not Found' if event is not from a page subscription
-      // else {
-      //   return res.status(404);
-      // }
     },
 };
 
