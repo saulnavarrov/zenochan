@@ -13,7 +13,7 @@ const token_apiSaul = 'EAAFPdRVJsDoBAClzsa0N0RqrFCYqpcLdDKFNPn2XtTAoDYLwhZCocKO0
 const apptoken = 'Sails=3AUVG-R9ZyY85-uFdoYEU0m6xNKz2wV1lV.N0kXRlGwXdFMVuBH0U9bFEvRBya%2BMJWdnkFzNU%2B%2FFIU=Saul';
 
 // Conexion con facebook
-const client = MessengerClient.connect(token_apiSaul);
+const client = MessengerClient;
 
 // Guarda de manera temporal la identificación de la personas
 var profileDataClients = {};
@@ -140,7 +140,7 @@ var saveResponseMessageOut = async (opt, type) => {
     // Respuesta del cliente.
     client.sendMessage(String(opt.idClient), {
       text: `${opt.text}`,
-    });
+    }).connect(token_apiSaul);
   }
 }
 
