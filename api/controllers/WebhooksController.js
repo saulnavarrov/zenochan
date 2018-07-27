@@ -215,7 +215,7 @@ var saveResponseMessageOut = async (opt, type) => {
  * @description :: Guardara todos los mensajes que entrano salend del sistema
  * 
  ****************************************************************************/
-var SaveMessageIn = async (opt) => {
+var SaveMessageIn = async (opt, tok) => {
   sails.log.debug('= =======================================> Funcion SaveMensaje In');
   
   // Estructura del mensaje
@@ -229,9 +229,11 @@ var SaveMessageIn = async (opt) => {
 
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
-  console.log(opt);
-  FilterDataMessageIn(opt);
+  console.log(tok);
+  FilterDataMessageIn(opt, tok);
 }
+
+// Error no esta llegando la variable del token para enviar los datos de regresos
 
 
 /****************************************************************************
@@ -243,9 +245,9 @@ var SaveMessageIn = async (opt) => {
  * @param {array} opt 
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-var FilterDataMessageIn = async (opt) => {
+var FilterDataMessageIn = async (opt, tok) => {
   sails.log.debug('= =======================================> Funcion Filter Data Message');
-  console.log(opt);
+  console.log(tok);
   var type = opt.typ || null;
   // console.log(opt);
 
@@ -260,7 +262,7 @@ var FilterDataMessageIn = async (opt) => {
     saveResponseMessageOut({
       idClient: opt.idClient,
       idPage: opt.idPage,
-      tokenPage: opt.tokenPage,
+      tokenPage: tok,
       text: texto,
     }, 'text');
     
@@ -280,7 +282,7 @@ var FilterDataMessageIn = async (opt) => {
         saveResponseMessageOut({
           idClient: opt.idClient,
           idPage: opt.idPage,
-          tokenPage: opt.tokenPage,
+          tokenPage: tok,
           text: texto
         },'text');
         // client.sendMessage(String(opt.idClient), {
@@ -722,7 +724,7 @@ module.exports = {
           // Identificación de la Pagina para traer los datos de la pagina la que va a responder
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
           var dataPageGet = await getDataPage({idPage: ss.idPage});
-              ss.tokenPage = dataPageGet.tokenPage;
+              // ss.tokenPage = dataPageGet.tokenPage;
 
               // console.log(dataPageGet)
           
@@ -753,7 +755,7 @@ module.exports = {
                 console.log('Type: message -> ', tm);
 
                 // Ejecutando función
-                SaveMessageIn(ss);
+                SaveMessageIn(ss, dataPageGet.tokenPage);
 
               //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //     //   y que ya puede enviar los demas mensajes
