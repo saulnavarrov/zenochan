@@ -720,6 +720,7 @@ module.exports = {
           }
 
           
+          
           // setInterval(() => {
             // // Identificacion de los perfiles clientes
             // if (seq > 0){
