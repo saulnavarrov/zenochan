@@ -93,6 +93,7 @@ var getConfirmtWebHooks = (opt, cb) => {
 }
 
 
+
 /**
  * saveResponseMessageOut
  * @description :: Cuando se responde un mensaje este va cargado de una serie de contextos
@@ -140,8 +141,6 @@ var saveResponseMessageOut = async (opt, type) => {
 
     // Respuesta del cliente.
     // if (typeof (opt.token) === 'string'){
-      console.log('====> Token');
-      console.log(opt.tokenPage);
       client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
         text: `${opt.text}`,
       });
@@ -442,10 +441,6 @@ var FilterDataMessageIn = async (opt, tok) => {
  */
 var IdentificacionDePerfiles = async (idFb, tok) => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
-
-  console.log('progando New Pages');
-  console.log(idFb);
-  console.log(tok)
 
   // Busqueda del usuario cliente en la base de datos
   var clientsDataId = await DataClients.find({
@@ -756,7 +751,6 @@ module.exports = {
               
               // Ejecutando función
               SaveMessageIn(ss, dataPageGet.tokenPage);
-              
               
               //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //     //   y que ya puede enviar los demas mensajes
