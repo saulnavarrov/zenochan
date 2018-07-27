@@ -653,6 +653,10 @@ module.exports = {
       // Si tiene datos el Entry
       if(en){
 
+        console.log('=====>>> Body Start')
+        console.log(JSON.stringify(b));
+        console.log('=====>>> Body End')
+
         // Identificación de objetivo que envia el mensaje
         if (ob === 'page') {
           // Control de datos
@@ -719,9 +723,7 @@ module.exports = {
           var dataPageGet = await getDataPage({idPage: ss.idPage});
               // ss.tokenPage = dataPageGet.tokenPage;
 
-          console.log('=====>>> Body Start')
-          console.log(JSON.stringify(b));
-          console.log('=====>>> Body End')
+          
           // console.log(ss)
           
           // Verifiación de que la Pagina este Activa
