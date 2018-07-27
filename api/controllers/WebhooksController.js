@@ -140,6 +140,7 @@ var saveResponseMessageOut = async (opt, type) => {
     var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
     // Respuesta del cliente.
+    console.log(dataPageConnectGlobal.tokenPage);
     client.connect(dataPageConnectGlobal.tokenPage).sendMessage(String(opt.idClient), {
       text: `${opt.text}`,
     });
@@ -708,7 +709,7 @@ module.exports = {
           // Identificación de la Pagina para traer los datos de la pagina la que va a responder
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
           var dataPageConnectGlobal = await getDataPage({idPage: ss.idPage});
-          console.log(dataPageConnectGlobal.tokenPage);
+          
           
           // Verifiación de que la Pagina este Activa
           if(dataPageConnectGlobal.active){
