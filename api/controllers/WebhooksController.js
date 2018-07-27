@@ -247,6 +247,7 @@ var FilterDataMessageIn = async (opt) => {
     saveResponseMessageOut({
       idClient: opt.idClient,
       idPage: opt.idPage,
+      tokenPage: opt.tokenPage,
       text: texto,
     }, 'text');
     
@@ -266,6 +267,7 @@ var FilterDataMessageIn = async (opt) => {
         saveResponseMessageOut({
           idClient: opt.idClient,
           idPage: opt.idPage,
+          tokenPage: opt.tokenPage,
           text: texto
         },'text');
         // client.sendMessage(String(opt.idClient), {
