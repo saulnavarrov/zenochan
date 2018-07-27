@@ -229,6 +229,7 @@ var SaveMessageIn = async (opt) => {
 
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
+  console.log(opt);
   FilterDataMessageIn(opt);
 }
 
@@ -244,7 +245,7 @@ var SaveMessageIn = async (opt) => {
  */
 var FilterDataMessageIn = async (opt) => {
   sails.log.debug('= =======================================> Funcion Filter Data Message');
-  console.log(opt.tokenPage);
+  console.log(opt);
   var type = opt.typ || null;
   // console.log(opt);
 
