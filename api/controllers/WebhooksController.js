@@ -771,7 +771,7 @@ module.exports = {
 
                   // Devuelve al servidor de Facebook que el mensaje ha sido recivido
                   //   y que ya puede enviar los demas mensajes
-                  // return res.ok('EVENT_RECEIVED');
+                  return res.ok('EVENT_RECEIVED');
                 }
 
               //   // No hay nada
