@@ -566,14 +566,14 @@ var CreateUpdateUsersClints = async (user, act) => {
  * @param {array} opt :: array de datos
  * @author :: SaulNavarrov < Sinavarrov @gmail.com >
  */
-var getDataPage = async (opt, cb) => {
+var getDataPage = async (opt) => {
   var idPage = opt.idPage;
 
   var getDataPageDb = await DataPages.find({
     idPage: idPage
   });
 
-  return cb(getDataPageDb[0]);
+  return getDataPageDb[0];
   // dataPageConnectGlobal = getDataPageDb[0];
 
   // console.log(getDataPageDb);
@@ -714,9 +714,7 @@ module.exports = {
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
           if (typeof (ss.idPage) === 'string' )
           {
-            var getDataPagedbs = getDataPage({idPage: ss.idPage}, getDP => {
-              return getDP;
-            });
+            var getDataPagedbs = getDataPage({idPage: ss.idPage});
 
             console.log(getDataPagedbs);
           }
