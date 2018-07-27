@@ -719,9 +719,9 @@ module.exports = {
           var dataPageGet = await getDataPage({idPage: ss.idPage});
               // ss.tokenPage = dataPageGet.tokenPage;
 
-          console.log('=====>>>')
+          console.log('=====>>> Body Start')
           console.log(JSON.stringify(b));
-          console.log('=====>>>')
+          console.log('=====>>> Body End')
           // console.log(ss)
           
           // Verifiación de que la Pagina este Activa
