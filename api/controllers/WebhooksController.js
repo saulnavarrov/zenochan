@@ -135,13 +135,21 @@ var saveResponseMessageOut = async (opt, type) => {
       sendRead: 'sb'
     }
   
-    var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
+    if(opt.tokenPage !== 'undefined'){
+      var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
-    // Respuesta del cliente.
-    console.log('tok: ', opt.tokenPage);
-    client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
-      text: `${opt.text}`,
-    });
+      // Respuesta del cliente.
+      console.log('tok: ', opt.tokenPage);
+      client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
+        text: `${opt.text}`,
+      });
+    }else{
+      sails.log.error({
+        success: false,
+        message: 'No se puede responder mensaje por falta de token de la pagina que se le dara respuesta',
+        error: true,
+      })
+    }
   }
 }
 
