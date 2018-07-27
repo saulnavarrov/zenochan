@@ -18,8 +18,6 @@ const client = MessengerClient;
 // Guarda de manera temporal la identificación de la personas
 var profileDataClients = {};
 
-// Guarda el token de manera global para que pueda ser usado mas luego.
-var dataPageConnectGlobal = {};
 
 
 /************************************************************************************************
