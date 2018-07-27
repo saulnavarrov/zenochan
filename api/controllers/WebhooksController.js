@@ -138,9 +138,9 @@ var saveResponseMessageOut = async (opt, type) => {
     var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
     // Respuesta del cliente.
-    client.sendMessage(String(opt.idClient), {
+    client.connect(token_apiSaul).sendMessage(String(opt.idClient), {
       text: `${opt.text}`,
-    }).connect(token_apiSaul);
+    });
   }
 }
 
