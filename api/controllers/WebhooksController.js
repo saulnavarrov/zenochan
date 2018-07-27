@@ -574,11 +574,6 @@ var getDataPage = async (opt) => {
   });
 
   return getDataPageDb[0];
-  // dataPageConnectGlobal = getDataPageDb[0];
-
-  // console.log(getDataPageDb);
-  // console.log(opt);
-
 }
 
 
@@ -712,70 +707,65 @@ module.exports = {
           
           // Identificación de la Pagina para traer los datos de la pagina la que va a responder
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
-          if (typeof (ss.idPage) === 'string' )
-          {
-            var getDataPagedbs = await getDataPage({idPage: ss.idPage});
-
-            console.log('--> Probando', getDataPagedbs.tokenPage);
-            console.log(getDataPagedbs);
-          }
-
-
+          var dataPageConnectGlobal = await getDataPage({idPage: ss.idPage});
           
-          // setInterval(() => {
-            // // Identificacion de los perfiles clientes
-            // if (seq > 0){
-            //   IdentificacionDePerfiles(ss.idClient);
-            // }
+          // Verifiación de que la Pagina este Activa
+          if(dataPageConnectGlobal.active){
+            
+            // Identificacion de los perfiles clientes
+            if (seq > 0){
+              IdentificacionDePerfiles(ss.idClient);
+            }
 
-          
-          // pageto
-          // Control del flujo de datos Read, Delivery, messagings
-          // Flujo para Los Reads
-          
-          // if(tm === 'read') {
-          //     console.log("--------------------------------------------> ", tm);
-          //     // console.log('Type: Read -> ', tm);
-          //     // console.log(ss);
+              // Control del flujo de datos Read, Delivery, messagings
+              // Flujo para Los Reads
 
-          //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-          //     //   y que ya puede enviar los demas mensajes
-          //     // return res.ok('EVENT_RECEIVED');
-          //   }
+              if(tm === 'read') {
+                console.log("--------------------------------------------> ", tm);
+              //     // console.log('Type: Read -> ', tm);
+              //     // console.log(ss);
 
-          //   // Flujo para los Messages
-          //   else if (tm === 'message') {
-          //     console.log("--------------------------------------------> ", tm);
-          //     console.log('Type: message -> ', tm);
+              //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //     //   y que ya puede enviar los demas mensajes
+                return res.ok('EVENT_RECEIVED');
+              }
 
-          //     // Ejecutando función
-          //     SaveMessageIn(ss);
+              // Flujo para los Messages
+              else if (tm === 'message') {
+                console.log("--------------------------------------------> ", tm);
+                console.log('Type: message -> ', tm);
 
-          //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-          //     //   y que ya puede enviar los demas mensajes
-          //     // return res.ok('EVENT_RECEIVED');
-          //   }
+                // Ejecutando función
+                SaveMessageIn(ss);
 
-          //   // Flujo para los Deliverys
-          //   else if (tm === 'delivery') {
-          //     console.log("--------------------------------------------> ", tm);
-          //     // console.log('Type: Dekuvery -> ', tm);
-          //     // console.log(ss);
+              //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //     //   y que ya puede enviar los demas mensajes
+                  // return res.ok('EVENT_RECEIVED');
+              }
 
-          //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-          //     //   y que ya puede enviar los demas mensajes
-          //     // return res.ok('EVENT_RECEIVED');
-          //   }
+              //   // Flujo para los Deliverys
+              //   else if (tm === 'delivery') {
+              //     console.log("--------------------------------------------> ", tm);
+              //     // console.log('Type: Dekuvery -> ', tm);
+              //     // console.log(ss);
 
-          //   // No hay nada
-          //   else {
-          //     console.log("--------------------------------------------> ERROR:", tm);
-          //     console.error('Que Paso');
+              //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //     //   y que ya puede enviar los demas mensajes
+              //     // return res.ok('EVENT_RECEIVED');
+              //   }
 
-          //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-          //     //   y que ya puede enviar los demas mensajes
-          //     // return res.ok('EVENT_RECEIVED');
-          //   }
+              //   // No hay nada
+              else {
+                console.log("--------------------------------------------> ERROR:", tm);
+                console.error('Que Paso');
+
+                // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+                //   y que ya puede enviar los demas mensajes
+                return res.ok('EVENT_RECEIVED');
+              }
+
+          }         
+
 
           //   // Salida 
           //   // console.log('-------------------------------------------->');
