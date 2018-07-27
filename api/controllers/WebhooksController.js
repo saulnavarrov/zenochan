@@ -217,7 +217,7 @@ var saveResponseMessageOut = async (opt, type) => {
  ****************************************************************************/
 var SaveMessageIn = async (opt) => {
   sails.log.debug('= =======================================> Funcion SaveMensaje In');
-  console.log(opt.tokenPage);
+  
   // Estructura del mensaje
   var saveData = opt;
 
@@ -244,8 +244,9 @@ var SaveMessageIn = async (opt) => {
  */
 var FilterDataMessageIn = async (opt) => {
   sails.log.debug('= =======================================> Funcion Filter Data Message');
+  console.log(opt.tokenPage);
   var type = opt.typ || null;
-  console.log(opt);
+  // console.log(opt);
 
   // filtros para textos
   if(type === 'text'){
