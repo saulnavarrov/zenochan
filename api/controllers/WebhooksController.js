@@ -723,58 +723,60 @@ module.exports = {
           // pageto
           // Control del flujo de datos Read, Delivery, messagings
           // Flujo para Los Reads
-          if(tm === 'read') {
-            console.log("--------------------------------------------> ", tm);
-            // console.log('Type: Read -> ', tm);
-            // console.log(ss);
+          setInterval( () => {
+            if(tm === 'read') {
+              console.log("--------------------------------------------> ", tm);
+              // console.log('Type: Read -> ', tm);
+              // console.log(ss);
+
+              // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //   y que ya puede enviar los demas mensajes
+              return res.ok('EVENT_RECEIVED');
+            }
+
+            // Flujo para los Messages
+            else if (tm === 'message') {
+              console.log("--------------------------------------------> ", tm);
+              console.log('Type: message -> ', tm);
+
+              // Ejecutando función
+              SaveMessageIn(ss);
+
+              // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //   y que ya puede enviar los demas mensajes
+              return res.ok('EVENT_RECEIVED');
+            }
+
+            // Flujo para los Deliverys
+            else if (tm === 'delivery') {
+              console.log("--------------------------------------------> ", tm);
+              // console.log('Type: Dekuvery -> ', tm);
+              // console.log(ss);
+
+              // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //   y que ya puede enviar los demas mensajes
+              return res.ok('EVENT_RECEIVED');
+            }
+
+            // No hay nada
+            else {
+              console.log("--------------------------------------------> ERROR:", tm);
+              console.error('Que Paso');
+
+              // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //   y que ya puede enviar los demas mensajes
+              return res.ok('EVENT_RECEIVED');
+            }
+
+            // Salida 
+            // console.log('-------------------------------------------->');
+            // console.log(ss); 
+            // console.log(JSON.stringify(body));
 
             // Devuelve al servidor de Facebook que el mensaje ha sido recivido
             //   y que ya puede enviar los demas mensajes
             return res.ok('EVENT_RECEIVED');
-          }
-
-          // Flujo para los Messages
-          else if (tm === 'message') {
-            console.log("--------------------------------------------> ", tm);
-            console.log('Type: message -> ', tm);
-
-            // Ejecutando función
-            SaveMessageIn(ss);
-
-            // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-            //   y que ya puede enviar los demas mensajes
-            return res.ok('EVENT_RECEIVED');
-          }
-
-          // Flujo para los Deliverys
-          else if (tm === 'delivery') {
-            console.log("--------------------------------------------> ", tm);
-            // console.log('Type: Dekuvery -> ', tm);
-            // console.log(ss);
-
-            // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-            //   y que ya puede enviar los demas mensajes
-            return res.ok('EVENT_RECEIVED');
-          }
-
-          // No hay nada
-          else {
-            console.log("--------------------------------------------> ERROR:", tm);
-            console.error('Que Paso');
-
-            // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-            //   y que ya puede enviar los demas mensajes
-            return res.ok('EVENT_RECEIVED');
-          }
-
-          // Salida 
-          // console.log('-------------------------------------------->');
-          // console.log(ss); 
-          // console.log(JSON.stringify(body));
-
-          // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-          //   y que ya puede enviar los demas mensajes
-          return res.ok('EVENT_RECEIVED');
+          }, 333);
         }
       }
       // Returns a '404 Not Found' if event is not from a page subscription
