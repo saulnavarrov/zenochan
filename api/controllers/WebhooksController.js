@@ -135,6 +135,7 @@ var saveResponseMessageOut = async (opt, type) => {
       sendRead: 'sb'
     }
   
+
     if(opt.tokenPage !== 'undefined'){
       var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
@@ -244,12 +245,14 @@ var SaveMessageIn = async (opt) => {
 var FilterDataMessageIn = async (opt) => {
   sails.log.debug('= =======================================> Funcion Filter Data Message');
   var type = opt.typ || null;
+  console.log(opt);
 
   // filtros para textos
   if(type === 'text'){
     // Funcion para buscar los datos en la base si existen o no.
     // Respuestas Rapida de resolución
     var texto = `Resp: ${opt.txt}`;
+
 
     // Funcion de respuestas
     saveResponseMessageOut({
