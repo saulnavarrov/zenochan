@@ -637,7 +637,7 @@ module.exports = {
    *      para organizarlo desde la manera estructurada
    * 
    ****************************************************************************/
-  'postWebHooksIn': (req, res) => {
+  'postWebHooksIn': async (req, res) => {
       // variable Principal del sistema
       var body = b = req.body || 0;
       var ss = {};                // Contenido enviado desglosado
