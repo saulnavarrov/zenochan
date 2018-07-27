@@ -139,11 +139,15 @@ var saveResponseMessageOut = async (opt, type) => {
     var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
     // Respuesta del cliente.
-    client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
-      text: `${opt.text}`,
-    });
+    if (typeof (opt.token) === 'string'){
+      client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
+        text: `${opt.text}`,
+      });
+    }
   }
 }
+
+// resolviendo problema de token por cada pagina que agrege a Zeno boot
 
 /**
  *{
