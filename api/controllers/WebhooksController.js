@@ -720,13 +720,13 @@ module.exports = {
           var dataPageGet = await getDataPage({idPage: ss.idPage});
               // ss.tokenPage = dataPageGet.tokenPage;
 
-          console.log('=====>>>')
-          console.log(dataPageGet)
-          console.log('=====>>>')
-          console.log(ss)
+          // console.log('=====>>>')
+          // console.log(dataPageGet)
+          // console.log('=====>>>')
+          // console.log(ss)
           
           // Verifiación de que la Pagina este Activa
-          if(false){
+          if(dataPageGet.active){
             
             // Identificacion de los perfiles clientes
             if (seq > 0){
@@ -780,7 +780,9 @@ module.exports = {
                 return res.ok('EVENT_RECEIVED');
               }
 
-          }         
+          }else{
+            return res.ok('EVENT_RECEIVED');
+          }        
 
 
           //   // Salida 
@@ -791,7 +793,6 @@ module.exports = {
           //   // Devuelve al servidor de Facebook que el mensaje ha sido recivido
           //   //   y que ya puede enviar los demas mensajes
           // }, 333);
-          return res.ok('EVENT_RECEIVED');
         }
       }
       // Returns a '404 Not Found' if event is not from a page subscription
