@@ -139,11 +139,13 @@ var saveResponseMessageOut = async (opt, type) => {
     var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
     // Respuesta del cliente.
-    if (typeof (opt.token) === 'string'){
+    // if (typeof (opt.token) === 'string'){
+      console.log('====> Token');
+      console.log(opt.tokenPage);
       client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
         text: `${opt.text}`,
       });
-    }
+    // }
   }
 }
 
