@@ -734,7 +734,7 @@ module.exports = {
             
             // Identificacion de los perfiles clientes
             if (seq > 0){
-              IdentificacionDePerfiles(ss.idClient, ss.tokenPage);
+              IdentificacionDePerfiles(ss.idClient, dataPageGet.tokenPage);
             }
 
               // Control del flujo de datos Read, Delivery, messagings
