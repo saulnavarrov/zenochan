@@ -714,7 +714,9 @@ module.exports = {
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
           if (typeof (ss.idPage) === 'string' )
           {
-            var getDataPagedbs = getDataPage({idPage: ss.idPage});
+            var getDataPagedbs = getDataPage({idPage: ss.idPage}, getDP => {
+              return getDP;
+            });
 
             console.log(getDataPagedbs);
           }
