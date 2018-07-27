@@ -687,7 +687,7 @@ module.exports = {
 
           // Identificacion de los perfiles clientes
           if(seq > 0){
-            IdentificacionDePerfiles(ss.idClient);
+            // IdentificacionDePerfiles(ss.idClient);
           }
           
 
