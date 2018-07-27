@@ -735,7 +735,7 @@ module.exports = {
 
               // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //   y que ya puede enviar los demas mensajes
-              return res.ok('EVENT_RECEIVED');
+              // return res.ok('EVENT_RECEIVED');
             }
 
             // Flujo para los Messages
@@ -748,7 +748,7 @@ module.exports = {
 
               // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //   y que ya puede enviar los demas mensajes
-              return res.ok('EVENT_RECEIVED');
+              // return res.ok('EVENT_RECEIVED');
             }
 
             // Flujo para los Deliverys
@@ -759,7 +759,7 @@ module.exports = {
 
               // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //   y que ya puede enviar los demas mensajes
-              return res.ok('EVENT_RECEIVED');
+              // return res.ok('EVENT_RECEIVED');
             }
 
             // No hay nada
@@ -769,7 +769,7 @@ module.exports = {
 
               // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //   y que ya puede enviar los demas mensajes
-              return res.ok('EVENT_RECEIVED');
+              // return res.ok('EVENT_RECEIVED');
             }
 
             // Salida 
@@ -779,8 +779,8 @@ module.exports = {
 
             // Devuelve al servidor de Facebook que el mensaje ha sido recivido
             //   y que ya puede enviar los demas mensajes
-            return res.ok('EVENT_RECEIVED');
           }, 333);
+          return res.ok('EVENT_RECEIVED');
         }
       }
       // Returns a '404 Not Found' if event is not from a page subscription
