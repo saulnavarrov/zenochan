@@ -711,10 +711,10 @@ module.exports = {
           var dataPageGet = await getDataPage({idPage: ss.idPage});
               ss.tokenPage = dataPageGet.tokenPage;
 
-              console.log(ss)
+              // console.log(dataPageGet)
           
           // Verifiación de que la Pagina este Activa
-          if(dataPageConnectGlobal.active){
+          if(dataPageGet.active){
             
             // Identificacion de los perfiles clientes
             if (seq > 0){
