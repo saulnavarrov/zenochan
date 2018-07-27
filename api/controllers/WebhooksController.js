@@ -258,7 +258,7 @@ var FilterDataMessageIn = async (opt) => {
   //Contenido no procesado
   else{
     // Respuesta para el cliente que manda el mensaje
-    if(opt.sequence > 0){
+    if(opt.seq > 0){
       setTimeout(() => {
         var texto = `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`;
 
