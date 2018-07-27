@@ -569,7 +569,7 @@ var CreateUpdateUsersClints = async (user, act) => {
 var getDataPage = async (opt) => {
   var idPage = opt.idPage;
 
-  var getDataPageDb = await DataPage.find({
+  var getDataPageDb = await DataPages.find({
     idPage: idPage
   });
 
