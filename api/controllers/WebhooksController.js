@@ -18,6 +18,8 @@ const client = MessengerClient;
 // Guarda de manera temporal la identificación de la personas
 var profileDataClients = {};
 
+// Guarda el token de manera global para que pueda ser usado mas luego.
+var tokenConnectPage = token_apiSaul; // '';
 
 
 /************************************************************************************************
@@ -138,9 +140,9 @@ var saveResponseMessageOut = async (opt, type) => {
     var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
     // Respuesta del cliente.
-    client.sendMessage(String(opt.idClient), {
+    client.connect(tokenConnectPage).sendMessage(String(opt.idClient), {
       text: `${opt.text}`,
-    }).connect(token_apiSaul);
+    });
   }
 }
 
@@ -471,7 +473,7 @@ var IdentificacionDePerfiles = async idFb => {
 var GetDataUserProfileFb = async (idfb, act) => {
   
   // Traera del facebook los datos del usuario
-  client.getUserProfile(String(idfb))
+  client.connect(tokenConnectPage).getUserProfile(String(idfb))
     .then(user => {
       if (user) {
         // Llamando la funcion y pasando la correspondiente variable.
@@ -555,6 +557,24 @@ var CreateUpdateUsersClints = async (user, act) => {
      * ESTAN DESACTIVADAS PARA ESTE USUARIO.
      */
   }
+}
+
+
+/**
+ * getDataPage
+ * @description :: 
+ * @param {array} opt :: array de datos
+ * @author :: SaulNavarrov < Sinavarrov @gmail.com >
+ */
+var getDataPage = async (opt) => {
+  var idPage = opt.idPage;
+
+  var getDataPageDb = await DataPage.find({
+    idPage: idPage
+  });
+
+  console.log(getDataPageDb);
+
 }
 
 
@@ -686,8 +706,15 @@ module.exports = {
 
 
           // Identificacion de los perfiles clientes
-          if(seq > 0){
-            // IdentificacionDePerfiles(ss.idClient);
+          if (seq > 0){
+            IdentificacionDePerfiles(ss.idClient);
+          }
+
+          // Identificación de la Pagina para traer los datos de la pagina la que va a responder
+          //    el bot de manera automatica identificandola y respondiendo de manera correcta
+          if (typeof (ss.idPage) === 'string' )
+          {
+            getDataPage({idPage: ss.idPage});
           }
           
 
