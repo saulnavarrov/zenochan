@@ -707,23 +707,27 @@ module.exports = {
           ss.mes = tm === 'NN' ? false : delete em[tm]['attachments'] ? em[tm] : em[tm]; // Contenido en secuencia del mensaje
           ss.bod = b; // Cuerpo completo del mensaje de entrada
 
-
-          // Identificacion de los perfiles clientes
-          if (seq > 0){
-            IdentificacionDePerfiles(ss.idClient);
-          }
-
+          
+          
           // Identificación de la Pagina para traer los datos de la pagina la que va a responder
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
           if (typeof (ss.idPage) === 'string' )
           {
             getDataPage({idPage: ss.idPage});
           }
+
+          
+          setInterval(() => {
+          // Identificacion de los perfiles clientes
+          if (seq > 0){
+            IdentificacionDePerfiles(ss.idClient);
+          }
+
           
           // pageto
           // Control del flujo de datos Read, Delivery, messagings
           // Flujo para Los Reads
-          setInterval( () => {
+          
             if(tm === 'read') {
               console.log("--------------------------------------------> ", tm);
               // console.log('Type: Read -> ', tm);
