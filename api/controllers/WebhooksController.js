@@ -138,7 +138,7 @@ var saveResponseMessageOut = async (opt, type) => {
     var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
     // Respuesta del cliente.
-    console.log(opt.tokenPage);
+    console.log('tok: ', opt.tokenPage);
     client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
       text: `${opt.text}`,
     });
