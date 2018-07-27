@@ -716,10 +716,11 @@ module.exports = {
           {
             var getDataPagedbs = await getDataPage({idPage: ss.idPage});
 
+            console.log('--> Probando', getDataPagedbs.tokenPage);
             console.log(getDataPagedbs);
           }
 
-          
+
           
           // setInterval(() => {
             // // Identificacion de los perfiles clientes
