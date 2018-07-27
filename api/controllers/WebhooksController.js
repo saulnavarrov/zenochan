@@ -136,21 +136,12 @@ var saveResponseMessageOut = async (opt, type) => {
     }
   
 
-    console.log('tok: ', opt.tokenPage);
-    // if(opt.tokenPage !== 'undefined'){
-      var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
+    var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
-      // Respuesta del cliente.
-      client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
-        text: `${opt.text}`,
-      });
-    // }else{
-      // sails.log.error({
-        // success: false,
-        // message: 'No se puede responder mensaje por falta de token de la pagina que se le dara respuesta',
-        // error: true,
-      // })
-    // }
+    // Respuesta del cliente.
+    client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
+      text: `${opt.text}`,
+    });
   }
 }
 
@@ -763,15 +754,15 @@ module.exports = {
               }
 
               //   // Flujo para los Deliverys
-              //   else if (tm === 'delivery') {
-              //     console.log("--------------------------------------------> ", tm);
-              //     // console.log('Type: Dekuvery -> ', tm);
+                else if (tm === 'delivery') {
+                  console.log("--------------------------------------------> ", tm);
+                  // console.log('Type: Dekuvery -> ', tm);
               //     // console.log(ss);
 
               //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //     //   y que ya puede enviar los demas mensajes
               //     // return res.ok('EVENT_RECEIVED');
-              //   }
+                }
 
               //   // No hay nada
               else {
