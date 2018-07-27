@@ -575,8 +575,8 @@ var getDataPage = async (opt) => {
 
   // getDataPageDb = dataPageConnectGlobal;
 
-  // console.log(getDataPageDb);
-  console.log(opt);
+  console.log(getDataPageDb);
+  // console.log(opt);
 
 }
 
