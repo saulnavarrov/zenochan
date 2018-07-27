@@ -708,6 +708,7 @@ module.exports = {
           // Identificación de la Pagina para traer los datos de la pagina la que va a responder
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
           var dataPageConnectGlobal = await getDataPage({idPage: ss.idPage});
+          console.log(dataPageConnectGlobal.tokenPage);
           
           // Verifiación de que la Pagina este Activa
           if(dataPageConnectGlobal.active){
