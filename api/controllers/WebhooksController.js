@@ -724,79 +724,71 @@ module.exports = {
           var dataPageGet = await getDataPage({idPage: ss.idPage});
               // ss.tokenPage = dataPageGet.tokenPage;
 
-          // console.log('=====>>>')
-          // console.log(dataPageGet)
-          // console.log('=====>>>')
+          console.log('=====>>>')
+          console.log(JSON.stringify(b));
+          console.log('=====>>>')
           // console.log(ss)
           
           // Verifiación de que la Pagina este Activa
           if(dataPageGet.active){
+
+            // Control del flujo de datos Read, Delivery, messagings
+            // ************************************************************************
             
-            // Identificacion de los perfiles clientes
-            if (seq > 0){
+            // Flujo para los Deliverys
+            if ( tm === 'delivery' ) {
+              console.log("--------------------------------------------> ", tm);
+              // console.log('Type: Dekuvery -> ', tm);
+              // console.log(ss);
+
+              // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //   y que ya puede enviar los demas mensajes
+              return res.ok('EVEN T_RECEIVED');
+            }
+            
+            // Flujo para los Messages
+            else if ( tm === 'message' ) {
+              console.log("--------------------------------------------> ", tm);
+              console.log('Type: message -> ', tm);
+              
+              // Identificacion de los perfiles clientes
               IdentificacionDePerfiles(ss.idClient, dataPageGet.tokenPage);
+              
+              // Ejecutando función
+              SaveMessageIn(ss, dataPageGet.tokenPage);
+              
+              
+              //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //     //   y que ya puede enviar los demas mensajes
+              return res.ok('EVENT_RECEIVED');
+            }
+            
+            // Flujo para Los Reads
+            else if( tm === 'read' ) {
+              console.log("--------------------------------------------> ", tm);
+            //     // console.log('Type: Read -> ', tm);
+            //     // console.log(ss);
+
+            //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+            //     //   y que ya puede enviar los demas mensajes
+              return res.ok('EVENT_RECEIVED');
             }
 
-              // Control del flujo de datos Read, Delivery, messagings
-              // Flujo para Los Reads
+            // No hay nada
+            else {
+              console.log("--------------------------------------------> ERROR:", tm);
+              console.error('Que Paso Problema no resulto mirar a ver que paso?');
 
-              if(tm === 'read') {
-                console.log("--------------------------------------------> ", tm);
-              //     // console.log('Type: Read -> ', tm);
-              //     // console.log(ss);
-
-              //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-              //     //   y que ya puede enviar los demas mensajes
-                return res.ok('EVENT_RECEIVED');
-              }
-
-              // Flujo para los Messages
-              else if (tm === 'message') {
-                console.log("--------------------------------------------> ", tm);
-                console.log('Type: message -> ', tm);
-
-                // Ejecutando función
-                SaveMessageIn(ss, dataPageGet.tokenPage);
-
-              //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-              //     //   y que ya puede enviar los demas mensajes
-                  return res.ok('EVENT_RECEIVED');
-              }
-
-              //   // Flujo para los Deliverys
-                else if (tm === 'delivery') {
-                  console.log("--------------------------------------------> ", tm);
-                  // console.log('Type: Dekuvery -> ', tm);
-                  // console.log(ss);
-
-                  // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-                  //   y que ya puede enviar los demas mensajes
-                  return res.ok('EVENT_RECEIVED');
-                }
-
-              //   // No hay nada
-              else {
-                console.log("--------------------------------------------> ERROR:", tm);
-                console.error('Que Paso');
-
-                // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-                //   y que ya puede enviar los demas mensajes
-                return res.ok('EVENT_RECEIVED');
-              }
+              // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //   y que ya puede enviar los demas mensajes
+              return res.ok('EVENT_RECEIVED');
+            }
 
           }else{
-            return res.ok('EVENT_RECEIVED');
+            // Como la pagina no esta activa esta respondera
+            // que no hay suscripcion a tal o no tiene el token
+            return res.status(404);
           }        
-
-
-          //   // Salida 
-          //   // console.log('-------------------------------------------->');
-          //   // console.log(ss); 
-          //   // console.log(JSON.stringify(body));
-
-          //   // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-          //   //   y que ya puede enviar los demas mensajes
-          // }, 333);
         }
       }
       // Returns a '404 Not Found' if event is not from a page subscription
