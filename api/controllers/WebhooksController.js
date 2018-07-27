@@ -443,6 +443,10 @@ var FilterDataMessageIn = async (opt, tok) => {
 var IdentificacionDePerfiles = async (idFb, tok) => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
 
+  console.log('progando New Pages');
+  console.log(idFb);
+  console.log(tok)
+
   // Busqueda del usuario cliente en la base de datos
   var clientsDataId = await DataClients.find({
       "idfbs": String(idFb)
