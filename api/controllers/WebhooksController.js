@@ -217,7 +217,7 @@ var saveResponseMessageOut = async (opt, type) => {
  ****************************************************************************/
 var SaveMessageIn = async (opt) => {
   sails.log.debug('= =======================================> Funcion SaveMensaje In');
-
+  console.log(opt.tokenPage);
   // Estructura del mensaje
   var saveData = opt;
 
@@ -749,7 +749,6 @@ module.exports = {
               else if (tm === 'message') {
                 console.log("--------------------------------------------> ", tm);
                 console.log('Type: message -> ', tm);
-                console.log(ss.tokenPage)
 
                 // Ejecutando función
                 SaveMessageIn(ss);
