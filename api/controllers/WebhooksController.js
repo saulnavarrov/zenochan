@@ -220,7 +220,6 @@ var SaveMessageIn = async (opt, tok) => {
 
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
-  console.log(tok);
   FilterDataMessageIn(opt, tok);
 }
 
@@ -238,7 +237,6 @@ var SaveMessageIn = async (opt, tok) => {
  */
 var FilterDataMessageIn = async (opt, tok) => {
   sails.log.debug('= =======================================> Funcion Filter Data Message');
-  console.log(tok);
   var type = opt.typ || null;
   // console.log(opt);
 
@@ -757,11 +755,11 @@ module.exports = {
                 else if (tm === 'delivery') {
                   console.log("--------------------------------------------> ", tm);
                   // console.log('Type: Dekuvery -> ', tm);
-              //     // console.log(ss);
+                  // console.log(ss);
 
-              //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-              //     //   y que ya puede enviar los demas mensajes
-              //     // return res.ok('EVENT_RECEIVED');
+                  // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+                  //   y que ya puede enviar los demas mensajes
+                  // return res.ok('EVENT_RECEIVED');
                 }
 
               //   // No hay nada
