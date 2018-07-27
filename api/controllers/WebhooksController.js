@@ -140,8 +140,8 @@ var saveResponseMessageOut = async (opt, type) => {
     var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
     // Respuesta del cliente.
-    console.log(dataPageConnectGlobal.tokenPage);
-    client.connect(dataPageConnectGlobal.tokenPage).sendMessage(String(opt.idClient), {
+    console.log(opt.tokenPage);
+    client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
       text: `${opt.text}`,
     });
   }
@@ -430,7 +430,7 @@ var FilterDataMessageIn = async (opt) => {
  * @param {string} idfb :: Codigo para identificar el Cliente de facebook
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-var IdentificacionDePerfiles = async idFb => {
+var IdentificacionDePerfiles = async (idFb, tok) => {
   sails.log.debug('Function: IdentificacionDePerfiles()');
 
   // Busqueda del usuario cliente en la base de datos
@@ -451,12 +451,12 @@ var IdentificacionDePerfiles = async idFb => {
       profileDataClients = clientsDataId[0];
       
       // Actualizaciones de datos
-      GetDataUserProfileFb(idFb, profileDataClients.dataUpdate);
+      GetDataUserProfileFb(idFb, tok, profileDataClients.dataUpdate);
     }
     else{
       // Ejecutara la funcion adecuada para la busqueda de los datos de los usuarios.
       // Accion de crear nuevo usuarios
-      GetDataUserProfileFb(idFb, 'a');
+      GetDataUserProfileFb(idFb, tok, 'a');
     }
 }
 
@@ -471,10 +471,10 @@ var IdentificacionDePerfiles = async idFb => {
  *    y entregarla posteriormente a otro usuario
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-var GetDataUserProfileFb = async (idfb, act) => {
+var GetDataUserProfileFb = async (idfb, tok, act) => {
   
   // Traera del facebook los datos del usuario
-  client.connect(dataPageConnectGlobal.tokenPage).getUserProfile(String(idfb))
+  client.connect(tok).getUserProfile(String(idfb))
     .then(user => {
       if (user) {
         // Llamando la funcion y pasando la correspondiente variable.
@@ -708,15 +708,15 @@ module.exports = {
           
           // Identificación de la Pagina para traer los datos de la pagina la que va a responder
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
-          var dataPageConnectGlobal = await getDataPage({idPage: ss.idPage});
-          
+          var dataPageGet = await getDataPage({idPage: ss.idPage});
+              ss.tokenPage = dataPageGet.tokenPage;
           
           // Verifiación de que la Pagina este Activa
           if(dataPageConnectGlobal.active){
             
             // Identificacion de los perfiles clientes
             if (seq > 0){
-              IdentificacionDePerfiles(ss.idClient);
+              IdentificacionDePerfiles(ss.idClient, ss.tokenPage);
             }
 
               // Control del flujo de datos Read, Delivery, messagings
