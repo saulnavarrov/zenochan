@@ -710,6 +710,8 @@ module.exports = {
           //    el bot de manera automatica identificandola y respondiendo de manera correcta
           var dataPageGet = await getDataPage({idPage: ss.idPage});
               ss.tokenPage = dataPageGet.tokenPage;
+
+              console.log(ss)
           
           // Verifiación de que la Pagina este Activa
           if(dataPageConnectGlobal.active){
@@ -742,7 +744,7 @@ module.exports = {
 
               //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //     //   y que ya puede enviar los demas mensajes
-                  // return res.ok('EVENT_RECEIVED');
+                  return res.ok('EVENT_RECEIVED');
               }
 
               //   // Flujo para los Deliverys
