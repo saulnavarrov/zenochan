@@ -19,7 +19,7 @@ const client = MessengerClient;
 var profileDataClients = {};
 
 // Guarda el token de manera global para que pueda ser usado mas luego.
-var tokenConnectPage = token_apiSaul; // '';
+var dataPageConnectGlobal = token_apiSaul; // '';
 
 
 /************************************************************************************************
@@ -140,7 +140,7 @@ var saveResponseMessageOut = async (opt, type) => {
     var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
     // Respuesta del cliente.
-    client.connect(tokenConnectPage).sendMessage(String(opt.idClient), {
+    client.connect(dataPageConnectGlobal).sendMessage(String(opt.idClient), {
       text: `${opt.text}`,
     });
   }
@@ -473,7 +473,7 @@ var IdentificacionDePerfiles = async idFb => {
 var GetDataUserProfileFb = async (idfb, act) => {
   
   // Traera del facebook los datos del usuario
-  client.connect(tokenConnectPage).getUserProfile(String(idfb))
+  client.connect(dataPageConnectGlobal).getUserProfile(String(idfb))
     .then(user => {
       if (user) {
         // Llamando la funcion y pasando la correspondiente variable.
@@ -573,7 +573,10 @@ var getDataPage = async (opt) => {
     idPage: idPage
   });
 
-  console.log(getDataPageDb);
+  // getDataPageDb = dataPageConnectGlobal;
+
+  // console.log(getDataPageDb);
+  console.log(opt);
 
 }
 
@@ -717,7 +720,7 @@ module.exports = {
             getDataPage({idPage: ss.idPage});
           }
           
-
+          pageto
           // Control del flujo de datos Read, Delivery, messagings
           // Flujo para Los Reads
           if(tm === 'read') {
