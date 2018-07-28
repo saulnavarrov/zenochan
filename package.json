@@ -16,6 +16,7 @@
     "grunt": "1.0.1",
     "messaging-api-messenger": "^0.7.4",
     "request": "^2.87.0",
+    "request-promise": "^4.2.2",
     "sails": "^1.0.2",
     "sails-hook-grunt": "^3.0.2",
     "sails-hook-orm": "^2.0.0-16",

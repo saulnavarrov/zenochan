@@ -150,10 +150,10 @@ var saveResponseMessageOut = async (opt, type) => {
     // Data de lo que se van a Guardar
     var saveData = {
 
-ERROR:
-      trabajando bajo las imagenes
-para evitar el uso del paquete de npm
-messagin messenger
+// ERROR:
+//       trabajando bajo las imagenes
+// para evitar el uso del paquete de npm
+// messagin messenger
 
 
     }
@@ -720,9 +720,9 @@ module.exports = {
       // Si tiene datos el Entry
       if(en){
 
-        // console.log('=====>>> Body Start')
-        // console.log(JSON.stringify(b));
-        // console.log('=====>>> Body End')
+        console.log('=====>>> Body Start')
+        console.log(JSON.stringify(b));
+        console.log('=====>>> Body End')
 
         // Identificación de objetivo que envia el mensaje
         if (ob === 'page') {
