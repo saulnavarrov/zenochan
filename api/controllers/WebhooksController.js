@@ -109,7 +109,7 @@ var getConfirmtWebHooks = (opt, cb) => {
  * @author :: SaulNavarrov <sinavarrov@gmail.com>
  */
 var saveResponseMessageOut = async (opt, type) => {
-  sails.log.debug('= =======================================> Funcion save response message out');
+  sails.log.debug('= =========== => Funcion save response message out');
   
   // Guardar los de tipo Texto
   if(type === 'text'){
@@ -212,16 +212,16 @@ var saveResponseMessageOut = async (opt, type) => {
  * 
  ****************************************************************************/
 var SaveMessageIn = async (opt, tok) => {
-  sails.log.debug('= =======================================> Funcion SaveMensaje In');
+  sails.log.debug('= =========== => Funcion SaveMensaje In');
   
   // Estructura del mensaje
   var saveData = opt;
 
   // Guarda el mensaje
   var saveMessengerMessages = await MessengerMessages.create(saveData).fetch();
-  // console.log('= =======================================> Start Save Ms In');
+  // console.log('= =============================> Start Save Ms In');
   // console.log(JSON.stringify(saveMessengerMessages));
-  // console.log('= =======================================> Stop');
+  // console.log('= =============================> Stop');
 
   // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
   // ya sea del ultimo en revision.
@@ -241,7 +241,7 @@ var SaveMessageIn = async (opt, tok) => {
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
 var FilterDataMessageIn = async (opt, tok) => {
-  sails.log.debug('= =======================================> Funcion Filter Data Message');
+  sails.log.debug('= =========== => Funcion Filter Data Message');
   var type = opt.typ || null;
   // console.log(opt);
 
@@ -344,11 +344,11 @@ var FilterDataMessageIn = async (opt, tok) => {
 
 //   // resolver el problema del doble submit debido
 
-//   // console.log('= =======================================> Start save Out');
+//   // console.log('= =============================> Start save Out');
 //   // console.log(saveData)
 //   // console.log(' = = = = = > Body')
 //   // console.log(JSON.stringify(body));
-//   // console.log('= =======================================> Stop');
+//   // console.log('= =============================> Stop');
 //   // return cb(false, false);
 // }
 
@@ -440,7 +440,7 @@ var FilterDataMessageIn = async (opt, tok) => {
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
 var IdentificacionDePerfiles = async (idFb, tok) => {
-  sails.log.debug('Function: IdentificacionDePerfiles()');
+  sails.log.debug('= =========== => Funcion  IdentificacionDePerfiles()');
 
   // Busqueda del usuario cliente en la base de datos
   var clientsDataId = await DataClients.find({
@@ -481,6 +481,7 @@ var IdentificacionDePerfiles = async (idFb, tok) => {
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
 var GetDataUserProfileFb = async (idfb, tok, act) => {
+  sails.log.debug('= =========== => Funcion Get Data Use Profile FB()');
   
   // Traera del facebook los datos del usuario
   client.connect(tok).getUserProfile(String(idfb))
@@ -505,6 +506,7 @@ var GetDataUserProfileFb = async (idfb, tok, act) => {
  * @author :: SaulNavarrov <Sinavarrov@gmail.com> 
  */
 var CreateUpdateUsersClints = async (user, act) => {
+  sails.log.debug('= =========== => Funcion Crete Update Users Clients');
 
   // Creación de un usuario nuevo.
   if(act === 'a'){
@@ -577,6 +579,8 @@ var CreateUpdateUsersClints = async (user, act) => {
  * @author :: SaulNavarrov < Sinavarrov @gmail.com >
  */
 var getDataPage = async (opt) => {
+  sails.log.debug('= =========== => Funcion Get Data Page()');
+
   var idPage = opt.idPage;
 
   var getDataPageDb = await DataPages.find({
@@ -586,6 +590,30 @@ var getDataPage = async (opt) => {
   return getDataPageDb[0];
 }
 
+
+
+/**
+ * updateToReadMessages
+ * @description :: Se utilizara para la actualización de los mensajes en cuanto se lea un mensaje
+ *    sea enviado desde el ZenoChan Bot o desde el servidor de Facebook, este encabezara y cambiara
+ *    el contenido de la variable de 0 a 1, como lectura de los mensajes ya existentes.
+ * @param {array} opt :: idClient and idPage para actualizar la lectura de datos por parte del boot
+ *      y evitar una congestion de datos
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+ */
+var updateToReadMessages = async (opt) => {
+  sails.log.debug('= =========== => Funcion Update To Read Messages');
+
+  var actualizando = await MessengerMessages.update({
+      read: Number(0),
+      idClient: String(opt.idClient),
+      idPage: String(opt.idPage)
+    })
+    .set({
+      read: Number(1)
+    })
+    .fetch();
+}
 
 
 
@@ -762,11 +790,16 @@ module.exports = {
             // Flujo para Los Reads
             else if( tm === 'read' ) {
               console.log("--------------------------------------------> ", tm);
-            //     // console.log('Type: Read -> ', tm);
-            //     // console.log(ss);
 
-            //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
-            //     //   y que ya puede enviar los demas mensajes
+              // Llama la funcion para actualizar los mensajes que aun esten en valor de 0 o
+              //    o que aun no se han marcado como lecturas
+              await updateToReadMessages({
+                idClient: ss.idClient,
+                idPage: ss.idPage
+              });
+
+              // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //   y que ya puede enviar los demas mensajes
               return res.ok('EVENT_RECEIVED');
             }
 
@@ -794,3 +827,22 @@ module.exports = {
     },
 };
 
+
+
+
+// setTimeout(revisionPruebas, 5000);
+
+// async function revisionPruebas(){
+  
+//   var actualizando = await MessengerMessages.update({
+//       read: Number(0),
+//       idClient: String(''),
+//       idPage: String('')
+//     })
+//     .set({
+//       read: Number(1)
+//     })
+//     .fetch();
+//   console.log('pobando el modo de read')
+//   console.log(actualizando.length);
+// }
