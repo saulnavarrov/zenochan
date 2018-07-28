@@ -146,6 +146,22 @@ var saveResponseMessageOut = async (opt, type) => {
       });
     // }
   }
+  else if(type === 'stiker'){
+    // Data de lo que se van a Guardar
+    var saveData = {
+
+ERROR:
+      trabajando bajo las imagenes
+para evitar el uso del paquete de npm
+messagin messenger
+
+
+    }
+
+    // var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
+
+    // client.connect(opt.tokenPage).sendme 
+  }
 }
 
 // resolviendo problema de token por cada pagina que agrege a Zeno boot
@@ -262,7 +278,7 @@ var FilterDataMessageIn = async (opt, tok) => {
   if(type === 'text'){
     // Funcion para buscar los datos en la base si existen o no.
     // Respuestas Rapida de resolución
-    var texto = `Resp: ${opt.txt}`;
+    var texto = `Bot: ${opt.txt}`;
 
 
     // Funcion de respuestas
@@ -284,7 +300,8 @@ var FilterDataMessageIn = async (opt, tok) => {
     // Respuesta para el cliente que manda el mensaje
     if(opt.seq > 0){
       setTimeout(() => {
-        var texto = `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`;
+        var texto = `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}
+        \nLo siento! aun no soportamos este tipo de mensajes!`;
 
         saveResponseMessageOut({
           idClient: opt.idClient,
@@ -292,6 +309,15 @@ var FilterDataMessageIn = async (opt, tok) => {
           tokenPage: tok,
           text: texto
         },'text');
+
+        saveResponseMessageOut({
+          idClient: opt.idClient,
+          idPage: opt.idPage,
+          tokenPage: tok,
+          text: '',
+          sti: 369239383222810,
+          uri: 'https://scontent.xx.fbcdn.net/v/t39.1997-6/p100x100/851582_369239386556143_1497813874_n.png?_nc_cat=0&_nc_ad=z-m&_nc_cid=0&oh=f662a5c4a3732dfa2ea2a6e8f7cc056f&oe=5C13604D'
+        },'stiker')
         // client.sendMessage(String(opt.idClient), {
         //   text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
         // });
@@ -453,7 +479,7 @@ var FilterDataMessageIn = async (opt, tok) => {
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
 var IdentificacionDePerfiles = async (idFb, tok) => {
-  sails.log.debug('= =========== => Funcion  IdentificacionDePerfiles()');
+  sails.log.debug('= =========== => Funcion IdentificacionDePerfiles');
 
   // Busqueda del usuario cliente en la base de datos
   var clientsDataId = await DataClients.find({
@@ -494,7 +520,7 @@ var IdentificacionDePerfiles = async (idFb, tok) => {
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
 var GetDataUserProfileFb = async (idfb, tok, act) => {
-  sails.log.debug('= =========== => Funcion Get Data Use Profile FB()');
+  sails.log.debug('= =========== => Funcion Get Data Use Profile FB');
   
   // Traera del facebook los datos del usuario
   client.connect(tok).getUserProfile(String(idfb))
@@ -592,7 +618,7 @@ var CreateUpdateUsersClints = async (user, act) => {
  * @author :: SaulNavarrov < Sinavarrov @gmail.com >
  */
 var getDataPage = async (opt) => {
-  sails.log.debug('= =========== => Funcion Get Data Page()');
+  sails.log.debug('= =========== => Funcion Get Data Page');
 
   var idPage = opt.idPage;
 
