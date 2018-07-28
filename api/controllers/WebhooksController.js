@@ -681,15 +681,15 @@ module.exports = {
       // Si tiene datos el Entry
       if(en){
 
-        console.log('=====>>> Body Start')
-        console.log(JSON.stringify(b));
-        console.log('=====>>> Body End')
+        // console.log('=====>>> Body Start')
+        // console.log(JSON.stringify(b));
+        // console.log('=====>>> Body End')
 
         // Identificación de objetivo que envia el mensaje
         if (ob === 'page') {
           // Control de datos
           // * * * **********************************************************************
-          // en.messaging[0];
+          // * * * en.messaging[0];
           var em = typeof (en.standby) === 'object' ? en.standby[0] : en.messaging[0];
 
           // Tipo de mensaje (Read, Messageclient, Messaging, Delivery)
