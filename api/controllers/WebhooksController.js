@@ -225,17 +225,20 @@ var SaveMessageIn = async (opt, tok) => {
   });
 
   // 
-  console.log(findOrCreate.length);
+  // console.log();
+  if (findOrCreate.length === 0){
 
-  // Guarda el mensaje
-  var saveMessengerMessages = await MessengerMessages.create(saveData).fetch();
-  // console.log('= =============================> Start Save Ms In');
-  // console.log(JSON.stringify(saveMessengerMessages));
-  // console.log('= =============================> Stop');
+    // Guarda el mensaje
+    var saveMessengerMessages = await MessengerMessages.create(saveData).fetch();
+    // console.log('= =============================> Start Save Ms In');
+    // console.log(JSON.stringify(saveMessengerMessages));
+    // console.log('= =============================> Stop');
+  
+    // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
+    // ya sea del ultimo en revision.
+    FilterDataMessageIn(opt, tok);
+  }
 
-  // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
-  // ya sea del ultimo en revision.
-  FilterDataMessageIn(opt, tok);
 }
 
 // Error no esta llegando la variable del token para enviar los datos de regresos
