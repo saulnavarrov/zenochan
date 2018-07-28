@@ -732,7 +732,7 @@ module.exports = {
           var em = typeof (en.standby) === 'object' ? en.standby[0] : en.messaging[0];
 
           // Tipo de mensaje (Read, Messageclient, Messaging, Delivery)
-          var tm = typeof (em.message) === 'object' ? 'message' : typeof (em.read) === 'object' ? 'read' : typeof (em.delivery) === 'object' ? 'delivery' : 'NN';
+          var tm = typeof (em.message) === 'object' ? 'message' : typeof (em.read) === 'object' ? 'read' : typeof (em.delivery) === 'object' ? 'delivery' : typeof (em.postback) === 'object' ? 'postback' :'NN';
 
           // Sabe si contiene texto o no contiene texto
           var tym = tm === 'message' ? typeof (em[tm].text) === 'string' ? true : false : false;
@@ -836,6 +836,15 @@ module.exports = {
                 idClient: ss.idClient,
                 idPage: ss.idPage
               });
+
+              // Devuelve al servidor de Facebook que el mensaje ha sido recivido
+              //   y que ya puede enviar los demas mensajes
+              return res.ok('EVENT_RECEIVED');
+            }
+
+            // Flujo para los PostBack
+            else if( tm === 'postback'){
+              console.log("--------------------------------------------> ", tm);
 
               // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //   y que ya puede enviar los demas mensajes
