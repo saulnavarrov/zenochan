@@ -217,6 +217,16 @@ var SaveMessageIn = async (opt, tok) => {
   // Estructura del mensaje
   var saveData = opt;
 
+  var findOrCreate = await MessengerMessages.find({
+    idClient: String(saveData.idClient),
+    idPage: String(saveData.idPage),
+    seq: Number(saveData.seq),
+    times: Number(saveData.times)
+  });
+
+  // 
+  console.log(findOrCreate.length);
+
   // Guarda el mensaje
   var saveMessengerMessages = await MessengerMessages.create(saveData).fetch();
   // console.log('= =============================> Start Save Ms In');
