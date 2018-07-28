@@ -874,23 +874,3 @@ module.exports = {
       }
     },
 };
-
-
-
-
-// setTimeout(revisionPruebas, 5000);
-
-// async function revisionPruebas(){
-  
-//   var actualizando = await MessengerMessages.update({
-//       read: Number(0),
-//       idClient: String(''),
-//       idPage: String('')
-//     })
-//     .set({
-//       read: Number(1)
-//     })
-//     .fetch();
-//   console.log('pobando el modo de read')
-//   console.log(actualizando.length);
-// }
