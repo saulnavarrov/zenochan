@@ -20,31 +20,135 @@ var tokenSaulPruebas = {
 async function on () {
   
 
-  /**
-   * Ejemplo de la busqueda de datos
-   */
-  // var buscarPerfil = await DataProfileFb({
-  //   id: tokenSaulPruebas.client,
-  //   tokenPage: tokenSaulPruebas.token
-  // })
+  var tok = tokenSaulPruebas.token;
 
-  // console.log(buscarPerfil)
+  // var p = {
+  //   "persistent_menu": [{
+  //       "locale": "default",
+  //       "composer_input_disabled": true,
+  //       "call_to_actions": [{
+  //           "title": "My Account",
+  //           "type": "nested",
+  //           "call_to_actions": [{
+  //               "title": "Pay Bill",
+  //               "type": "postback",
+  //               "payload": "PAYBILL_PAYLOAD"
+  //             },
+  //             {
+  //               "title": "History",
+  //               "type": "postback",
+  //               "payload": "HISTORY_PAYLOAD"
+  //             },
+  //             {
+  //               "title": "Contact Info",
+  //               "type": "postback",
+  //               "payload": "CONTACT_INFO_PAYLOAD"
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           "type": "web_url",
+  //           "title": "Latest News",
+  //           "url": "http://www.messenger.com/",
+  //           "webview_height_ratio": "full"
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "locale": "zh_CN",
+  //       "composer_input_disabled": false,
+  //       "call_to_actions": [{
+  //         "title": "Pay Bill",
+  //         "type": "postback",
+  //         "payload": "PAYBILL_PAYLOAD"
+  //       }]
+  //     }
+  //   ]
+  // }
 
+  // var p = {
+  //   "persistent_menu": [{
+  //     "locale": "default",
+  //     "composer_input_disabled": true,
+  //     "call_to_actions": [
+  //       {
+  //         title: 'Pruebas 01',
+  //         type: 'postback',
+  //         payload: 'Prueba01PayBill'
+  //       },
+  //       {
+  //         "title": "My Account",
+  //         "type": "nested",
+  //         "call_to_actions": [{
+  //             "title": "Pay Bill",
+  //             "type": "postback",
+  //             "payload": "PAYBILL_PAYLOAD"
+  //           },
+  //           {
+  //             "type": "web_url",
+  //             "title": "Latest News",
+  //             "url": "https://www.messenger.com/",
+  //             "webview_height_ratio": "full"
+  //           },
+  //           {
+  //             title: 'Info bot',
+  //             type: 'nested',
+  //             call_to_actions: [{
+  //                 type: "web_url",
+  //                 title: 'Url ZenoChanBot',
+  //                 url: 'https://zenochandev.herokuapp.com/',
+  //                 webview_height_ratio: "full"
+  //               },
+  //               {
+  //                 title: 'Versión',
+  //                 type: 'postback',
+  //                 payload: 'VersionBot'
+  //               }
+  //             ]
+  //           }
+  //         ]            
+  //       },
+        
+  //     ]
+  //   }]
+  // }
+  // var aa = await rps({
+  //     method: 'POST',
+  //     uri: `https://graph.facebook.com/v2.6/me/messenger_profile?access_token=${tok}`,
+  //     form: p,
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //   })
+  //   .then(rBody => {
+  //       console.log(rBody)
+  //     })
+  //     .catch(rErr => {
+  //       var er = JSON.parse(rErr.response.body);
+  //       console.log(er)
+  //     });
+  // var profileSet = await PropertiesApiBotConfig('set', {
+  //         form: p
+  //        }, tok)
+  //        console.log(profileSet);
 
+  // var form = {
+  //     "get_started": {'payload': "User_Get_Starter-ZenoChan"},
+  //     "greeting":[{ "locale": "default", "text": "Hola! {{user_first_name}}.\nMi nombre es Zeno Bot, Asistente de la Pagina de Saul Navarrv\n¿Dime en que puedo ayudarte?" }], // Para un solo idioma
+  //     // "greeting":[{"locale":"es_LA","text":"Hola! {{user_first_name}}. ¿Dime en que puedo ayudarte?"},{"locale":"default","text":"Hello! {{user_first_name}}. ¿En que puedo ayudarte?"}, {"locale":"en_US", "text":"Hello! {{user_first_name}}. How can I help you?"}], // Usado para multi idiomas
+  //  }
+  //  var profileSet = await PropertiesApiBotConfig('set', {
+  //   form: form
+  //  }, tok)
+  //  console.log(profileSet);
 
-  /**
-   * Pruebas basicas
-   */
-  /**
-   * Consultar y configurar propiedades de la api profile
-   */
-  // var tok = tokenSaulPruebas.token;
-  //   var configDel = await PropertiesApiBotConfig('del', {
-  //     fields: ["GET_STARTED"]
-  //   },tok);
-  //   console.log(configDel);
-  
+  // var configDel = await PropertiesApiBotConfig('del', {
+  //    fields: ["GET_STARTED", "GREETING", "PERSISTENT_MENU"]
+  //  },tok);
+  //  console.log(configDel);
+
 }
+
 
 on();
 
