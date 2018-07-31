@@ -17,12 +17,12 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': ['LogsNavigations'],
+  '*': true,
 
   WebhooksController: {
     // '*': false,
-    'getWebHooks': true,//['LogsNavigations'],
-    'postWebHooksIn': true,//['LogsNavigations'],
+    'getWebHooks':['LogsNavigations'],
+    'postWebHooksIn':['LogsNavigations'],
   }
 
 };
