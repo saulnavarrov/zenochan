@@ -36,6 +36,7 @@ async function registerNavegations (opt, cb) {
 
     // Save Registro de navegación
     sails.log.debug('= =======> Polices')
+    console.log(req.headers["x-forwarded-for"]);
     console.log(datosReg);
     // UserNavegations.create(datosReg).exec((e, rv) => {
     //   if (e) return cb(true, e);
