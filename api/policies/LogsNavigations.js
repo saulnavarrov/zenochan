@@ -12,7 +12,7 @@ async function registerNavegations (opt, cb) {
       res = opt.res,
       user = req.session.user,
       datosReg = {
-        'xforwarderfor': req.headers["x-forwarded-fdor"] || '',
+        'xforwarderfor': req.headers["x-forwarded-for"] || '',
         'xrequestid': req.headers['x-request-id'] || '',
         'xforwardedproto': req.headers['x-forwarded-proto'] || '',
         'xrequeststart': req.headers['x-request-start'] || '',
