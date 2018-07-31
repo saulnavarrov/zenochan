@@ -4,6 +4,12 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
+/* ************************* CALL TO CONTROLLERS *********************************** */
+ 
+const apiFbMessenger = require('./ApiFbMessengerController');
+
+/* **************************** END CONTROLLERS ************************************* */
+
 // conector
 const { MessengerClient } = require('messaging-api-messenger');
 // variables
@@ -114,7 +120,7 @@ var saveResponseMessageOut = async (opt, type) => {
   // Guardar los de tipo Texto
   if(type === 'text'){
 
-    await ApiFbMessengerController.text('hola','como estas?',opt.token);
+    await ApiFbMessenger.text('hola','como estas?',opt.token);
 
     // Data de lo que se va a guardar
     // var saveData = {
