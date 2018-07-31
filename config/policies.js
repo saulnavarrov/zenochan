@@ -19,6 +19,11 @@ module.exports.policies = {
 
   '*': true,
 
+
+  ViewsController: {
+    '*': ['LogsNavigations'],
+  },
+
   WebhooksController: {
     // '*': false,
     'getWebHooks':['LogsNavigations'],
