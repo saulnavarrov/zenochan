@@ -230,12 +230,12 @@ var FilterDataMessageIn = async (opt, tok) => {
 
 
     // // Funcion de respuestas
-    // saveResponseMessageOut({
-    //   idClient: opt.idClient,
-    //   idPage: opt.idPage,
-    //   tokenPage: tok,
-    //   text: texto,
-    // }, 'text');
+    saveResponseMessageOut({
+      idClient: opt.idClient,
+      idPage: opt.idPage,
+      tokenPage: tok,
+      text: texto,
+    }, 'text');
     
     // SaveMessageOut(opt, body)
 
