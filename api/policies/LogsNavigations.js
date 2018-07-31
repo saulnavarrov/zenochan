@@ -12,22 +12,24 @@ async function registerNavegations (opt, cb) {
       res = opt.res,
       user = req.session.user,
       datosReg = {
-        'xrealip': req.headers['x-real-ip'],
+        'xrequestid': req.headers['x-request-id'],
         'xforwarderfor': req.headers["x-forwarded-for"],
         'xforwardedproto': req.headers['x-forwarded-proto'],
+        'xrequeststart': req.headers['x-request-start'],
         'host': req.headers['host'],
         'url': req.url,
         'method': req.method,
         'complete': req.complete,
         'opController': req.options['controller'],
         'opAction': req.options.action,
-        'xnginxproxy': req.headers['x-nginx-proxy'],
+        'xnginxproxy': req.headers['x-nginx-proxy'] || '',
         'connection': req.headers['connection'],
         'cache-control': req.headers['cache-control'],
         'upgrade-insecure-requests': req.headers['upgrade-insecure-requests'],
         'user-agent': req.headers['user-agent'],
         'accept-encoding': req.headers['accept-encoding'],
-        'accept-language': req.headers['accept-lenguage'],
+        'accept-language': req.headers['accept-lenguage'] || req.i18n.locale,
+        'locale': req.i18n.locale,
         'cookie': req.headers['cookie'],
         'dnt': req.headers['dnt'],
         'if-none-match': req.headers['if-none-match'],
@@ -36,7 +38,7 @@ async function registerNavegations (opt, cb) {
 
     // Save Registro de navegación
     sails.log.debug('= =======> Polices')
-    console.log(req.headers);
+    console.log(req.i18n.locale);
     console.log(datosReg);
     // UserNavegations.create(datosReg).exec((e, rv) => {
     //   if (e) return cb(true, e);
