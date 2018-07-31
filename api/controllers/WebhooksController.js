@@ -496,7 +496,8 @@ var IdentificacionDePerfiles = async (idFb, idPag, tok) => {
   // Consulta de la pagina con la que se va a asociar
   var dataPag = DataPages.find({idPage: idPag});
 
-  console.log(' ==> Datos de la pagina')
+  console.log(' ==> Datos de la pagina');
+  console.log(datapag);
 
   // Verificación de contenido de usuario en caso de no exista este lo genera automaticamente
   if (clientsDataId.length > 0) {
@@ -532,7 +533,7 @@ var GetDataUserProfileFb = async (idfb, idPag, tok, act) => {
   sails.log.debug('= =========== => Funcion Get Data Use Profile FB');
   
   // Traera del facebook los datos del usuario
-  client.connect(tok).getUserProfile(String(idfb))
+  await client.connect(tok).getUserProfile(String(idfb))
     .then(user => {
       if (user) {
         // Llamando la funcion y pasando la correspondiente variable.
