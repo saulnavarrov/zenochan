@@ -12,10 +12,10 @@ async function registerNavegations (opt, cb) {
       res = opt.res,
       user = req.session.user,
       datosReg = {
-        'xrequestid': req.headers['x-request-id'],
-        'xforwarderfor': req.headers["x-forwarded-for"],
-        'xforwardedproto': req.headers['x-forwarded-proto'],
-        'xrequeststart': req.headers['x-request-start'],
+        'xforwarderfor': req.headers["x-forwarded-fdor"] || '',
+        'xrequestid': req.headers['x-request-id'] || '',
+        'xforwardedproto': req.headers['x-forwarded-proto'] || '',
+        'xrequeststart': req.headers['x-request-start'] || '',
         'host': req.headers['host'],
         'url': req.url,
         'method': req.method,
@@ -24,26 +24,20 @@ async function registerNavegations (opt, cb) {
         'opAction': req.options.action,
         'xnginxproxy': req.headers['x-nginx-proxy'] || '',
         'connection': req.headers['connection'],
-        'cache-control': req.headers['cache-control'],
-        'upgrade-insecure-requests': req.headers['upgrade-insecure-requests'],
-        'user-agent': req.headers['user-agent'],
-        'accept-encoding': req.headers['accept-encoding'],
-        'accept-language': req.headers['accept-lenguage'] || req.i18n.locale,
+        'cacheControl': req.headers['cache-control'],
+        'upgradeInsecureRequests': req.headers['upgrade-insecure-requests'],
+        'userAgent': req.headers['user-agent'],
+        'acceptEncoding': req.headers['accept-encoding'],
+        'acceptLanguage': req.headers['accept-lenguage'] || req.i18n.locale,
         'locale': req.i18n.locale,
         'cookie': req.headers['cookie'],
         'dnt': req.headers['dnt'],
-        'if-none-match': req.headers['if-none-match'],
+        'ifNoneMatch': req.headers['if-none-match'],
         'user': user === undefined ? 'Guest' : user.auth.id,
       };
 
     // Save Registro de navegación
-    sails.log.debug('= =======> Polices')
-    console.log(req.i18n.locale);
-    console.log(datosReg);
-    // UserNavegations.create(datosReg).exec((e, rv) => {
-    //   if (e) return cb(true, e);
-    //   return cb(null, rv);
-    // });
+    await LogsNavigations.create(  datosReg).fetch();
 }
 
 
@@ -57,11 +51,6 @@ module.exports = async (req, res, next) => {
   // Guarda el Registro de navegación.
   await registerNavegations(options);
 
-
-  // Navegations.registerNavegations(options, (err, resNav) => {
-  //   if (err) sails.log.error(err);
-  // });
-
-  // Pase
+  // continue
   return next();
 };
