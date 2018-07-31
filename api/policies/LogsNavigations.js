@@ -12,9 +12,9 @@ async function registerNavegations (opt, cb) {
       res = opt.res,
       user = req.session.user,
       datosReg = {
-        'xrealip': req.headers['xrealip'],
-        'xforwarderfor': req.headers['xforwarderfor'],
-        'xforwardedproto': req.headers['xforwardedproto'],
+        'xrealip': req.headers['x-real-ip'],
+        'xforwarderfor': req.headers["x-forwarded-for"],
+        'xforwardedproto': req.headers['x-forwarded-proto'],
         'host': req.headers['host'],
         'url': req.url,
         'method': req.method,
@@ -36,7 +36,7 @@ async function registerNavegations (opt, cb) {
 
     // Save Registro de navegación
     sails.log.debug('= =======> Polices')
-    console.log(req.headers["x-forwarded-for"]);
+    console.log(req.headers);
     console.log(datosReg);
     // UserNavegations.create(datosReg).exec((e, rv) => {
     //   if (e) return cb(true, e);
