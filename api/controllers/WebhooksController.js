@@ -478,12 +478,12 @@ var FilterDataMessageIn = async (opt, tok) => {
  * @param {string} idfb :: Codigo para identificar el Cliente de facebook
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-var IdentificacionDePerfiles = async (idFb, tok) => {
+var IdentificacionDePerfiles = async (idFb, idPag, tok) => {
   sails.log.debug('= =========== => Funcion IdentificacionDePerfiles');
 
   // Busqueda del usuario cliente en la base de datos
   var clientsDataId = await DataClients.find({
-      "idfbs": String(idFb)
+      "idfbs": String(idFb),
     })
     .catch(err => {
       return {
@@ -493,19 +493,24 @@ var IdentificacionDePerfiles = async (idFb, tok) => {
       }
     });
 
-    // Verificación de contenido de usuario en caso de no exista este lo genera automaticamente
-    if (clientsDataId.length > 0) {
-      // Actualiza los datos del usuario en la variable global
-      profileDataClients = clientsDataId[0];
-      
-      // Actualizaciones de datos
-      GetDataUserProfileFb(idFb, tok, profileDataClients.dataUpdate);
-    }
-    else{
-      // Ejecutara la funcion adecuada para la busqueda de los datos de los usuarios.
-      // Accion de crear nuevo usuarios
-      GetDataUserProfileFb(idFb, tok, 'a');
-    }
+  // Consulta de la pagina con la que se va a asociar
+  var dataPag = DataPages.find({idPage: idPag});
+
+  console.log(' ==> Datos de la pagina')
+
+  // Verificación de contenido de usuario en caso de no exista este lo genera automaticamente
+  if (clientsDataId.length > 0) {
+    // Actualiza los datos del usuario en la variable global
+    profileDataClients = clientsDataId[0];
+    
+    // Actualizaciones de datos
+    GetDataUserProfileFb(idFb, '', tok, profileDataClients.dataUpdate);
+  }
+  else{
+    // Ejecutara la funcion adecuada para la busqueda de los datos de los usuarios.
+    // Accion de crear nuevo usuarios
+    GetDataUserProfileFb(idFb, '', tok, 'a');
+  }
 }
 
 
@@ -518,11 +523,12 @@ var IdentificacionDePerfiles = async (idFb, tok) => {
  * @description :: Buscara los datos en facebook y los traera de vuelta para poder
  *    ser creados o a su vez actualizado de manera automaticamente o manual
  * @param {string} idfb :: ID del usuario que viene de facebook
+ * @param {string} idPag :: Id de la pagina con la que se busca y asocia la pagina
  * @param {string} act :: Accion que va tomar la funcion luego despues de encontrar el usuario 
  *    y entregarla posteriormente a otro usuario
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-var GetDataUserProfileFb = async (idfb, tok, act) => {
+var GetDataUserProfileFb = async (idfb, idPag, tok, act) => {
   sails.log.debug('= =========== => Funcion Get Data Use Profile FB');
   
   // Traera del facebook los datos del usuario
@@ -530,7 +536,7 @@ var GetDataUserProfileFb = async (idfb, tok, act) => {
     .then(user => {
       if (user) {
         // Llamando la funcion y pasando la correspondiente variable.
-        CreateUpdateUsersClints(user, act);
+        CreateUpdateUsersClints(user, idPag, act);
       }
     });
 }
@@ -547,7 +553,7 @@ var GetDataUserProfileFb = async (idfb, tok, act) => {
  *    y entregarla posteriormente a otro usuario
  * @author :: SaulNavarrov <Sinavarrov@gmail.com> 
  */
-var CreateUpdateUsersClints = async (user, act) => {
+var CreateUpdateUsersClints = async (user, idPag, act) => {
   sails.log.debug('= =========== => Funcion Crete Update Users Clients');
 
   // Creación de un usuario nuevo.
@@ -555,6 +561,7 @@ var CreateUpdateUsersClints = async (user, act) => {
     if(user){
       var newClienteData = await DataClients.create({
             idfbs: String(user.id),
+            idfbsPg: String(idPag),
             first_name: user.first_name,
             last_name: user.last_name,
             profile_pic: user.profile_pic,
@@ -819,7 +826,7 @@ module.exports = {
               console.log('Type: message -> ', tm);
               
               // Identificacion de los perfiles clientes
-              IdentificacionDePerfiles(ss.idClient, dataPageGet.tokenPage);
+              IdentificacionDePerfiles(ss.idClient, ss.idPage, dataPageGet.tokenPage);
               
               // Ejecutando función
               SaveMessageIn(ss, dataPageGet.tokenPage);

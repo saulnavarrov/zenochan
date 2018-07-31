@@ -53,9 +53,10 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     // // Id Paginas
-    // pagesids: {
-    //   model: 'clientsid'
-    // }
+    usersClients: {
+      collection: 'dataclients',
+      via: 'idpages'
+    }
 
   },
 

@@ -20,6 +20,13 @@ module.exports = {
       defaultsTo: ''
     },
 
+    // Id Pagina Asociada
+    'idfbsPg':{
+      type: 'string',
+      defaultsTo: '',
+      description: `spoid de la pagina con quien esta asociado, codigo en String`
+    },
+
     // nombre:
     "first_name": {
       type: 'string',
@@ -127,10 +134,10 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     
-    // Id de conexion
-    // 'idsfbs': {
-    //   model: 'clientsid'
-    // },
+    // Id de la pagina asociada
+    'idpages': {
+      model: 'datapages'
+    },
 
   }
 

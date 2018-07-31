@@ -13,16 +13,27 @@ module.exports = {
 };
 
 
-
 // on();
 
+// Funcion de pruebas de la api
 async function on() {
+  var tok = `EAAFPdRVJsDoBAClzsa0N0RqrFCYqpcLdDKFNPn2XtTAoDYLwhZCocKO0ZBchlNpZC3CNr1DZA8cWYWhA4RjsYIpJPWHmhNjFxAq166I6ZCP1XRFob6HcJ6C95JWBjX51F69tRUOZBvtcX07Wa8bshrLSryaP0jT6x3JxHdV5yvU9p56UMOrAvW`;
+  var id = '1703497029718211';
   
-  var text = await sendText('aa', 'zz', 'sd');
+  var text = await sendText(id, 'bienvenidos a la nueva api', tok);
   console.log(text)
   
 }
 
+
+/** /***********************************************************************************
+ * sendText
+ * @description :: Envio de mensajes de Texto desde la pagina
+ * @param {String} spid 
+ * @param {String} text 
+ * @param {String} tok 
+ * @author SaúlNavarrov 
+ */
 async function sendText(spid, text, tok){
   var e = [], // Retorno de Datos
       dat = {}; // Armando del texto de envio
@@ -65,17 +76,16 @@ async function sendText(spid, text, tok){
   }
 
   // Armando Texto para enviar
-  dat.text = `hola SAUL qUE MAS`;
   var type = `messages`;
-  var tok = `EAAFPdRVJsDoBAClzsa0N0RqrFCYqpcLdDKFNPn2XtTAoDYLwhZCocKO0ZBchlNpZC3CNr1DZA8cWYWhA4RjsYIpJPWHmhNjFxAq166I6ZCP1XRFob6HcJ6C95JWBjX51F69tRUOZBvtcX07Wa8bshrLSryaP0jT6x3JxHdV5yvU9p56UMOrAvW`;
-
+  dat.text = text;
+  
   // Envio de datos
-  return apiToMessenger('1703497029718211', dat, tok, type);
+  return apiToMessenger(spid, dat, tok, type);
 }
 
 
 
-/**
+/** **********************************************************************************
  * apiToMessenger
  * @description Hace la llamada a Facebook Api Messenger para entregar el mensaje
  * @param {String} psid :: Id del usuario a quien se envia el mensajes
