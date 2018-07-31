@@ -5,10 +5,11 @@
  * @description :: Registra todas las visitas hechas las paginas y guarda la informacion permitiendo un recorrido de todas ellas.
  * @autor       :: SaulNavarrov <Sinavarrov@gmail.com>
  */
+const iplocation = require('ip-location');
 
 async function registerNavegations (opt, cb) {
 
-    var req = opt.req,
+    let req = opt.req,
       res = opt.res,
       user = req.session.user,
       datosReg = {
@@ -36,9 +37,30 @@ async function registerNavegations (opt, cb) {
         'user': user === undefined ? 'Guest' : user.auth.id,
       };
 
-    // Save Registro de navegación
-    await LogsNavigations.create(  datosReg).fetch();
+
+    // Consultando ips
+    
+    // iplocation(req.headers["x-forwarded-for"])
+    //   .then(d => {
+    //     sails.log.debug('Bienvenidos ip');
+    //     datosReg.ipData = d;
+    //     saveData(datosReg);
+    //   })
+    //   .catch(dErr => {
+    //     sails.log.error(new Error('Error con la ip'));
+    //     sails.log.error(dErr);
+    //     datosReg.ipData = {}
+    //     saveData(datosReg);
+    //   });
+    console.log(req.headers["x-forwarded-for"]);
+        
+  }
+
+async function saveData(dat) {
+  console.log(dat);  
 }
+
+    // await LogsNavigations.create(datosReg).fetch();
 
 
 // Exportaciónes
