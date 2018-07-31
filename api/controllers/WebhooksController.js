@@ -494,7 +494,7 @@ var IdentificacionDePerfiles = async (idFb, idPag, tok) => {
     });
 
   // Consulta de la pagina con la que se va a asociar
-  var dataPag = DataPages.find({idPage: idPag});
+  var dataPag = await DataPages.find({idPage: idPag});
 
   console.log(' ==> Datos de la pagina');
   console.log(datapag);
