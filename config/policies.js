@@ -17,7 +17,7 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': 'LogsNavigations',
+  '*': ['LogsNavigations'],
 
   WebhooksController: {
     // '*': false,
