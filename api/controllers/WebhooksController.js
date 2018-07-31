@@ -494,13 +494,14 @@ var IdentificacionDePerfiles = async (idFb, idPag, tok) => {
     });
 
   // Consulta de la pagina con la que se va a asociar
-  var dataPages = await DataPages.find({idPage: String(idPag)});
-  console.log(' ==> Datos de la pagina');
-  console.log(dataPages)
-  // var dataPag = await DataPages.find({idPage: idPag});
-
-
-  // console.log(datapag);
+  var dp =  await DataPages.find({idPage: String(idPag)});
+  var dataPages = dp[0];
+  delete dataPages.namePage;
+  delete dataPages.active;
+  delete dataPages.tokenPage;
+  delete dataPages.typePage;
+  
+  console.log(dataPages);
 
   // Verificación de contenido de usuario en caso de no exista este lo genera automaticamente
   if (clientsDataId.length > 0) {
