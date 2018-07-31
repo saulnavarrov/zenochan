@@ -500,12 +500,6 @@ var IdentificacionDePerfiles = async (idFb, idPag, tok) => {
     select: ['id', 'idPage']
     });
   var dataPages = dp[0];
-  // delete dataPages.namePage;
-  // delete dataPages.active;
-  // delete dataPages.tokenPage;
-  // delete dataPages.typePage;
-  
-    console.log(dataPages)
 
   // Verificación de contenido de usuario en caso de no exista este lo genera automaticamente
   if (clientsDataId.length > 0) {
@@ -513,12 +507,12 @@ var IdentificacionDePerfiles = async (idFb, idPag, tok) => {
     profileDataClients = clientsDataId[0];
     
     // Actualizaciones de datos
-    GetDataUserProfileFb(idFb, '', tok, profileDataClients.dataUpdate);
+    GetDataUserProfileFb(idFb, dataPages, tok, profileDataClients.dataUpdate);
   }
   else{
     // Ejecutara la funcion adecuada para la busqueda de los datos de los usuarios.
     // Accion de crear nuevo usuarios
-    GetDataUserProfileFb(idFb, '', tok, 'a');
+    GetDataUserProfileFb(idFb, dataPages, tok, 'a');
   }
 }
 
@@ -537,7 +531,7 @@ var IdentificacionDePerfiles = async (idFb, idPag, tok) => {
  *    y entregarla posteriormente a otro usuario
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-var GetDataUserProfileFb = async (idfb, idPag, tok, act) => {
+var GetDataUserProfileFb = async (idfb, dtPage, tok, act) => {
   sails.log.debug('= =========== => Funcion Get Data Use Profile FB');
   
   // Traera del facebook los datos del usuario
@@ -545,7 +539,7 @@ var GetDataUserProfileFb = async (idfb, idPag, tok, act) => {
     .then(user => {
       if (user) {
         // Llamando la funcion y pasando la correspondiente variable.
-        CreateUpdateUsersClints(user, idPag, act);
+        CreateUpdateUsersClints(user, dtPage, act);
       }
     });
 }
@@ -562,7 +556,7 @@ var GetDataUserProfileFb = async (idfb, idPag, tok, act) => {
  *    y entregarla posteriormente a otro usuario
  * @author :: SaulNavarrov <Sinavarrov@gmail.com> 
  */
-var CreateUpdateUsersClints = async (user, idPag, act) => {
+var CreateUpdateUsersClints = async (user, dtPage, act) => {
   sails.log.debug('= =========== => Funcion Crete Update Users Clients');
 
   // Creación de un usuario nuevo.
@@ -570,7 +564,7 @@ var CreateUpdateUsersClints = async (user, idPag, act) => {
     if(user){
       var newClienteData = await DataClients.create({
             idfbs: String(user.id),
-            idfbsPg: String(idPag),
+            idfbsPg: String(dtPage.idPage),
             first_name: user.first_name,
             last_name: user.last_name,
             profile_pic: user.profile_pic,
@@ -578,6 +572,7 @@ var CreateUpdateUsersClints = async (user, idPag, act) => {
             timezone: user.timezone,
             gender: user.gender,
             active: 'true',
+            idpages: dtPage.id
           })
           .fetch();
       // Actualiza los datos del usuario en la variable global
