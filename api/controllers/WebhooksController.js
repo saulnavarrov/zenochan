@@ -114,38 +114,41 @@ var saveResponseMessageOut = async (opt, type) => {
   // Guardar los de tipo Texto
   if(type === 'text'){
 
+    await ApiFbMessengerController.text('hola','como estas?',opt.token);
+
     // Data de lo que se va a guardar
-    var saveData = {
-      idClient: opt.idClient,
-      idPage: opt.idPage,
-      times: 0,
-      tm: 'ZenBot',
-      seq: 0,
-      typ: 'text',
-      tym: true,
-      txt: opt.text,
-      txa: opt.text.split(' '),
-      aty: false,
-      att: {},
-      mid: 'SendMessageBotReemplace',
-      sti: 0,
-      uri: '',
-      mes: {},
-      bod: {},
-      read: 0,
-      sendRead: 'sb'
-    }
+    // var saveData = {
+    //   idClient: opt.idClient,
+    //   idPage: opt.idPage,
+    //   times: 0,
+    //   tm: 'ZenBot',
+    //   seq: 0,
+    //   typ: 'text',
+    //   tym: true,
+    //   txt: opt.text,
+    //   txa: opt.text.split(' '),
+    //   aty: false,
+    //   att: {},
+    //   mid: 'SendMessageBotReemplace',
+    //   sti: 0,
+    //   uri: '',
+    //   mes: {},
+    //   bod: {},
+    //   read: 0,
+    //   sendRead: 'sb'
+    // }
   
 
-    var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
+    // var saveMensajeResponseBot = await MessengerMessages.create(saveData).fetch();
 
-    // Respuesta del cliente.
-    // if (typeof (opt.token) === 'string'){
-      client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
-        text: `${opt.text}`,
-      });
+    // // Respuesta del cliente.
+    // // if (typeof (opt.token) === 'string'){
+    //   client.connect(opt.tokenPage).sendMessage(String(opt.idClient), {
+    //     text: `${opt.text}`,
+    //   });
     // }
   }
+
   else if(type === 'stiker'){
     // Data de lo que se van a Guardar
     var saveData = {
@@ -163,59 +166,6 @@ var saveResponseMessageOut = async (opt, type) => {
     // client.connect(opt.tokenPage).sendme 
   }
 }
-
-// resolviendo problema de token por cada pagina que agrege a Zeno boot
-
-/**
- *{
-   "_id": ObjectId("5b5a38bd399c1000140c5a8a"),
-   "idClient": "1703497029718211",
-   "idPage": "2083506518327974",
-   "times": 1532639421689.0,
-   "tm": "message",
-   "seq": NumberInt(282017),
-   "typ": "text",
-   "tym": true,
-   "txt": "PPP ppp",
-   "txa": [
-     "PPP",
-     "ppp"
-   ],
-   "aty": false,
-   "att": false,
-   "mid": "kR6EpVKdOstKyqhEEWvXmj2OGniNCp17HMqEXIaaKk4rlteIDcvrd9HgHXjH-vmSqvqZMpeihnHDejdDUTMZuw",
-   "sti": NumberInt(0),
-   "uri": "",
-   "mes": {
-     "mid": "kR6EpVKdOstKyqhEEWvXmj2OGniNCp17HMqEXIaaKk4rlteIDcvrd9HgHXjH-vmSqvqZMpeihnHDejdDUTMZuw",
-     "seq": NumberInt(282017),
-     "text": "PPP ppp"
-   },
-   "bod": {
-     "object": "page",
-     "entry": [{
-       "id": "2083506518327974",
-       "time": 1532639421812.0,
-       "standby": [{
-         "sender": {
-           "id": "1703497029718211"
-         },
-         "recipient": {
-           "id": "2083506518327974"
-         },
-         "timestamp": 1532639421689.0,
-         "message": {
-           "mid": "kR6EpVKdOstKyqhEEWvXmj2OGniNCp17HMqEXIaaKk4rlteIDcvrd9HgHXjH-vmSqvqZMpeihnHDejdDUTMZuw",
-           "seq": NumberInt(282017),
-           "text": "PPP ppp"
-         }
-       }]
-     }]
-   },
-   "read": NumberInt(0),
-   "sendRead": "tR"
- }
- */
 
 
 
@@ -245,10 +195,7 @@ var SaveMessageIn = async (opt, tok) => {
   if (findOrCreate.length === 0){
 
     // Guarda el mensaje
-    var saveMessengerMessages = await MessengerMessages.create(saveData).fetch();
-    // console.log('= =============================> Start Save Ms In');
-    // console.log(JSON.stringify(saveMessengerMessages));
-    // console.log('= =============================> Stop');
+    await MessengerMessages.create(saveData).fetch();
   
     // Envio para filtros del mensaje y saber el contenido que se esta pidiendo.
     // ya sea del ultimo en revision.
@@ -281,13 +228,14 @@ var FilterDataMessageIn = async (opt, tok) => {
     var texto = `Bot: ${opt.txt}`;
 
 
-    // Funcion de respuestas
-    saveResponseMessageOut({
-      idClient: opt.idClient,
-      idPage: opt.idPage,
-      tokenPage: tok,
-      text: texto,
-    }, 'text');
+
+    // // Funcion de respuestas
+    // saveResponseMessageOut({
+    //   idClient: opt.idClient,
+    //   idPage: opt.idPage,
+    //   tokenPage: tok,
+    //   text: texto,
+    // }, 'text');
     
     // SaveMessageOut(opt, body)
 
@@ -310,14 +258,14 @@ var FilterDataMessageIn = async (opt, tok) => {
           text: texto
         },'text');
 
-        saveResponseMessageOut({
-          idClient: opt.idClient,
-          idPage: opt.idPage,
-          tokenPage: tok,
-          text: '',
-          sti: 369239383222810,
-          uri: 'https://scontent.xx.fbcdn.net/v/t39.1997-6/p100x100/851582_369239386556143_1497813874_n.png?_nc_cat=0&_nc_ad=z-m&_nc_cid=0&oh=f662a5c4a3732dfa2ea2a6e8f7cc056f&oe=5C13604D'
-        },'stiker')
+        // saveResponseMessageOut({
+        //   idClient: opt.idClient,
+        //   idPage: opt.idPage,
+        //   tokenPage: tok,
+        //   text: '',
+        //   sti: 369239383222810,
+        //   uri: 'https://scontent.xx.fbcdn.net/v/t39.1997-6/p100x100/851582_369239386556143_1497813874_n.png?_nc_cat=0&_nc_ad=z-m&_nc_cid=0&oh=f662a5c4a3732dfa2ea2a6e8f7cc056f&oe=5C13604D'
+        // },'stiker')
         // client.sendMessage(String(opt.idClient), {
         //   text: `Hola ${profileDataClients.first_name} ${profileDataClients.last_name}\nLo siento no soportamos este tipo de mensajes!`,
         // });
@@ -830,10 +778,10 @@ module.exports = {
               console.log('Type: message -> ', tm);
               
               // Identificacion de los perfiles clientes
-              IdentificacionDePerfiles(ss.idClient, ss.idPage, dataPageGet.tokenPage);
+              await IdentificacionDePerfiles(ss.idClient, ss.idPage, dataPageGet.tokenPage);
               
               // Ejecutando función
-              SaveMessageIn(ss, dataPageGet.tokenPage);
+              await SaveMessageIn(ss, dataPageGet.tokenPage);
               
               //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //     //   y que ya puede enviar los demas mensajes

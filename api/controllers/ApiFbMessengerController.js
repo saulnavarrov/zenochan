@@ -35,6 +35,17 @@ async function on() {
  * @author SaúlNavarrov 
  */
 async function sendText(spid, text, tok){
+  sails.log.debug(`= =========== => Funcion Send Text`);
+
+  console.log(spid)
+  console.log(text)
+  console.log(tok)
+
+  if(true){
+    return false;
+  }
+
+
   var e = [], // Retorno de Datos
       dat = {}; // Armando del texto de envio
 
@@ -94,6 +105,8 @@ async function sendText(spid, text, tok){
  * @param {String} type :: Tipo de mensaje en la url Ejemplo: ('messages');
  */
 async function apiToMessenger(psid, resp, tok, type){
+  sails.log.debug(`= =========== => Funcion Api To Messenger`);
+
   // Retorno de datos
   var r = {};
 
@@ -127,7 +140,7 @@ async function apiToMessenger(psid, resp, tok, type){
       message: rErr.response.headers['www-authenticate'],
       error: rErr.response.body
     }];
-    // console.error(new Error(rErr.response.headers['www-authenticate']));
+    console.error(new Error(rErr.response.headers['www-authenticate']));
   });
 
   // Retorno de resultados
