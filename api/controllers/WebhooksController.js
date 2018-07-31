@@ -114,7 +114,7 @@ var saveResponseMessageOut = async (opt, type) => {
   // Guardar los de tipo Texto
   if(type === 'text'){
 
-    await ApiFbMessenger.text('hola','como estas?',opt.token);
+    await ApiFbMessengerController.text('hola','como estas?',opt.token);
 
     // Data de lo que se va a guardar
     // var saveData = {
@@ -620,9 +620,9 @@ var updateToReadMessages = async (opt) => {
 
 
 
-/************************************************************************
- * modulos
- */
+/********************************************************************************
+ *                      MODULE - EXPORTS = MODULE - EXPORTS
+ ********************************************************************************/
 module.exports = {
   
   /**
