@@ -509,6 +509,9 @@ var IdentificacionDePerfiles = async (idFb, tok) => {
 }
 
 
+//                IMPORTANTE = IMPORTANTE = IMPORTANTE
+// ASOCIAR LOS USUARIOS CON LAS PAGINAS CORRESPONDIENTES PARA NO GENERAR INCONVENIENTES
+// A LA HORA DE ORGANIZARLOS POR PAGINAS Y CLIENTES
 
 /****************************************************************************************
  * GetDataUserProfileFb
