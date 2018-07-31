@@ -6,7 +6,7 @@
  */
 /* ************************* CALL TO CONTROLLERS *********************************** */
  
-const apiFbMessenger = require('./ApiFbMessengerController');
+const ApiFbMessenger = require('./ApiFbMessengerController');
 
 /* **************************** END CONTROLLERS ************************************* */
 
