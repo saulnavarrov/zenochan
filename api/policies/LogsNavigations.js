@@ -70,18 +70,17 @@ async function registerNavegations (opt) {
       
       // La ip no existe en mi base de datos
       if(!findIpDb.length){
-        sails.log.debug(findIpDb);
         
         await rps({
           method: 'GET',
           uri: `http://ip-api.com/json/${ip}`
         })
         .then(rBody => {
-
+          
           // funcion para guardar los datos
           rr = rBody;// saveNewIps(datosReg, rBody);
           nxe = true;
-
+          
         })
         .catch(rErr => {
           sails.log.error(rErr);
@@ -90,7 +89,7 @@ async function registerNavegations (opt) {
           rr = rErr;
           nxe = false;
         });
-
+        
         // Luego de haber buscado las ips
         if(nxe){
           // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
@@ -101,6 +100,8 @@ async function registerNavegations (opt) {
             city: rr.city,
             isp: rr.isp
           }).fetch();
+          
+          sails.log.debug(rr);
           sails.log.debug(newIpLocations);
         }
       }
