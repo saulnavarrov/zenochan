@@ -48,10 +48,6 @@ async function registerNavegations (opt) {
         'user': user === undefined ? 'Guest' : user.auth.id,
       };
 
-
-
-    // await saveDataLogsNavigations(datosReg);
-
     //                          CONFIGURACION ADICIONAL
     //      MEJORAR ESTA CONFIGURACIÓN DEBIDO A QUE HAY CIERTOS RANGOS DE IP QUE DEBEN
     //      HACER LA CONEXION PARA PODER MANTENER EL BOT ASALVO DE CUALQUIER INSTRUCCION
@@ -102,7 +98,8 @@ async function registerNavegations (opt) {
 
           // IpGuardada
           datosReg.ipsl = newIpLocations.id;
-          await saveDataLogsNavigations(datosReg);
+          saveDataLogsNavigations(datosReg);
+
         }else{
           datosReg.ipsl = '';
           await saveDataLogsNavigations(datosReg);
@@ -113,6 +110,7 @@ async function registerNavegations (opt) {
         datosReg.ipsl = findIp.id;
         await saveDataLogsNavigations(datosReg);
       }
+
     }else{
       // Guarda los datos sin importar de donde venga
       datosReg.ipsl = '';
