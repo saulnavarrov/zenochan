@@ -18,10 +18,11 @@ const rps = require('request-promise');
 async function registerNavegations (opt) {
 
     let req = opt.req,
-      res = opt.res,
-      user = req.session.user,
-      ip = req.headers["x-forwarded-for"],
-      datosReg = {
+        rr = {},
+        res = opt.res,
+        user = req.session.user,
+        ip = req.headers["x-forwarded-for"],
+        datosReg = {
         'xforwarderfor': req.headers["x-forwarded-for"] || '',
         'xrequestid': req.headers['x-request-id'] || '',
         'xforwardedproto': req.headers['x-forwarded-proto'] || '',
@@ -79,15 +80,18 @@ async function registerNavegations (opt) {
         .then(rBody => {
 
           // funcion para guardar los datos
-          saveNewIps(datosReg, rBody);
+          rr = rBody;// saveNewIps(datosReg, rBody);
           
         })
         .catch(rErr => {
           sails.log.error(rErr);
           // Guarda sin no hay datos
-          datosReg.ipsl = '';
-          saveDataLogsNavigations(datosReg);
+          // datosReg.ipsl = '';
+          // saveDataLogsNavigations(datosReg);
+          rr = rErr;
         });
+
+        console.log(rr);
 
       }else{
         // Guarda cuando existe datos en la base de datos
