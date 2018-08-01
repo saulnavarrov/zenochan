@@ -97,7 +97,7 @@ module.exports = {
       type: 'String',
       defaultsTo: '',
       description: `Codigo Zip de conexion`
-    }
+    },
     
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -109,6 +109,11 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
+    // Conexion con logs Navigations
+    logsNav: {
+      collection: 'logsnavigations',
+      via: 'ipsl'
+    }
   },
 
 };

@@ -39,56 +39,52 @@ async function registerNavegations (opt, cb) {
       };
 
 
+
+    await saveDataLogsNavigations(datosReg);
+
+    //                          CONFIGURACION ADICIONAL
+    //      MEJORAR ESTA CONFIGURACIÓN DEBIDO A QUE HAY CIERTOS RANGOS DE IP QUE DEBEN
+    //      HACER LA CONEXION PARA PODER MANTENER EL BOT ASALVO DE CUALQUIER INSTRUCCION
+    //      YA QUE ESTA ABIERTO A QUE CUALQUIER PERSONA ENVIE DATOS DESDE FACEBOOK
+    //  
+    //      USAR UN PROVEEDOR DE IPS PARA ACTUALIZAR LOS DATOS
+    //      MANTENER UNA BASE DE DATOS DE IP'S QUE SE CONECTARON CON NOSOTROS Y PODER 
+    //      EVITAR LA VERIFICACION CONSTANTE
+    //
+    /***************************************************************************************** */
+
     // Consultando ips
     // Trae una ip de conexion
-    if (typeof (ip) !== 'undefined') {
+    // 
+    // if (typeof (ip) !== 'undefined') {
       
-      // Buscara la ip si esta en la base de datos para no consultarla
-      var findIpDb = await IpsLocations.find({ query: ip });
-      var findIp = findIpDb[0]; // Paso la ip de Array a Json
+    //   // Buscara la ip si esta en la base de datos para no consultarla
+    //   var findIpDb = await IpsLocations.find({ where: { query: ip }, select: ['id', 'query'] });
+    //   var findIp = findIpDb[0]; // Paso la ip de Array a Json
 
-      console.log('probando')
-      console.log(findIpDb.length);
+      
+    //   // La ip no existe en mi base de datos
+    //   if(!findIpDb.length){
+    //     var newIpLocations
+    //   }else{
 
-    }else{
-      sails.log.debug('No hay contenido en la var ip: ', ip);
-    }
+    //   }
 
-
-    // if(typeof(ip) !== 'undefined'){
-    //   await rps({
-    //     method: 'GET',
-    //     uri: `http://ip-api.com/json/${ip}`
-    //   }).then(rBody => {
-    //     console.log(rBody);
-    //   }).catch(rErr => {
-    //     console.log(rErr);
-    //   });
     // }else{
-    //   console.log('No hay ip en el contenedor')
+    //   sails.log.debug('No hay contenido en la var ip: ', ip);
     // }
-
-    // iplocation()
-    //   .then(d => {
-    //     sails.log.debug('Bienvenidos ip');
-    //     datosReg.ipData = d;
-    //     saveData(datosReg);
-    //   })
-    //   .catch(dErr => {
-    //     sails.log.error(new Error('Error con la ip'));
-    //     sails.log.error(dErr);
-    //     datosReg.ipData = {}
-    //     saveData(datosReg);
-    //   });
-    console.log(ip);
         
   }
 
-async function saveData(dat) {
-  console.log(dat);  
+
+/**
+ * saveDataLogsNavigations
+ * @param {Json} dat :: Datos que guardara  
+ */
+async function saveDataLogsNavigations(dat) {
+  await LogsNavigations.create(dat).fetch();
 }
 
-    // await LogsNavigations.create(datosReg).fetch();
 
 
 // Exportaciónes
