@@ -40,18 +40,33 @@ async function registerNavegations (opt, cb) {
 
 
     // Consultando ips
-    if(typeof(ip) !== 'undefined'){
-      await rps({
-        method: 'GET',
-        uri: `http://ip-api.com/json/${ip}`
-      }).then(rBody => {
-        console.log(rBody);
-      }).catch(rErr => {
-        console.log(rErr);
-      });
+    // Trae una ip de conexion
+    if (typeof (ip) !== 'undefined') {
+      
+      // Buscara la ip si esta en la base de datos para no consultarla
+      var findIpDb = await IpsLocations.find({ query: ip });
+      var findIp = findIpDb[0]; // Paso la ip de Array a Json
+
+      console.log('probando')
+      console.log(findIpDb.length);
+
     }else{
-      console.log('No hay ip en el contenedor')
+      sails.log.debug('No hay contenido en la var ip: ', ip);
     }
+
+
+    // if(typeof(ip) !== 'undefined'){
+    //   await rps({
+    //     method: 'GET',
+    //     uri: `http://ip-api.com/json/${ip}`
+    //   }).then(rBody => {
+    //     console.log(rBody);
+    //   }).catch(rErr => {
+    //     console.log(rErr);
+    //   });
+    // }else{
+    //   console.log('No hay ip en el contenedor')
+    // }
 
     // iplocation()
     //   .then(d => {
@@ -65,7 +80,7 @@ async function registerNavegations (opt, cb) {
     //     datosReg.ipData = {}
     //     saveData(datosReg);
     //   });
-    console.log(req.headers["x-forwarded-for"]);
+    console.log(ip);
         
   }
 
