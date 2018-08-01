@@ -3,11 +3,19 @@
  *
  * @module      :: Police
  * @description :: Registra todas las visitas hechas las paginas y guarda la informacion permitiendo un recorrido de todas ellas.
- * @autor       :: SaulNavarrov <Sinavarrov@gmail.com>
+ * @author      :: SaulNavarrov <Sinavarrov@gmail.com>
  */
+// requires
 const rps = require('request-promise');
 
-async function registerNavegations (opt, cb) {
+
+/**
+ * registerNavegations
+ * @description :: Controlador de funciones del police
+ * @param {*} opt :: Datos para Require y response
+ * @author :: SaúlNavarrov <Sinavarrov@gmail.com>
+ */
+async function registerNavegations (opt) {
 
     let req = opt.req,
       res = opt.res,
@@ -55,7 +63,6 @@ async function registerNavegations (opt, cb) {
 
     // Consultando ips
     // Trae una ip de conexion
-    // 
     if (typeof (ip) !== 'undefined') {
       
       // Buscara la ip si esta en la base de datos para no consultarla
@@ -64,16 +71,23 @@ async function registerNavegations (opt, cb) {
 
       // La ip no existe en mi base de datos
       if(!findIpDb.length){
+        // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
+        // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
         var newIpLocations = await IpsLocations.create({
           query: String(ip)
         }).fetch();
 
         // IpGuardada
-        console.log(newIpLocations);
+        datosReg.ipsl = newIpLocations.id;
+        await saveDataLogsNavigations(datosReg);
       }else{
-
+        // Guarda cuando existe datos en la base de datos
+        datosReg.ipsl = findIp.id;
+        await saveDataLogsNavigations(datosReg);
       }
     }else{
+      // Guarda los datos sin importar de donde venga
+      datosReg.ipsl = '';
       await saveDataLogsNavigations(datosReg);
     }        
   }
@@ -81,7 +95,9 @@ async function registerNavegations (opt, cb) {
 
 /**
  * saveDataLogsNavigations
- * @param {Json} dat :: Datos que guardara  
+ * @description :: Guarda en la base de datos el logs de las Navegaciones
+ * @param {Json} dat :: Datos que guardara
+ * @author SaúlNavarrov <Sinavarrov@gmail.com>
  */
 async function saveDataLogsNavigations(dat) {
   await LogsNavigations.create(dat).fetch();
