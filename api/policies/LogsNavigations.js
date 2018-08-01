@@ -71,10 +71,23 @@ async function registerNavegations (opt) {
 
       // La ip no existe en mi base de datos
       if(!findIpDb.length){
+
+        await rps({
+          method: 'GET',
+          uri: `http://ip-api.com/json/${ip}`
+        })
+        .then(rBody => {
+          sails.log.debug(rBody);
+        })
+        .catch(rErr => {
+          sails.log.error(rErr);
+        });
+
         // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
         // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
         var newIpLocations = await IpsLocations.create({
-          query: String(ip)
+          query: String(ip),
+
         }).fetch();
 
         // IpGuardada
