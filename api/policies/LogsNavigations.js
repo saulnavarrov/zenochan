@@ -67,49 +67,53 @@ async function registerNavegations (opt) {
       var findIpDb = await IpsLocations.find({ where: { query: ip }, select: ['id', 'query'] });
       var findIp = findIpDb[0]; // Paso la ip de Array a Json
 
+      sails.log.debug(findIpDb);
+
       // La ip no existe en mi base de datos
-      if(!findIpDb.length){
+    //   if(!findIpDb.length){
 
-        await rps({
-          method: 'GET',
-          uri: `http://ip-api.com/json/${ip}`
-        })
-        .then(rBody => {
+    //     await rps({
+    //       method: 'GET',
+    //       uri: `http://ip-api.com/json/${ip}`
+    //     })
+    //     .then(rBody => {
 
-          // funcion para guardar los datos
-          rr = rBody;// saveNewIps(datosReg, rBody);
-          nxe = true;
+    //       // funcion para guardar los datos
+    //       rr = rBody;// saveNewIps(datosReg, rBody);
+    //       nxe = true;
 
-        })
-        .catch(rErr => {
-          sails.log.error(rErr);
-          // Guarda sin no hay datos
-          // datosReg.ipsl = '';
-          // saveDataLogsNavigations(datosReg);
-          rr = rErr;
-          nxe = false;
-        });
+    //     })
+    //     .catch(rErr => {
+    //       sails.log.error(rErr);
+    //       // Guarda sin no hay datos
+    //       // datosReg.ipsl = '';
+    //       // saveDataLogsNavigations(datosReg);
+    //       rr = rErr;
+    //       nxe = false;
+    //     });
 
-        // Luego de haber buscado las ips
-        if(nxe){
-          // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
-          // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
-          var newIpLocations = await IpsLocations.create(rr).fetch();
+    //     // Luego de haber buscado las ips
+    //     if(nxe){
+    //       // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
+    //       // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
+    //       var newIpLocations = await IpsLocations.create(rr).fetch();
 
-          // IpGuardada
-          datosReg.ipsl = newIpLocations.id;
-          saveDataLogsNavigations(datosReg);
+    //       // IpGuardada
+    //       if(!typeof (newIpLocations.UsageError)){
+    //         datosReg.ipsl = newIpLocations.id;
+    //         saveDataLogsNavigations(datosReg);
+    //       }
 
-        }else{
-          datosReg.ipsl = '';
-          await saveDataLogsNavigations(datosReg);
-        }
+    //     }else{
+    //       datosReg.ipsl = '';
+    //       await saveDataLogsNavigations(datosReg);
+    //     }
 
-      }else{
-        // Guarda cuando existe datos en la base de datos
-        datosReg.ipsl = findIp.id;
-        await saveDataLogsNavigations(datosReg);
-      }
+    //   }else{
+    //     // Guarda cuando existe datos en la base de datos
+    //     datosReg.ipsl = findIp.id;
+    //     await saveDataLogsNavigations(datosReg);
+    //   }
 
     }else{
       // Guarda los datos sin importar de donde venga
