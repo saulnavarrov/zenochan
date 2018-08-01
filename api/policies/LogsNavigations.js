@@ -77,22 +77,18 @@ async function registerNavegations (opt) {
           uri: `http://ip-api.com/json/${ip}`
         })
         .then(rBody => {
-          sails.log.debug(rBody);
+
+          // funcion para guardar los datos
+          saveNewIps(datosReg, rBody);
+          
         })
         .catch(rErr => {
           sails.log.error(rErr);
+          // Guarda sin no hay datos
+          datosReg.ipsl = '';
+          saveDataLogsNavigations(datosReg);
         });
 
-        // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
-        // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
-        var newIpLocations = await IpsLocations.create({
-          query: String(ip),
-
-        }).fetch();
-
-        // IpGuardada
-        datosReg.ipsl = newIpLocations.id;
-        await saveDataLogsNavigations(datosReg);
       }else{
         // Guarda cuando existe datos en la base de datos
         datosReg.ipsl = findIp.id;
@@ -104,6 +100,28 @@ async function registerNavegations (opt) {
       await saveDataLogsNavigations(datosReg);
     }        
   }
+
+
+
+
+
+/**
+ * saveNewIps
+ * @description :: 
+ * @param {*} dat
+ * @author SaúlNavarrov <Sinavarrov@gmail.com>
+ */
+async function saveNewIps(datosReg, resDB) {
+  // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
+  // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
+  var newIpLocations = await IpsLocations.create(resDB).fetch();
+
+  // IpGuardada
+  datosReg.ipsl = newIpLocations.id;
+  await saveDataLogsNavigations(datosReg);
+}
+
+
 
 
 /**
