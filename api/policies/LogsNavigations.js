@@ -19,6 +19,7 @@ async function registerNavegations (opt) {
 
     let req = opt.req,
         rr = {},
+        nxe = true,
         res = opt.res,
         user = req.session.user,
         ip = req.headers["x-forwarded-for"],
@@ -81,7 +82,8 @@ async function registerNavegations (opt) {
 
           // funcion para guardar los datos
           rr = rBody;// saveNewIps(datosReg, rBody);
-          
+          nxe = true;
+
         })
         .catch(rErr => {
           sails.log.error(rErr);
@@ -89,9 +91,22 @@ async function registerNavegations (opt) {
           // datosReg.ipsl = '';
           // saveDataLogsNavigations(datosReg);
           rr = rErr;
+          nxe = false;
         });
 
-        console.log(rr);
+        // Luego de haber buscado las ips
+        if(nxe){
+          // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
+          // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
+          var newIpLocations = await IpsLocations.create(rr).fetch();
+
+          // IpGuardada
+          datosReg.ipsl = newIpLocations.id;
+          await saveDataLogsNavigations(datosReg);
+        }else{
+          datosReg.ipsl = '';
+          await saveDataLogsNavigations(datosReg);
+        }
 
       }else{
         // Guarda cuando existe datos en la base de datos
@@ -105,25 +120,6 @@ async function registerNavegations (opt) {
     }        
   }
 
-
-
-
-
-/**
- * saveNewIps
- * @description :: 
- * @param {*} dat
- * @author SaúlNavarrov <Sinavarrov@gmail.com>
- */
-async function saveNewIps(datosReg, resDB) {
-  // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
-  // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
-  var newIpLocations = await IpsLocations.create(resDB).fetch();
-
-  // IpGuardada
-  datosReg.ipsl = newIpLocations.id;
-  await saveDataLogsNavigations(datosReg);
-}
 
 
 
