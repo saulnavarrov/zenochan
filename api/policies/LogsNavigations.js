@@ -86,21 +86,21 @@ async function registerNavegations (opt) {
         .catch(rErr => {
           sails.log.error(rErr);
           // Guarda sin no hay datos
-          // datosReg.ipsl = '';
-          // saveDataLogsNavigations(datosReg);
+          datosReg.ipsl = '';
           rr = rErr;
           nxe = false;
         });
 
-        sails.log.debug(rr)
+        // Luego de haber buscado las ips
+        if(nxe){
+          // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
+          // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
+          var newIpLocations = await IpsLocations.create(rr).fetch();
+          sails.log.debug(newIpLocations);
+        }
       }
 
 
-    //     // Luego de haber buscado las ips
-    //     if(nxe){
-    //       // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
-    //       // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
-    //       var newIpLocations = await IpsLocations.create(rr).fetch();
 
     //       // IpGuardada
     //       if(!typeof (newIpLocations.UsageError)){
