@@ -95,7 +95,12 @@ async function registerNavegations (opt) {
         if(nxe){
           // Creamos la ip en la base de datos para luego asociarla con las nuevas ip logs con el fin
           // de crear un registro de las ips que se conecten para usarlas en un futuro proximo
-          var newIpLocations = await IpsLocations.create(rr).fetch();
+          var newIpLocations = await IpsLocations.create({
+            query: rr.query,
+            as: rr.as,
+            city: rr.city,
+            isp: rr.isp
+          }).fetch();
           sails.log.debug(newIpLocations);
         }
       }
