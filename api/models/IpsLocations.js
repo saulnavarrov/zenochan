@@ -99,6 +99,13 @@ module.exports = {
       description: `Codigo Zip de conexion`
     },
     
+    'blocked': {
+      type: 'String',
+      isIn: ['L','U'],
+      defaultsTo: 'U',
+      description: `Se determina si la ip sera bloqueada o no, esta por defecto
+        en unblocked`
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
