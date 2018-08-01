@@ -67,30 +67,34 @@ async function registerNavegations (opt) {
       var findIpDb = await IpsLocations.find({ where: { query: ip }, select: ['id', 'query'] });
       var findIp = findIpDb[0]; // Paso la ip de Array a Json
 
-      sails.log.debug(findIpDb);
-
+      
       // La ip no existe en mi base de datos
-    //   if(!findIpDb.length){
+      if(!findIpDb.length){
+        sails.log.debug(findIpDb);
+        
+        await rps({
+          method: 'GET',
+          uri: `http://ip-api.com/json/${ip}`
+        })
+        .then(rBody => {
 
-    //     await rps({
-    //       method: 'GET',
-    //       uri: `http://ip-api.com/json/${ip}`
-    //     })
-    //     .then(rBody => {
+          // funcion para guardar los datos
+          rr = rBody;// saveNewIps(datosReg, rBody);
+          nxe = true;
 
-    //       // funcion para guardar los datos
-    //       rr = rBody;// saveNewIps(datosReg, rBody);
-    //       nxe = true;
+        })
+        .catch(rErr => {
+          sails.log.error(rErr);
+          // Guarda sin no hay datos
+          // datosReg.ipsl = '';
+          // saveDataLogsNavigations(datosReg);
+          rr = rErr;
+          nxe = false;
+        });
 
-    //     })
-    //     .catch(rErr => {
-    //       sails.log.error(rErr);
-    //       // Guarda sin no hay datos
-    //       // datosReg.ipsl = '';
-    //       // saveDataLogsNavigations(datosReg);
-    //       rr = rErr;
-    //       nxe = false;
-    //     });
+        sails.log.debug(rr)
+      }
+
 
     //     // Luego de haber buscado las ips
     //     if(nxe){
