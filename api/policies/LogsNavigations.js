@@ -40,7 +40,7 @@ async function registerNavegations (opt, cb) {
 
 
 
-    await saveDataLogsNavigations(datosReg);
+    // await saveDataLogsNavigations(datosReg);
 
     //                          CONFIGURACION ADICIONAL
     //      MEJORAR ESTA CONFIGURACIÓN DEBIDO A QUE HAY CIERTOS RANGOS DE IP QUE DEBEN
@@ -56,24 +56,26 @@ async function registerNavegations (opt, cb) {
     // Consultando ips
     // Trae una ip de conexion
     // 
-    // if (typeof (ip) !== 'undefined') {
+    if (typeof (ip) !== 'undefined') {
       
-    //   // Buscara la ip si esta en la base de datos para no consultarla
-    //   var findIpDb = await IpsLocations.find({ where: { query: ip }, select: ['id', 'query'] });
-    //   var findIp = findIpDb[0]; // Paso la ip de Array a Json
+      // Buscara la ip si esta en la base de datos para no consultarla
+      var findIpDb = await IpsLocations.find({ where: { query: ip }, select: ['id', 'query'] });
+      var findIp = findIpDb[0]; // Paso la ip de Array a Json
 
-      
-    //   // La ip no existe en mi base de datos
-    //   if(!findIpDb.length){
-    //     var newIpLocations
-    //   }else{
+      // La ip no existe en mi base de datos
+      if(!findIpDb.length){
+        var newIpLocations = await IpsLocations.create({
+          query: String(ip)
+        }).fetch();
 
-    //   }
+        // IpGuardada
+        console.log(newIpLocations);
+      }else{
 
-    // }else{
-    //   sails.log.debug('No hay contenido en la var ip: ', ip);
-    // }
-        
+      }
+    }else{
+      await saveDataLogsNavigations(datosReg);
+    }        
   }
 
 
