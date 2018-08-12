@@ -100,8 +100,8 @@ async function registerNavegations (opt) {
             city: rr.city,
             isp: rr.isp
           }).fetch();
-          
-          sails.log.debug(rr);
+
+          sails.log.debug(JSON.parse (rr));
           sails.log.debug(newIpLocations);
         }
       }
