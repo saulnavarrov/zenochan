@@ -16,23 +16,27 @@ module.exports = {
       type: 'String',
       unique: true,
       required: true,
-      description: ''
+      description: 'Abreviación del pais'
     },
-    
+
     cntry: {
       type: 'String',
       unique: true,
       required: true,
+      description: 'Abreviación internacional del pais'
+
     },
     country: {
       type: 'String',
-      defaultsTo: '?'
+      defaultsTo: '?',
+      description: 'Nombre del pais'
     },
     
-    ipBlock: {
+    countryBlock: {
       type: 'String',
       isIn: ['B', 'U'],
-      defaultsTo: 'U'
+      defaultsTo: 'U',
+      description: 'Para bloquear paises '
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

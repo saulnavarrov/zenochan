@@ -30,6 +30,13 @@ module.exports = {
       defaultsTo: '?'
     },
 
+    ipBlock: {
+      type: 'String',
+      isIn: ['B', 'U'],
+      defaultsTo: 'U',
+      description: 'Para bloquear paises que llegen a conflictos'
+    },
+
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
