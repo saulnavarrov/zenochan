@@ -27,147 +27,147 @@ module.exports = {
      },
       // req.headers["x-forwarder-for"],
       
-    /*  'xrealip': {
-        type: '',
-        defaultsto: '',
-        description: ''
-      },
+    'xrealip': {
+      type: 'String',
+      defaultsTo: 'NoIP',
+      description: 'Ip de la persona que se conecta'
+    },
       // req.headers['x-real-ip'],
       
-      'xforwardedproto': {
+    /*  'xforwardedproto': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['x-forwarder-proto'],
       
       'host': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['host'],
       
       'url': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.url,
       
       'userAgent': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['user-agent'],
       
       'method': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.method,
       
       'complete': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.complete,
       
       'opController': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.options['controller'],
       
       'opAction': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.options.action,
       
       'xnginxproxy': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['x-nginx-proxy'],
       
       'connection': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['connection'],
       
       'cacheControl': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['cache-control'],
       
       'xHubSignature': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['x-hub-signature'],
       
       'acceptEncoding': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['accept-encoding'],
       
       'acceptLanguage': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['accept-lenguage'] || req.i18n.locale,
       
       'locale': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.i18n.locale,
       
       'cookie': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['cookie'],
       
       'ifNoneMatch': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // req.headers['if-none-match'],
       
       'user': {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       // user === undefined ? 'Guest' : user.auth.id,
       
       country: {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       ctry: {
         type: '',
-        defaultsto: '',
+        defaultsTo: '',
         description: ''
       },
       
