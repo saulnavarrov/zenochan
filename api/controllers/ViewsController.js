@@ -8,7 +8,7 @@
 module.exports = {
   
   'index': async (req, res) => {
-    return res.view('pages/homepage');
+    return res.view('maintenice');
   }
 
 };
