@@ -15,19 +15,27 @@ module.exports = {
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     ipFrom: {
       type: 'number',
-      required: true
+      required: true,
+      description: 'Rango de IP de arranque'
     },
+
     ipTo: {
       type: 'number',
-      required: true
+      required: true,
+      description: 'Rango de IP final',
     },
+
     assigned: {
       type: 'String',
-      defaultsTo: '?'
+      defaultsTo: '?',
+      description: 'Cuantas IP`s cuantas ip fueron asignadas en este rango'
     },
+
     registry: {
       type: 'String',
-      defaultsTo: '?'
+      defaultsTo: '?',
+      description: 'Organización que registra la ip'
+
     },
 
     ipBlock: {
@@ -36,7 +44,6 @@ module.exports = {
       defaultsTo: 'U',
       description: 'Para bloquear paises que llegen a conflictos'
     },
-
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -47,7 +54,8 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     country: {
-      model: 'countrys'
+      model: 'countrys',
+      description: 'Conexión con el modelo de Countrys (Paises)'
     }
   },
 

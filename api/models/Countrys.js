@@ -49,7 +49,8 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     ipsAsigned: {
       collection: 'ipgeos',
-      via: 'country'
+      via: 'country',
+      description: 'Conexion con el modelo IpGeos (Ips Geolocalizados) en la base de datos'
     }
   },
 
