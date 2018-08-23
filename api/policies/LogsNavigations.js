@@ -5,11 +5,13 @@
  * @description :: Registra todas las visitas hechas las paginas y guarda la informacion permitiendo un recorrido de todas ellas.
  * @author      :: SaulNavarrov <Sinavarrov@gmail.com>
  */
-// requires
-const rps = require('request-promise');
-var ip2int = require('ip2int');
 
-/**
+ // requires
+const rps = require('request-promise');
+
+
+
+/** ************************************************************************************************
  * registerNavegations
  * @description :: Controlador de funciones del police
  * @param {*} opt :: Datos para Require y response
@@ -48,6 +50,7 @@ async function registerNavegations (opt) {
 
 
 
+    /** *************************************************************************************** */
     //                          CONFIGURACION ADICIONAL
     //      MEJORAR ESTA CONFIGURACIÓN DEBIDO A QUE HAY CIERTOS RANGOS DE IP QUE DEBEN
     //      HACER LA CONEXION PARA PODER MANTENER EL BOT ASALVO DE CUALQUIER INSTRUCCION
@@ -57,14 +60,14 @@ async function registerNavegations (opt) {
     //      MANTENER UNA BASE DE DATOS DE IP'S QUE SE CONECTARON CON NOSOTROS Y PODER 
     //      EVITAR LA VERIFICACION CONSTANTE
     //
-    /***************************************************************************************** */
+    /****************************************************************************************** */
 
-    var intip = ip2(ip);
-    var ipint = int2(intip);
+    var intip = ip2int(ip);
+    var ipint = int2ip(intip);
 
     var searchIp = await IpGeos.find({
-      'ipFrom': {'<': Number(ip2(ip))},
-      'ipTo': {'>': Number(ip2(ip))}
+      'ipFrom': {'<': Number(ip2int(ip))},
+      'ipTo': {'>': Number(ip2int(ip))}
       }).populate('country');
     
     // Lo guarda con el pais de origen de los datos
@@ -82,7 +85,7 @@ async function registerNavegations (opt) {
 
     // Consultando ips
     // Trae una ip de conexion
-    if (typeof (ip) !== 'undefined') {
+    // if (typeof (ip) !== 'undefined') {
       
     //   // Buscara la ip si esta en la base de datos para no consultarla
     //   var findIpDb = await IpsLocations.find({ where: { query: ip }, select: ['id', 'query'] });
@@ -150,11 +153,12 @@ async function registerNavegations (opt) {
     //   // Guarda los datos sin importar de donde venga
     //   datosReg.ipsl = '';
     //   await saveDataLogsNavigations(datosReg);
-    }        
+    // }  
   }
 
 
-/**
+
+/** ************************************************************************************************
  * saveDataLogsNavigations
  * @description :: Guarda en la base de datos el logs de las Navegaciones
  * @param {Json} dat :: Datos que guardara
@@ -167,7 +171,12 @@ async function saveDataLogsNavigations(dat) {
 
 
 
-// Exportaciónes
+/** ************************************************************************************************
+ * Exportar Modulos
+ * @param {Array} req 
+ * @param {Array} res 
+ * @param {Array} next 
+ */
 module.exports = async (req, res, next) => {
   var options = {
     req: req,
@@ -183,14 +192,24 @@ module.exports = async (req, res, next) => {
 
 
 
-
-
-/*** Conversion */
-function int2 (ipInt) {
+/** ************************************************************************************************
+ * int2ip
+ * @param {Int32} ipInt : Numero de para cambiar y darme la ip
+ * @returns {String} Retorno de la Ip en IPv4
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+ * ************************************************************************************************/
+function int2ip (ipInt) {
     return ( (ipInt>>>24) +'.' + (ipInt>>16 & 255) +'.' + (ipInt>>8 & 255) +'.' + (ipInt & 255) );
 }
 
-function ip2(ip) {
+
+
+/** ************************************************************************************************
+ * ip2int
+ * @param {String} ip :: Ip formato IPv4
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+ * ************************************************************************************************/
+function ip2int(ip) {
   return ip.split('.').reduce(function (ipInt, octet) {
     return (ipInt << 8) + parseInt(octet, 10)
   }, 0) >>> 0;
