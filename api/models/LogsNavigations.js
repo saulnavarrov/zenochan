@@ -14,15 +14,20 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    /**
+    cntry: {
+      type: 'String',
+      defaultsTo: '?',
+      description: 'Abreviación de que pais se conecta la persona'
+    },
+    
      'xforwarderfor': {
-       type: '',
-       defaultsto: '',
-       description: ''
+       type: 'String',
+       defaultsTo: 'NoIP',
+       description: 'Ip de la persona que se conecta'
      },
       // req.headers["x-forwarder-for"],
       
-      'xrealip': {
+    /*  'xrealip': {
         type: '',
         defaultsto: '',
         description: ''
@@ -165,11 +170,7 @@ module.exports = {
         defaultsto: '',
         description: ''
       },
-      cntry: {
-        type: '',
-        defaultsto: '',
-        description: ''
-      }
+      
      */
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
