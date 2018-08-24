@@ -16,7 +16,7 @@ const rps = require('request-promise');
  * @description :: Controlador de funciones del police
  * @param {*} opt :: Datos para Require y response
  * @author :: SaúlNavarrov <Sinavarrov@gmail.com>
- */
+ ** ************************************************************************************************/
 async function registerNavegations (opt) {
 
     let req = opt.req,
@@ -26,6 +26,9 @@ async function registerNavegations (opt) {
         user = req.session.user,
         ip = req.headers["x-forwarder-for"],
         datosReg = {
+        country: '',
+        ctry: '',
+        cntry: '',
         'xforwarderfor': req.headers["x-forwarder-for"],
         'xrealip': req.headers['x-real-ip'],
         'xforwardedproto': req.headers['x-forwarder-proto'],
@@ -166,17 +169,18 @@ async function registerNavegations (opt) {
  */
 async function saveDataLogsNavigations(dat) {
   var da = await LogsNavigations.create(dat).fetch();
-  console.log(da);
 }
 
 
 
 /** ************************************************************************************************
  * Exportar Modulos
+ * @description :: Exportacion de todas funciones sin tener que importar los archivos.
  * @param {Array} req 
  * @param {Array} res 
- * @param {Array} next 
- */
+ * @param {Array} next
+ * @author :: SaulNavarrov <Sinavarrov@gmail.com> 
+ * ************************************************************************************************/
 module.exports = async (req, res, next) => {
   var options = {
     req: req,
@@ -194,6 +198,7 @@ module.exports = async (req, res, next) => {
 
 /** ************************************************************************************************
  * int2ip
+ * @description :: convierte el valor entero a una cadena de Ip
  * @param {Int32} ipInt : Numero de para cambiar y darme la ip
  * @returns {String} Retorno de la Ip en IPv4
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
@@ -206,6 +211,7 @@ function int2ip (ipInt) {
 
 /** ************************************************************************************************
  * ip2int
+ * @description :: Convierte la ip en un valor Entero.
  * @param {String} ip :: Ip formato IPv4
  * @author :: SaulNavarrov <Sinavarrov@gmail.com>
  * ************************************************************************************************/
