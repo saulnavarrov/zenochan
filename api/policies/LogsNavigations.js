@@ -8,6 +8,7 @@
 
  // requires
 const rps = require('request-promise');
+const {ip2int, int2ip} = require('../controllers/IpGeosController');   // Controlador de IpGeos para 
 
 
 
@@ -25,10 +26,12 @@ async function registerNavegations (opt) {
         res = opt.res,
         user = req.session.user,
         ip = req.headers["x-forwarder-for"],
+        ipInt = await ip2int(ip);
         datosReg = {
         country: '',
         ctry: '',
         cntry: '',
+        ip2int: ipInt || 0,
         'xforwarderfor': req.headers["x-forwarder-for"],
         'xrealip': req.headers['x-real-ip'],
         'xforwardedproto': req.headers['x-forwarder-proto'],
@@ -65,22 +68,22 @@ async function registerNavegations (opt) {
     //
     /****************************************************************************************** */
 
-    var intip = ip2int(ip);
-    var ipint = int2ip(intip);
-
+    // Busca la ip en la base de datos y coteja con los paises asociados
     var searchIp = await IpGeos.find({
-      'ipFrom': {'<': Number(ip2int(ip))},
-      'ipTo': {'>': Number(ip2int(ip))}
+      'ipFrom': {'<': Number(ipInt)},
+      'ipTo': {'>': Number(ipInt)}
       }).populate('country');
     
     // Lo guarda con el pais de origen de los datos
     if(searchIp.length){
       searchIp = searchIp[0]; // reasigno los datos a JSON
       
+      // Guarda los paises y son enviados para guardar
       datosReg.country = searchIp.country.country;
       datosReg.ctry = searchIp.country.ctry;
       datosReg.cntry = searchIp.country.cntry;
 
+      // Funcion para guardar los datos
       await saveDataLogsNavigations(datosReg);
     }else{
       await saveDataLogsNavigations(datosReg);
@@ -178,10 +181,10 @@ async function saveDataLogsNavigations(dat) {
  * @description :: Exportacion de todas funciones sin tener que importar los archivos.
  * @param {Array} req 
  * @param {Array} res 
- * @param {Array} next
+ * @param {Array} nxt
  * @author :: SaulNavarrov <Sinavarrov@gmail.com> 
  * ************************************************************************************************/
-module.exports = async (req, res, next) => {
+module.exports = async (req, res, nxt) => {
   var options = {
     req: req,
     res: res
@@ -191,32 +194,5 @@ module.exports = async (req, res, next) => {
   await registerNavegations(options);
 
   // continue
-  return next();
+  return nxt();
 };
-
-
-
-/** ************************************************************************************************
- * int2ip
- * @description :: convierte el valor entero a una cadena de Ip
- * @param {Int32} ipInt : Numero de para cambiar y darme la ip
- * @returns {String} Retorno de la Ip en IPv4
- * @author :: SaulNavarrov <Sinavarrov@gmail.com>
- * ************************************************************************************************/
-function int2ip (ipInt) {
-    return ( (ipInt>>>24) +'.' + (ipInt>>16 & 255) +'.' + (ipInt>>8 & 255) +'.' + (ipInt & 255) );
-}
-
-
-
-/** ************************************************************************************************
- * ip2int
- * @description :: Convierte la ip en un valor Entero.
- * @param {String} ip :: Ip formato IPv4
- * @author :: SaulNavarrov <Sinavarrov@gmail.com>
- * ************************************************************************************************/
-function ip2int(ip) {
-  return ip.split('.').reduce(function (ipInt, octet) {
-    return (ipInt << 8) + parseInt(octet, 10)
-  }, 0) >>> 0;
-}

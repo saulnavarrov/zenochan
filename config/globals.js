@@ -11,6 +11,16 @@
 
 module.exports.globals = {
 
+  /** *************************************************************************
+   *            CONTROLADORES GLOBALES DE LA APP DE USO INTERNO
+   * 
+   * Estos controladores se ulitizaran para ser llamados por otros controladores
+   * en o desde cualquier parte de la app, para evitar llamadas contantes a 
+   * controladores de manera redundante
+   * *************************************************************************/
+  // IpGeosC: require('../api/controllers/IpGeosController'),
+  controllers: true,
+
   /****************************************************************************
   *                                                                           *
   * Whether to expose the locally-installed Lodash as a global variable       *
