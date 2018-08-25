@@ -30,6 +30,14 @@ module.exports.policies = {
     // '*': false,
     'getWebHooks': ['LogsNavigations', 'IpBlock'],
     'postWebHooksIn': ['LogsNavigations', 'IpBlock'],
-  }
+  },
+
+  // ViewsController: {
+  //   '*': false
+  // },
+
+  WordsListController: {
+    '*': false
+  },
 
 };
