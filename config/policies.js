@@ -19,7 +19,7 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': true,
+  // '*': true,
 
 
   ViewsController: {
@@ -37,7 +37,8 @@ module.exports.policies = {
   // },
 
   WordsListController: {
-    '*': false
+    // '*': false
+    find: false
   },
 
 };
