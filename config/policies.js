@@ -8,6 +8,8 @@
  * https://sailsjs.com/docs/concepts/policies
  */
 
+
+
 module.exports.policies = {
 
   /***************************************************************************
@@ -21,13 +23,13 @@ module.exports.policies = {
 
 
   ViewsController: {
-    '*': ['LogsNavigations'],
+    '*': ['LogsNavigations', 'IpBlock'],
   },
 
   WebhooksController: {
     // '*': false,
-    'getWebHooks':['LogsNavigations'],
-    'postWebHooksIn':['LogsNavigations'],
+    'getWebHooks': ['LogsNavigations', 'IpBlock'],
+    'postWebHooksIn': ['LogsNavigations', 'IpBlock'],
   }
 
 };

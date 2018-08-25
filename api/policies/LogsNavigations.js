@@ -26,7 +26,7 @@ async function registerNavegations (opt) {
         res = opt.res,
         user = req.session.user,
         ip = req.headers["x-forwarder-for"],
-        ipInt = await ip2int(ip);
+        ipInt = await ip2int(ip),
         datosReg = {
         country: '',
         ctry: '',
@@ -82,6 +82,7 @@ async function registerNavegations (opt) {
       datosReg.country = searchIp.country.country;
       datosReg.ctry = searchIp.country.ctry;
       datosReg.cntry = searchIp.country.cntry;
+      datosReg.Block = searchIp.country.countryBlock === 'B' ? 'Block Country' : searchIp.ipBlock === 'B' ? 'Block Ip' : '';
 
       // Funcion para guardar los datos
       await saveDataLogsNavigations(datosReg);
