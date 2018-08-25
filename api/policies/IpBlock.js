@@ -31,22 +31,25 @@ module.exports = async (req, res, nxt) => {
 
   // Verificando de bloqueo del pais
   if ('B' === country.countryBlock) {
-    sails.log.error('Pais Bloqueado');
+    sails.log.error('Pais Bloqueado: ' + ip + " P: " + country.cntry);
 
     // return
-    return res.json({status: 403, text: 'block Country'})
+    return res.status(403).json({
+      message: 'Block Ip Country Connect'
+    });
   }
 
 
   // Verificando bloqueo de la IP's
   if ('B' === ipGeos.ipBlock) {
-    sails.log.error('Ip Bloqueado');
-    return res.json({status: 403, text: 'block Ip Country'})
+    sails.log.error('Ip Bloqueado: ' + ip +" P: " + country.cntry);
+
+    // Return
+    return res.status(403).json({
+      message: 'Block Ip Connect'
+    });
   }
 
   // console
-  // sails.log(country);
-  // sails.log(ipGeos)
-
   return nxt();
 }
