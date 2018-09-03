@@ -36,9 +36,9 @@ module.exports.policies = {
   //   '*': false
   // },
 
-  WordsListController: {
-    // '*': false
-    find: false
+  WordsListsController: {
+    '*': false
+
   },
 
 };
