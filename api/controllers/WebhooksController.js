@@ -16,7 +16,7 @@ const { MessengerClient } = require('messaging-api-messenger');
 // Token que genera facebook app para la pagina
 const token_apiSaul = 'EAAFPdRVJsDoBAClzsa0N0RqrFCYqpcLdDKFNPn2XtTAoDYLwhZCocKO0ZBchlNpZC3CNr1DZA8cWYWhA4RjsYIpJPWHmhNjFxAq166I6ZCP1XRFob6HcJ6C95JWBjX51F69tRUOZBvtcX07Wa8bshrLSryaP0jT6x3JxHdV5yvU9p56UMOrAvW';
 // Token de la app para que facebook la reconosca
-const apptoken = 'Sails=3AUVG-R9ZyY85-uFdoYEU0m6xNKz2wV1lV.N0kXRlGwXdFMVuBH0U9bFEvRBya%2BMJWdnkFzNU%2B%2FFIU=Saul';
+const apptoken = 'Sails=3AUVG-R9ZyY85-uFdoYEU0m6xNKz2wV1ldV.N0kXRlGwXdFMVuBH0U9bFEvRBya%2BMJWdnkFzNU%2B%2FFIU=Saul';
 
 // Conexion con facebook
 const client = MessengerClient;
@@ -120,7 +120,7 @@ var saveResponseMessageOut = async (opt, type) => {
   // Guardar los de tipo Texto
   if(type === 'text'){
 
-    await ApiFbMessenger.text('hola','como estas?',opt.token);
+    // await ApiFbMessenger.text('hola','como estas?',opt.token);
 
     // Data de lo que se va a guardar
     // var saveData = {
@@ -438,7 +438,7 @@ var IdentificacionDePerfiles = async (idFb, idPag, tok) => {
   // Busqueda del usuario cliente en la base de datos
   var clientsDataId = await DataClients.find({
       "idfbs": String(idFb),
-    })
+    }).populate('idpages')
     .catch(err => {
       return {
         success: false,
@@ -447,26 +447,29 @@ var IdentificacionDePerfiles = async (idFb, idPag, tok) => {
       }
     });
 
-  // Consulta de la pagina con la que se va a asociar
-  // Elimino la información que no necesito
-  var dp =  await DataPages.find({
-    where: { idPage: String(idPag) },
-    select: ['id', 'idPage']
+    
+    // Consulta de la pagina con la que se va a asociar
+    // Elimino la información que no necesito
+    var dp =  await DataPages.find({
+      where: { idPage: String(idPag) },
+      select: ['id', 'idPage']
     });
-  var dataPages = dp[0];
+    var dataPages = dp[0];
+   
+    sails.log.debug(dataPages)
 
   // Verificación de contenido de usuario en caso de no exista este lo genera automaticamente
   if (clientsDataId.length > 0) {
-    // Actualiza los datos del usuario en la variable global
-    profileDataClients = clientsDataId[0];
+  //   // Actualiza los datos del usuario en la variable global
+  //   profileDataClients = clientsDataId[0];
     
-    // Actualizaciones de datos
-    GetDataUserProfileFb(idFb, dataPages, tok, profileDataClients.dataUpdate);
+  //   // Actualizaciones de datos
+  //   GetDataUserProfileFb(idFb, dataPages, tok, profileDataClients.dataUpdate);
   }
   else{
-    // Ejecutara la funcion adecuada para la busqueda de los datos de los usuarios.
-    // Accion de crear nuevo usuarios
-    GetDataUserProfileFb(idFb, dataPages, tok, 'a');
+  //   // Ejecutara la funcion adecuada para la busqueda de los datos de los usuarios.
+  //   // Accion de crear nuevo usuarios
+  //   GetDataUserProfileFb(idFb, dataPages, tok, 'a');
   }
 }
 
@@ -765,9 +768,16 @@ module.exports = {
           if(dataPageGet.active){
 
             // Control del flujo de datos Read, Delivery, messagings
-            // ************************************************************************
             
-            // Flujo para los Deliverys
+
+            /**
+             * DELIVERYS
+             * @name :: Delivery
+             * @description ::  Flujo para los Deliverys
+             *                  Deliveris son los datos de envios de mensajes, identi-
+             *                  ficando los mensajes enviados o recividos
+             * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+             **************************************************************************/
             if ( tm === 'delivery' ) {
               console.log("--------------------------------------------> ", tm);
               // console.log('Type: Dekuvery -> ', tm);
@@ -778,7 +788,17 @@ module.exports = {
               return res.ok('EVEN T_RECEIVED');
             }
             
-            // Flujo para los Messages
+            
+            
+            /**
+             * MESSAGES
+             * @name :: Message
+             * @description ::  Flujo para los Messages
+             *                  Controla el La disposicion de los mensajes que envian
+             *                  los usuarios para el Servidor, y tambien el control del
+             *                  respuestas de parte del Bot
+             * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+             **************************************************************************/
             else if ( tm === 'message' ) {
               console.log("--------------------------------------------> ", tm);
               console.log('Type: message -> ', tm);
@@ -787,14 +807,23 @@ module.exports = {
               await IdentificacionDePerfiles(ss.idClient, ss.idPage, dataPageGet.tokenPage);
               
               // Ejecutando función
-              await SaveMessageIn(ss, dataPageGet.tokenPage);
+              // await SaveMessageIn(ss, dataPageGet.tokenPage);
               
               //     // Devuelve al servidor de Facebook que el mensaje ha sido recivido
               //     //   y que ya puede enviar los demas mensajes
               return res.ok('EVENT_RECEIVED');
             }
             
-            // Flujo para Los Reads
+            
+            
+            /**
+             * READS
+             * @name :: Reads
+             * @description ::  Flujo para Los Reads
+             *                  Identifica que mensajes se han leido y cuales no para 
+             *                  mantener el fujo constantes
+             * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+             **************************************************************************/
             else if( tm === 'read' ) {
               console.log("--------------------------------------------> ", tm);
 
@@ -810,7 +839,16 @@ module.exports = {
               return res.ok('EVENT_RECEIVED');
             }
 
-            // Flujo para los PostBack
+            
+            
+            /**
+             * POSTBACK'S
+             * @name :: PostBack
+             * @description ::  Flujo para los PostBack
+             *                  Identifica que mensajes se han leido y cuales no para 
+             *                  mantener el fujo constantes
+             * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+             **************************************************************************/
             else if( tm === 'postback'){
               console.log("--------------------------------------------> ", tm);
 
@@ -819,7 +857,15 @@ module.exports = {
               return res.ok('EVENT_RECEIVED');
             }
 
-            // No hay nada
+            
+            
+            
+            /**
+             * SIN DATA
+             * @name :: Sin data
+             * @description ::  Para cuando no se reconoce ninguna de las anteriores
+             * @author :: SaulNavarrov <Sinavarrov@gmail.com>
+             */
             else {
               console.log("--------------------------------------------> ERROR:", tm);
               console.error('Que Paso Problema no resulto mirar a ver que paso?');
@@ -828,6 +874,7 @@ module.exports = {
               //   y que ya puede enviar los demas mensajes
               return res.ok('EVENT_RECEIVED');
             }
+            
 
           }else{
             // Como la pagina no esta activa esta respondera

@@ -43,57 +43,57 @@ async function sendText(spid, text, tok){
   console.log(text)
   console.log(tok)
 
-  if(true){
-    return false;
-  }
+  // if(true){
+  //   return false;
+  // }
 
 
-  var e = [], // Retorno de Datos
-      dat = {}; // Armando del texto de envio
+  // var e = [], // Retorno de Datos
+  //     dat = {}; // Armando del texto de envio
 
-  // Revision de errores
-  // spid
-  if (typeof (spid) !== 'string' || !spid.length) {
-    e.spid = {
-      success: false,
-      error: 'spid en blanco',
-      message: 'El spid del usuario no puede estar en blanco o una cadena vacia'
-    }
-    e.r = true;
-  }
+  // // Revision de errores
+  // // spid
+  // if (typeof (spid) !== 'string' || !spid.length) {
+  //   e.spid = {
+  //     success: false,
+  //     error: 'spid en blanco',
+  //     message: 'El spid del usuario no puede estar en blanco o una cadena vacia'
+  //   }
+  //   e.r = true;
+  // }
 
-  // text
-  if (typeof (text) !== 'string' || !text.length) {
-    e.text = {
-      success: false,
-      error: 'text en blanco',
-      message: 'El "text" no se permite texto en blanco'
-    }
-    e.r = true;
-  }
+  // // text
+  // if (typeof (text) !== 'string' || !text.length) {
+  //   e.text = {
+  //     success: false,
+  //     error: 'text en blanco',
+  //     message: 'El "text" no se permite texto en blanco'
+  //   }
+  //   e.r = true;
+  // }
 
-  // token
-  if (typeof (tok) !== 'string' || !tok.length) {
-    e.tok = {
-      success: false,
-      error: 'tok en blanco',
-      message: 'El "tok" no se permite texto en blanco'
-    }
-    e.r = true;
-  }
+  // // token
+  // if (typeof (tok) !== 'string' || !tok.length) {
+  //   e.tok = {
+  //     success: false,
+  //     error: 'tok en blanco',
+  //     message: 'El "tok" no se permite texto en blanco'
+  //   }
+  //   e.r = true;
+  // }
 
-  // Retorno de Errores
-  if (e.r) {
-    delete e.r;
-    return e
-  }
+  // // Retorno de Errores
+  // if (e.r) {
+  //   delete e.r;
+  //   return e
+  // }
 
-  // Armando Texto para enviar
-  var type = `messages`;
-  dat.text = text;
+  // // Armando Texto para enviar
+  // var type = `messages`;
+  // dat.text = text;
   
-  // Envio de datos
-  return apiToMessenger(spid, dat, tok, type);
+  // // Envio de datos
+  // return apiToMessenger(spid, dat, tok, type);
 }
 
 

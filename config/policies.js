@@ -36,9 +36,9 @@ module.exports.policies = {
   //   '*': false
   // },
 
-  WordsListsController: {
-    '*': false
+  // WordsListsController: {
+  //   '*': false
 
-  },
+  // },
 
 };
